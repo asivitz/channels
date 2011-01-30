@@ -1,0 +1,18 @@
+<h1>User#register</h1>
+
+<% form_for(@user, :url => 'register') do |f| %>
+
+<%= f.error_messages %><br/>
+
+<label for="user_alias">Username</label><br/>
+<%= f.text_field "alias", :size => 20 %><br/>
+
+<label for="user_password">Password</label><br/>
+<%= f.password_field "password", :size => 20 %><br/>
+
+<label for="user_password_confirmation">Password Confirmation</label><br/>
+<%= f.password_field "password_confirmation", :size => 20 %><br/>
+
+<%= f.submit "Register" %>
+
+<% end %>

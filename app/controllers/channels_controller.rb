@@ -1,4 +1,6 @@
 class ChannelsController < ApplicationController
+    before_filter :login_required
+
   # GET /channels
   # GET /channels.xml
   def index

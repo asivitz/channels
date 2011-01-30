@@ -1,0 +1,16 @@
+<h1>User#login</h1>
+
+<% form_tag('/user/login') do %>
+<h3>Login</h3>  
+
+<label for="user_alias">Username:</label><br/>
+<%= text_field "user", "alias", :size => 20 %><br/>
+
+<label for="user_password">Password:</label><br/>
+<%= password_field "user", "password", :size => 20 %><br/>
+
+<%= submit_tag "Submit" %>
+
+<%= link_to 'Register', :action => 'register' %>
+
+<% end %>
