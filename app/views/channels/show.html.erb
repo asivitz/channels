@@ -1,0 +1,38 @@
+<h2>Showing Channel:
+<%=h @channel.name %>
+</h2>
+
+<table>
+<% @channel.messages.each do |m| %>
+    <tr>
+        <td>
+            <b><%= m.poster %>:</b>
+        </td>
+        <td>
+            <%= m.content %>
+        </td>
+    </tr>
+<% end %>
+</table>
+
+<hr/>
+<% form_for [@channel, @message] do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+    <%= f.label "name" %>
+    <%= f.text_field :poster %>
+    </p>
+    <p>
+    <%= f.label "Message" %>
+    <%= f.text_field :content %>
+    </p>
+    <p>
+    <%= f.submit 'Post' %>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_channel_path(@channel) %> |
+<%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %> |
+
+<%= link_to 'Back', channels_path %>
