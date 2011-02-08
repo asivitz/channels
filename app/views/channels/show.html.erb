@@ -2,6 +2,23 @@
 <%=h @channel.name %>
 </h2>
 
+<div>
+Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
+    <div>
+        <% form_tag('add_user') do %>
+            Add user:
+            <%= text_field :user, :alias, :value => "" %>
+            <%= hidden_field :channel, :id %>
+            <%= submit_tag 'Add' %>
+        <% end %>
+        <% if @channel.users.include? @user %>
+            <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
+        <% end %>
+    </div>
+</div>
+
+<hr/>
+
 <table style="width:800px;">
 <% @channel.messages.each do |m| %>
     <tr>

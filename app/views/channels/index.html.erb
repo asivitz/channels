@@ -1,1 +1,27 @@
 <h1>select a channel</h1>
+
+<hr/>
+
+<div style="color:blue;">
+(debug list of all channels)
+<table>
+    <% @channels.each do |channel| %>
+        <tr>
+            <td><%= link_to channel.name, channel %></td>
+        </tr>
+    <% end %>
+</table>
+</div>
+
+<hr/>
+
+<div style="color:blue;">
+(debug list of all users)
+<table>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.alias %></td>
+        </tr>
+    <% end %>
+</table>
+</div>

@@ -5,6 +5,7 @@ class ChannelsController < ApplicationController
   # GET /channels.xml
   def index
     @channels = Channel.all
+    @users = User.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +16,6 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.xml
   def show
-    @channels = Channel.all
     @channel = Channel.find(params[:id])
     @message = Message.new # to add a new message
 
@@ -28,7 +28,6 @@ class ChannelsController < ApplicationController
   # GET /channels/new
   # GET /channels/new.xml
   def new
-    @channels = Channel.all
     @channel = Channel.new
 
     respond_to do |format|
@@ -39,7 +38,6 @@ class ChannelsController < ApplicationController
 
   # GET /channels/1/edit
   def edit
-    @channels = Channel.all
     @channel = Channel.find(params[:id])
   end
 
@@ -47,6 +45,7 @@ class ChannelsController < ApplicationController
   # POST /channels.xml
   def create
     @channel = Channel.new(params[:channel])
+    @channel.users << @user
 
     respond_to do |format|
       if @channel.save
@@ -87,5 +86,26 @@ class ChannelsController < ApplicationController
       format.html { redirect_to(channels_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def add_user
+      @channel = Channel.find(params[:channel][:id])
+      toadd = User.find_by_alias(params[:user][:alias])
+      if toadd.nil?
+          flash[:warning] = "No such user to add"
+      elsif @channel.users.include? toadd
+          flash[:warning] = "User already a member of channel"
+      else
+          @channel.users << toadd
+          @channel.save
+      end
+      redirect_to(@channel)
+  end
+
+  def leave_channel
+      @channel = Channel.find(params[:id])
+      @channel.users.delete @user
+      @channel.save
+      redirect_to :action => "index"
   end
 end

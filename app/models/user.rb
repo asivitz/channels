@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
     validates_uniqueness_of :alias
     validates_confirmation_of :password
 
+    has_and_belongs_to_many :channels
+
     attr_protected :id, :salt
     attr_accessor :password, :password_confirmation
 
@@ -35,5 +37,4 @@ class User < ActiveRecord::Base
         return u if User.encrypt(pass, u.salt)==u.hashed_password
         nil
     end  
-
 end

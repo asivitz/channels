@@ -10,17 +10,18 @@
 <body>
 
 <div style="float:right;">
-    Logged in as <%= @user.alias %>
+    Logged in as <%= @user.alias %> | <%= link_to 'Logout', '/user/logout' %>
 </div>
 
 <p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:warning] %></p>
 
 <div style="float:left;margin:10px;">
 
     <h1><%= link_to 'channels', channels_path %></h1>
 
 <table>
-    <% @channels.each do |channel| %>
+    <% @user.channels(true).each do |channel| %>
         <tr>
             <td><%= link_to channel.name, channel %></td>
         </tr>
