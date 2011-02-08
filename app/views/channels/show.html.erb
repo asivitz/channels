@@ -19,17 +19,21 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 
 <hr/>
 
+<% if @channel.messages.size == 0 %>
+    This channel has no messages.
+<% end %>
+
 <table style="width:800px;">
 <% @channel.messages.each do |m| %>
     <tr>
         <td valign="top" width="110" nowrap>
             <i><%= m.updated_at.localtime.strftime("%b %e %l:%M%p") %></i> 
         </td>
-        <td valign="top">
+        <td valign="top" width="40" style="text-align:right;">
             <b><%= m.poster %>:</b>
         </td>
-        <td>
-            <%= m.content %>
+        <td style="text-align:left;">
+            <%= m.marked_up_content %>
         </td>
     </tr>
 <% end %>
