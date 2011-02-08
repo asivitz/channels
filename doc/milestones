@@ -1,0 +1,54 @@
+Milestone 1:
+Target: Small collaboration groups
+Effect: We use it for our discussions
+Features: real time updates, automatic url detection and linking, daily email digests, message replies (with some UI jazz)
+System: Get sourcecode hosted
+Users (during development of milestone): Just dev team
+
+Milestone 2:
+Target: Medium sized social groups
+Effect: Groups of friends can share messages, links, pictures, videos, etc...
+Features: panel on the side of a channel for displaying images/videos/etc, email based "invites"
+System: Get site hosted
+Users: Just dev team
+
+Milestone 3:
+Target: Group management
+Effect: Groups can choose from a few basic governments
+Features: "Anarchy" government, "Monarchy" government, "Democracy" government,
+add members, remove members, change group name, change government
+UI: Decide on our terminology
+Users: Just dev team
+
+Milestone 4:
+Target: Branding, Look & feel, stability
+Effect: Give the site an identity, polish existing features
+UI: Consistent look and feel under a particular brand, logical organization of pages
+Users: Just dev team
+
+Milestone 5:
+Target: Entrance exam group
+Effect: Lumen can form his music sharing group
+Features: Semi-public groups that are apply-to-join
+Users: Select friends
+
+Milestone 6:
+Target: Groups as entities
+Effect: Groups can grow and gain abilities
+Features: Group size limits, "Representative Democracy" government, inter-group communication
+Users: Select friends
+
+Milestone 7:
+Target: Other network integration
+Effect: Have technology to interface with email, facebook, and twitter
+Users: Select friends
+
+Milestone 8:
+Target: Large groups, large userbase
+Effect: Site is load tested and built to handle many users and groups
+Users: Friends of friends (with invite scheme?)
+
+Milestone 9:
+Target: Public release
+Effect: Stable and cohesive site that's ready to hit the public
+Marketing: Comprehensive strategy for spreading the word
