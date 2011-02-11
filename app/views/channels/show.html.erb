@@ -1,3 +1,11 @@
+<%= javascript_include_tag "channel" %>
+
+<script type="text/javascript">
+    var currentnumber = <%= @channel.messages.count %>;
+    $(document).ready(function(){waitForMsg(<%= @channel.id %>);});
+</script>
+
+
 <h2>Showing Channel:
 <%=h @channel.name %>
 </h2>
@@ -23,7 +31,7 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
     This channel has no messages.
 <% end %>
 
-<table style="width:800px;">
+<table id="messagetable" style="width:800px;">
 <% @channel.messages.each do |m| %>
     <tr>
         <td valign="top" width="110" nowrap>

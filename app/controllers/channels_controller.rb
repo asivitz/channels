@@ -108,4 +108,16 @@ class ChannelsController < ApplicationController
       @channel.save
       redirect_to :action => "index"
   end
+
+  def get_updates
+      @channel = Channel.find(params[:id])
+      render :text => "{number:#{@channel.messages.count}}"
+  end
+
+  def get_message
+      @channel = Channel.find(params[:id])
+      msgnum = params[:messagenum].to_i
+      message = @channel.messages[msgnum]
+      render :text => "{name:\"#{message.poster}\",date:\"#{message.updated_at}\",content:\"#{message.content}\"}"
+  end
 end
