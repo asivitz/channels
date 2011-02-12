@@ -1,46 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>  
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Channels: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
-  <%= stylesheet_link_tag 'channels' %>
-  <%= javascript_include_tag 'jquery' %>
-  <%= javascript_include_tag 'jquerycolor' %>
-  <%= yield :head %>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Channels: <%= controller.action_name %></title>
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<%= stylesheet_link_tag 'reset' %>
+	<%= stylesheet_link_tag 'global' %>
+	<%= stylesheet_link_tag 'channels' %>
+	<%= javascript_include_tag 'jquery' %>
+	<%= javascript_include_tag 'jquerycolor' %>
+	<%= yield :head %>
 </head>
 <body>
 
-<div style="float:right;">
-    Logged in as <%= @user.alias %> | <%= link_to 'Logout', '/user/logout' %>
-</div>
-
-<p style="color: green"><%= flash[:notice] %></p>
-<p style="color: red"><%= flash[:warning] %></p>
-
-<div style="float:left;margin:10px;">
-
-    <h1><%= link_to 'channels', channels_path %></h1>
-
-<table>
-    <% @user.channels(true).each do |channel| %>
-        <tr>
-            <td><%= link_to channel.name, channel %></td>
-        </tr>
-    <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New channel', new_channel_path %>
-</div>
-
-
-<div style="float:left;margin:10px;">
-<%= yield %>
-</div>
-
+	<header id="header">
+	    Logged in as <%= @user.alias %> | <%= link_to 'Logout', '/user/logout' %>
+	</header>
+	<!-- /end #header -->
+	<div id="wrapper">
+		<p style="color: green"><%= flash[:notice] %></p>
+		<p style="color: red"><%= flash[:warning] %></p>
+		<aside id="sidebar">
+			<h1><%= link_to 'channels', channels_path %></h1>
+			
+			<nav id="channel_nav">
+				<ul>
+					<% @user.channels(true).each do |channel| %>
+					   <li><%= link_to channel.name, channel %></li>
+					<% end %>
+				</ul>
+			</nav>
+			
+			<%= link_to 'New channel', new_channel_path %>
+		</aside>
+		<!-- /end left #sidebar -->
+	
+	
+		<article id="main">
+			<%= yield %>
+		</article>
+		<!-- /end #main content -->
+	</div>
+	<!-- /end #wrapper -->
 </body>
 </html>

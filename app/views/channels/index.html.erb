@@ -3,25 +3,21 @@
 <hr/>
 
 <div style="color:blue;">
-(debug list of all channels)
-<table>
-    <% @channels.each do |channel| %>
-        <tr>
-            <td><%= link_to channel.name, channel %></td>
-        </tr>
-    <% end %>
-</table>
+	(debug list of all channels)
+	<ul id="channels_list>
+	    <% @channels.each do |channel| %>
+	        <li><%= link_to channel.name, channel %></li>
+	    <% end %>
+	</ul>
 </div>
 
 <hr/>
 
 <div style="color:blue;">
-(debug list of all users)
-<table>
-    <% @users.each do |user| %>
-        <tr>
-            <td><%= user.alias %></td>
-        </tr>
-    <% end %>
-</table>
+	(debug list of all users)
+	<ul id="user_list">
+	    <% @users.each do |user| %>
+	        <li><%= user.alias %></li>
+	    <% end %>
+	</ul>
 </div>
