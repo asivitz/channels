@@ -29,6 +29,20 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 
 <hr/>
 
+<% form_for [@channel, @message] do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+    Post Message<br/>
+    <%= f.text_area :content, :size => "60x2" %>
+    </p>
+    <p>
+    <%= f.submit 'Post' %>
+    </p>
+<% end %>
+
+<hr/>
+
 <% if @channel.messages.size == 0 %>
     This channel has no messages.
 <% end %>
@@ -50,17 +64,6 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 </table>
 
 <hr/>
-<% form_for [@channel, @message] do |f| %>
-    <%= f.error_messages %>
-
-    <p>
-    Post Message<br/>
-    <%= f.text_area :content, :size => "60x10" %>
-    </p>
-    <p>
-    <%= f.submit 'Post' %>
-    </p>
-<% end %>
 
 <%= link_to 'Edit', edit_channel_path(@channel) %> |
 <%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %> |

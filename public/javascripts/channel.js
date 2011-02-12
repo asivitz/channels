@@ -73,6 +73,6 @@ function addMessageToTable(username, time, content)
     row[0].style.opacity = 0;
     row.animate(
             { opacity:1, color:'black' },
-           5000,
+           2000,
           null);
 }
