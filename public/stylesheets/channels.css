@@ -1,0 +1,22 @@
+#messagetable
+{
+}
+
+#messagetable .namecol
+{
+    text-align:right;
+    font-weight:bold;
+}
+
+#messagetable .datecol
+{
+    text-align:right;
+    font-style: italic;
+    padding-right:5px;
+}
+
+#messagetable .contentcol
+{
+    text-align:left;
+}
+

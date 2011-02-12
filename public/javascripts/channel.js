@@ -1,6 +1,6 @@
 var waitMin = 5;
 var waitMax = 45;
-var waitReset = 20;
+var waitReset = 10;
 var waitTime = waitReset;
 
 function waitForMsg(channelid)
@@ -66,6 +66,13 @@ function retrieveMessage(channelid, messagenum)
 
 function addMessageToTable(username, time, content)
 {
-    row = '<tr><td>' + username + '</td><td>' + time + '</td><td>' + content + '</td></tr>';
-    $(row).appendTo('#messagetable');
+    var row = $('<tr><td class=\"datecol\">' + time + '</td><td class=\"namecol\">' + username + ':</td><td class=\"contentcol\">' + content + '</td></tr>');
+    row.prependTo('#messagetable')
+
+    row[0].style.color = 'blue';
+    row[0].style.opacity = 0;
+    row.animate(
+            { opacity:1, color:'black' },
+           5000,
+          null);
 }

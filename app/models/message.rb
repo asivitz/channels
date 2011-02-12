@@ -10,4 +10,8 @@ class Message < ActiveRecord::Base
         end
         msg
     end
+
+    def pretty_updated_at
+        return self.updated_at.localtime.strftime("%b %e %l:%M%p")
+    end
 end

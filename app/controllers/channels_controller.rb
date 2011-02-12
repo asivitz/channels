@@ -118,6 +118,6 @@ class ChannelsController < ApplicationController
       @channel = Channel.find(params[:id])
       msgnum = params[:messagenum].to_i
       message = @channel.messages[msgnum]
-      render :text => "{name:\"#{message.poster}\",date:\"#{message.updated_at}\",content:\"#{message.content}\"}"
+      render :text => "{name:\"#{message.poster}\",date:\"#{message.pretty_updated_at}\",content:\"#{message.content}\"}"
   end
 end
