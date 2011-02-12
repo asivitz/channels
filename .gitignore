@@ -2,6 +2,5 @@
 .*.swp
 tmp
 log
-script
 vendor
 *.sqlite3
