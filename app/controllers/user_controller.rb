@@ -3,7 +3,21 @@ class UserController < ApplicationController
 
     def register
         if request.post?  
+            code = params[:register_code]
+            regcodeattempt = Digest::SHA1.hexdigest(code)
+            realsha1 = "120f96256585144f7d145089b28f555739fe047e"
+
             @user = User.new(params[:user])
+
+            logger.debug "real :" + realsha1
+            logger.debug "entered :" + regcodeattempt
+
+            if (regcodeattempt != realsha1)
+                flash[:warning] = "Incorrect registration code"
+                return
+            end
+
+
             if @user.save
                 session[:user] = User.authenticate(@user.alias, @user.password)
                 flash[:message] = "Signup successful"

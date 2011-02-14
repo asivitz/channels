@@ -13,6 +13,10 @@
 <label for="user_password_confirmation">Password Confirmation</label><br/>
 <%= f.password_field "password_confirmation", :size => 20 %><br/>
 
+<label >Registration Code</label><br/>
+<%= text_field_tag :register_code, '', :size => 20 %><br/>
+
+
 <%= f.submit "Register" %>
 
 <% end %>
