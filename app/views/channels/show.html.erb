@@ -36,10 +36,9 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
     Post Message<br/>
     <%= f.text_area :content, :size => "60x2", :id => "msginput" %>
     </p>
-    <p>
-    <%= f.submit 'Post' %>
-    </p>
 <% end %>
+
+<a href="javascript:submitPost();">Post</a>
 
 <hr/>
 
@@ -64,12 +63,23 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 </table>
 
 <script type="text/javascript">
+    // attach handler to form's submit event 
+
+function submitPost()
+{
+      $('#new_message').ajaxSubmit();
+      //addMessageToTable("<%= @user.alias %>", "", $('#msginput').val());
+      $('#msginput').val("");
+      getNewMessages(<%= @channel.id %>);
+
+}
+
 $('#msginput').keypress(function(event) 
 {
     if (event.which == '13' && !event.shiftKey) 
     {
       event.preventDefault();
-      $('#new_message').submit();
+      submitPost();
     }
 });
 </script>

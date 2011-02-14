@@ -5,6 +5,27 @@ var waitTime = waitReset;
 
 function waitForMsg(channelid)
 {
+    var newmsgs = getNewMessages(channelid);
+    if (newmsgs)
+    {
+        waitTime -= 5;
+        if (waitTime < waitMin)
+            waitTime = waitMin;
+        if (waitTime > waitReset)
+            waitTime = waitReset;
+    }
+    else
+    {
+        waitTime += 5;
+        if (waitTime > waitMax)
+            waitTime = waitMax;
+    }
+
+    setTimeout('waitForMsg(' + channelid + ')', waitTime * 1000);
+}
+
+function getNewMessages(channelid)
+{
     $.ajax(
         {
             url:"/channels/get_updates/" + channelid,
@@ -20,29 +41,17 @@ function waitForMsg(channelid)
                         retrieveMessage(channelid, i);
                     }
 
-
                     currentnumber = nummsgs;
-                    waitTime -= 5;
-                    if (waitTime < waitMin)
-                        waitTime = waitMin;
-                    if (waitTime > waitReset)
-                        waitTime = waitReset;
+                    return true;
                 }
                 else
                 {
-                    waitTime += 5;
-                    if (waitTime > waitMax)
-                        waitTime = waitMax;
+                    return false;
                 }
-                setTimeout('waitForMsg(' + channelid + ')', waitTime * 1000);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown)
-            {
-                alert("error: " + textStatus + " (" + errorThrown + ")"); 
-                //setTimeout('waitForMsg()', 15000);
             }
         }
         );
+        return false;
 }
 
 function retrieveMessage(channelid, messagenum)
@@ -73,6 +82,6 @@ function addMessageToTable(username, time, content)
     row[0].style.opacity = 0;
     row.animate(
             { opacity:1, color:'black' },
-           2000,
+           1000,
           null);
 }
