@@ -9,14 +9,10 @@ class UserController < ApplicationController
 
             @user = User.new(params[:user])
 
-            logger.debug "real :" + realsha1
-            logger.debug "entered :" + regcodeattempt
-
             if (regcodeattempt != realsha1)
                 flash[:warning] = "Incorrect registration code"
                 return
             end
-
 
             if @user.save
                 session[:user] = User.authenticate(@user.alias, @user.password)
