@@ -6,6 +6,8 @@
 {
     text-align:right;
     font-weight:bold;
+    padding-right:5px;
+    color:firebrick;
 }
 
 #messagetable .datecol
@@ -13,6 +15,7 @@
     text-align:right;
     font-style: italic;
     padding-right:5px;
+    white-space:nowrap;
 }
 
 #messagetable .contentcol

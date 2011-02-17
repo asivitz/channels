@@ -19,6 +19,17 @@ class ApplicationController < ActionController::Base
       return false 
   end
 
+  def member_required
+      @channel = Channel.find(params[:id])
+      if @channel.users.include? @user
+          return true
+      end
+
+      flash[:warning] = 'You are not a member of this channel.'
+      redirect_to :controller => "channels", :action => "index"
+      return false
+  end
+
   def current_user
       session[:user]
   end

@@ -37,4 +37,14 @@ class User < ActiveRecord::Base
         return u if User.encrypt(pass, u.salt)==u.hashed_password
         nil
     end  
+    
+    def last_read_map
+        @last_read_map ||= {}
+    end
+
+    def last_read channel_id
+        msgnum = self.last_read_map[channel_id]
+        return 0 if not msgnum
+        return msgnum
+    end
 end

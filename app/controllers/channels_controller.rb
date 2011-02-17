@@ -1,5 +1,7 @@
 class ChannelsController < ApplicationController
     before_filter :login_required
+    before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit]
+
 
   # GET /channels
   # GET /channels.xml
@@ -16,8 +18,8 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.xml
   def show
-    @channel = Channel.find(params[:id])
     @message = Message.new # to add a new message
+    @user.last_read_map[@channel.id] = @channel.num_messages - 1
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +40,6 @@ class ChannelsController < ApplicationController
 
   # GET /channels/1/edit
   def edit
-    @channel = Channel.find(params[:id])
   end
 
   # POST /channels
@@ -62,8 +63,6 @@ class ChannelsController < ApplicationController
   # PUT /channels/1
   # PUT /channels/1.xml
   def update
-    @channel = Channel.find(params[:id])
-
     respond_to do |format|
       if @channel.update_attributes(params[:channel])
         flash[:notice] = 'Channel was successfully updated.'
@@ -79,7 +78,6 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.xml
   def destroy
-    @channel = Channel.find(params[:id])
     @channel.destroy
 
     respond_to do |format|
@@ -89,7 +87,6 @@ class ChannelsController < ApplicationController
   end
 
   def add_user
-      @channel = Channel.find(params[:channel][:id])
       toadd = User.find_by_alias(params[:user][:alias])
       if toadd.nil?
           flash[:warning] = "No such user to add"
@@ -103,20 +100,18 @@ class ChannelsController < ApplicationController
   end
 
   def leave_channel
-      @channel = Channel.find(params[:id])
       @channel.users.delete @user
       @channel.save
       redirect_to :action => "index"
   end
 
   def get_updates
-      @channel = Channel.find(params[:id])
-      render :text => "{number:#{@channel.messages.count}}"
+      render :text => "{number:#{@channel.num_messages}}"
   end
 
   def get_message
-      @channel = Channel.find(params[:id])
       msgnum = params[:messagenum].to_i
+      @user.last_read_map[@channel.id] = msgnum
       message = @channel.messages[msgnum]
       render :text => "{name:\"#{message.poster}\",date:\"#{message.pretty_updated_at}\",content:\"#{message.content}\"}"
   end

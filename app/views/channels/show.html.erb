@@ -18,7 +18,7 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
         <% form_tag('add_user') do %>
             Add user:
             <%= text_field :user, :alias, :value => "" %>
-            <%= hidden_field :channel, :id %>
+            <%= hidden_field_tag :id, @channel.id %>
             <%= submit_tag 'Add' %>
         <% end %>
         <% if @channel.users.include? @user %>
