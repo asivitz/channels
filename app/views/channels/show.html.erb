@@ -47,18 +47,22 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 <% end %>
 
 <table id="messagetable">
+    <% prev_message = nil %>
 <% @channel.messages.reverse.each do |m| %>
     <tr>
         <td class="datecol">
             <%= m.pretty_updated_at %> 
         </td>
         <td class="namecol">
-            <%= m.poster %>:
+            <% if prev_message.nil? or prev_message.poster != m.poster %>
+                <%= m.poster %>:
+            <% end %>
         </td>
         <td class="contentcol">
             <%= m.marked_up_content %>
         </td>
     </tr>
+    <% prev_message = m %>
 <% end %>
 </table>
 
