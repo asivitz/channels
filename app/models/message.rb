@@ -14,4 +14,8 @@ class Message < ActiveRecord::Base
     def pretty_updated_at
         return self.updated_at.localtime.strftime("%b %e %l:%M%p")
     end
+
+    def to_json
+         "{\"id\":#{self.id},\"name\":\"#{self.poster}\",\"date\":\"#{self.pretty_updated_at}\",\"content\":\"#{self.content}\"}"
+    end
 end

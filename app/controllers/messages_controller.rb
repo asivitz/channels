@@ -10,6 +10,8 @@ class MessagesController < ApplicationController
         @message = @channel.messages.build(params[:message])
         @message.poster = @user.alias
         @message.save
-        redirect_to @channel
+        #redirect_to @channel
+
+        render :text => "{\"id\":\"#{@message.id}\"}"
     end
 end

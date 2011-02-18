@@ -28,25 +28,15 @@ function getNewMessages(channelid)
 {
     $.ajax(
         {
-            url:"/channels/get_updates/" + channelid,
+            url:"/channels/get_updates/" + channelid + "?last_read=" + currentnumber,
             cache: false,
-            success: function(data)
+            dataType: 'json',
+            success: function(json)
             {
-                var json = eval('(' + data + ')');
-                var nummsgs = json['number'];
-                if (nummsgs > currentnumber)
+                for (var i = 0; i < json.length; i++)
                 {
-                    for (var i = currentnumber; i < nummsgs; i++)
-                    {
-                        retrieveMessage(channelid, i);
-                    }
-
-                    currentnumber = nummsgs;
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    var msg = json[i];
+                    addMessageToTable(msg['id'], msg['name'], msg['date'], msg['content']);
                 }
             }
         }
@@ -54,29 +44,24 @@ function getNewMessages(channelid)
         return false;
 }
 
-function retrieveMessage(channelid, messagenum)
+function addMessageToTable(id, username, time, content)
 {
-    $.ajax(
-    {
-        url:"/channels/get_message/" + channelid + "?messagenum=" + messagenum,
-        cache: false,
-        success: function(data)
-        {
-            var json = eval('(' + data + ')');
-            addMessageToTable(json['name'],json['date'],json['content']);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown)
-        {
-            alert("error getting message: " + textStatus + " (" + errorThrown + ")");
-        }
-    }
-    );
-}
+    //see if we already have this message
+    var existing = $('#message_' + id);
+    if (existing.length > 0)
+        return;
 
-function addMessageToTable(username, time, content)
-{
-    var row = $('<tr><td class=\"datecol\">' + time + '</td><td class=\"namecol\">' + username + ':</td><td class=\"contentcol\">' + content + '</td></tr>');
-    row.prependTo('#messagetable')
+    //find the last poster. if the names are the same, don't show a new username
+    var names = jQuery.trim($('#messagetable tr td.namecol').text()).split(/\s+/);
+    var last = names[names.length - 1];
+
+    namedisplay = username + ":";
+    if (last == username + ":")
+        namedisplay = "";
+
+    //make the row
+    var row = $('<tr id=\"message_' + id + '\"><td class=\"datecol\">' + time + '</td><td class=\"namecol\">' + namedisplay + '</td><td class=\"contentcol\">' + content + '</td></tr>');
+    row.appendTo('#messagetable')
 
     row[0].style.color = 'blue';
     row[0].style.opacity = 0;
