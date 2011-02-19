@@ -27,13 +27,22 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset{margin-bottom:20px}
 #sidebar {
 	display:inline;
 	float: left;
-	width: 25%;
+        margin-right:10px;
+        border-radius:10px;
+        -moz-border-radius:10px;
+        border:2px solid black;
+        padding:5px;
 }
 
 #main {
 	display:inline;
 	float: left;
 	width: 75%;
+
+        border-radius:10px;
+        -moz-border-radius:10px;
+        border:2px solid black;
+        padding:5px;
 }
 
 /* Previous styles from scaffold. Not sure where these apply yet */
