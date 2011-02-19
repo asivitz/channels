@@ -8,6 +8,8 @@
     font-weight:bold;
     padding-right:5px;
     color:firebrick;
+    vertical-align:top;
+    padding-top:7px;
 }
 
 #messagetable .datecol
@@ -16,20 +18,36 @@
     font-style: italic;
     padding-right:5px;
     white-space:nowrap;
+    vertical-align:top;
+    padding-top:7px;
 }
 
 #messagetable .contentcol
 {
     text-align:left;
+    vertical-align:top;
 }
 
 #messagetable .contentcol ul
 {
-    margin-bottom:5px;
+    float:left;
+    margin-bottom:10px;
 }
 
 #messagetable .contentcol li
 {
     list-style-type: none;
     margin-left:0px;
+    background-color:lightblue;
+    float:left;
+    clear:both;
+    padding:5px;
+    margin:2px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+}
+
+#messagetable tr
+{
 }
