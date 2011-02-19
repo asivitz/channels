@@ -23,3 +23,13 @@
     text-align:left;
 }
 
+#messagetable .contentcol ul
+{
+    margin-bottom:5px;
+}
+
+#messagetable .contentcol li
+{
+    list-style-type: none;
+    margin-left:0px;
+}

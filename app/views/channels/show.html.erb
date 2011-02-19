@@ -29,34 +29,6 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 
 <hr/>
 
-<% if @channel.messages.size == 0 %>
-    This channel has no messages.
-<% end %>
-
-<table id="messagetable">
-    <% prev_message = nil %>
-    <% @channel.messages.each do |m| %>
-        <tr id="message_<%= m.id %>">
-            <td class="datecol">
-                <% if prev_message.nil? or prev_message.poster != m.poster %>
-                    <%= m.pretty_updated_at %> 
-                <% end %>
-            </td>
-            <td class="namecol">
-                <% if prev_message.nil? or prev_message.poster != m.poster %>
-                    <%= m.poster %>:
-                <% end %>
-            </td>
-            <td class="contentcol">
-                <%= m.marked_up_content %>
-            </td>
-        </tr>
-        <% prev_message = m %>
-    <% end %>
-</table>
-
-<hr/>
-
 <% form_for [@channel, @message] do |f| %>
     <%= f.error_messages %>
 
@@ -67,6 +39,47 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 <% end %>
 
 <a href="javascript:submitPost();">Post</a>
+
+<hr/>
+
+<% if @channel.messages.size == 0 %>
+    This channel has no messages.
+<% end %>
+
+<table id="messagetable">
+    <% prev_message = nil %>
+    <% @channel.messages.reverse.each do |m| %>
+        <% if prev_message.nil? or prev_message.poster != m.poster %>
+            <% if not prev_message.nil? %>
+                        </ul>
+                    </td>
+                </tr>
+            <% end %>
+            <tr>
+                <td class="datecol">
+                    <% if prev_message.nil? or prev_message.poster != m.poster %>
+                        <%= m.pretty_updated_at %> 
+                    <% end %>
+                </td>
+                <td class="namecol">
+                    <% if prev_message.nil? or prev_message.poster != m.poster %>
+                        <%= m.poster %>:
+                    <% end %>
+                </td>
+                <td class="contentcol">
+                    <ul>
+            <% end %>
+            <li id="message_<%= m.id %>">
+                <%= m.marked_up_content %>
+            </li>
+
+        <% prev_message = m %>
+    <% end %>
+    </ul>
+    </td>
+    </tr>
+</table>
+
 
 <script type="text/javascript">
     // attach handler to form's submit event 
@@ -79,7 +92,7 @@ function submitPost()
         dataType: 'json',
         success:    function(data, stat)
         {
-            addMessageToTable(data['id'],"<%= @user.alias %>", "", text);
+            addMessageToTable(data['id'],"<%= @user.alias %>", data['time'], text);
         }
     };
     $('#new_message').ajaxSubmit(options);
