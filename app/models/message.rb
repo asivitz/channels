@@ -16,6 +16,6 @@ class Message < ActiveRecord::Base
     end
 
     def to_json
-         "{\"id\":#{self.id},\"name\":\"#{self.poster}\",\"date\":\"#{self.pretty_updated_at}\",\"content\":\"#{self.content}\"}"
+         "{\"id\":#{self.id},\"name\":\"#{self.poster}\",\"date\":\"#{self.pretty_updated_at}\",\"content\":\"#{self.marked_up_content}\"}"
     end
 end
