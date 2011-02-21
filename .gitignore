@@ -4,4 +4,4 @@ tmp
 log
 vendor
 *.sqlite3
-*.lock
+.bundle
