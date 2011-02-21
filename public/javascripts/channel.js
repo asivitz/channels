@@ -63,7 +63,7 @@ function addMessageToTable(id, username, time, content)
     {
         var line = $(linehtml);
         var ul = toprow.children().last().children().first();
-        line.prependTo(ul);
+        line.appendTo(ul);
         added = line;
     }
     else

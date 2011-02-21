@@ -48,36 +48,25 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 
 <table id="messagetable">
     <% prev_message = nil %>
-    <% @channel.messages.reverse.each do |m| %>
-        <% if prev_message.nil? or prev_message.poster != m.poster %>
-            <% if not prev_message.nil? %>
-                        </ul>
-                    </td>
-                </tr>
-            <% end %>
-            <tr>
-                <td class="datecol">
-                    <% if prev_message.nil? or prev_message.poster != m.poster %>
-                        <%= m.pretty_updated_at %> 
+    <% @channel.grouped_messages.each do |group| %>
+        <tr>
+            <td class="datecol">
+                <%= group.date %> 
+            </td>
+            <td class="namecol">
+                <%= group.poster %>:
+            </td>
+            <td class="contentcol">
+                <ul>
+                    <% group.messages.reverse.each do |m| %>
+                        <li id="message_<%= m.id %>">
+                        <%= m.marked_up_content %>
+                        </li>
                     <% end %>
-                </td>
-                <td class="namecol">
-                    <% if prev_message.nil? or prev_message.poster != m.poster %>
-                        <%= m.poster %>:
-                    <% end %>
-                </td>
-                <td class="contentcol">
-                    <ul>
-            <% end %>
-            <li id="message_<%= m.id %>">
-                <%= m.marked_up_content %>
-            </li>
-
-        <% prev_message = m %>
+                </ul>
+            </td>
+        </tr>
     <% end %>
-    </ul>
-    </td>
-    </tr>
 </table>
 
 
