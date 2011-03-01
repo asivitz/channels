@@ -7,7 +7,7 @@
     $(document).ready(function(){waitForMsg(<%= @channel.id %>);});
 </script>
 
-
+<div id="message_post">
 <h2>Showing Channel:
 <%=h @channel.name %>
 </h2>
@@ -27,7 +27,6 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
     </div>
 </div>
 
-<hr/>
 
 <%= form_for [@channel, @message] do |f| %>
     <p>
@@ -38,7 +37,7 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
 
 <a href="javascript:submitPost();">Post</a>
 
-<hr/>
+</div>
 
 <% if @channel.messages.size == 0 %>
     This channel has no messages.
