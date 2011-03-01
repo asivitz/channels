@@ -1,5 +1,5 @@
 * {margin: 0;padding: 0;}
-body{font:13px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;background: #f9f9f9;}
+body{font:13px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif; background: #f9f9f9;}
 a:focus{outline:none}
 hr{border:0 #ccc solid;border-top-width:1px;clear:both;height:0}
 h1{font-size:25px}
@@ -86,30 +86,6 @@ a:hover {
 	margin: 10px 0;
 }
 
-#sidebar .channel_controls .users_in_channel {
-	margin: 0 0 10px;
-	color: #666;
-}
-
-#sidebar .channel_controls .add_user_form label {
-	color: #666;
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 10px;
-}
-
-#sidebar .channel_controls .add_user_form label input {
-	padding: 5px 3px;
-	width: 192px;
-	border: 1px solid #bbb;
-	-moz-box-shadow: inset 0px 1px 1px #eee; 
-	-webkit-box-shadow: inset 0px 1px 1px #eee; 
-	box-shadow: inset 0px 1px 1px #eee; 
-}
-#sidebar .channel_controls .add_user_form input {
-	
-}
-
 #sidebar div.new_channel {
 	border-top: 1px dotted #ccc;
 	margin-top: 10px;
@@ -117,7 +93,8 @@ a:hover {
 
 #sidebar div.new_channel a {
 	display: block;
-	width: 110px;
+	width: 80px;
+	font-size: 11px;
 	text-align: center;
 	padding: 2px 10px 3px;
 	background-color: #f0f0f0;
@@ -139,6 +116,68 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #f0f0f0 100%)
 	margin-left: 220px;
 	background: #fff;
 	border-left: 1px solid #ccc;
+}
+
+#main .top_controls {
+	float: left;
+	width: 100%;
+	margin: 0;
+	background: #f3f6f9;
+	border-bottom: 1px solid #ccd4dd;
+	font-size: 11px;
+	padding: 5px 0;
+	margin: 0 0 20px;
+}
+#main .top_controls:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
+
+#main .top_controls .users_in_channel {
+	float: left;
+	padding: 0 0 0 10px;
+	line-height: 18px;
+	color: #666;
+}
+.top_controls .channel_controls .add_user_form {
+	float: right;
+	height: 20px;
+	overflow: hidden;
+	padding: 0 5px;
+}
+.top_controls .channel_controls .add_user_form label {
+	color: #666;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 10px;
+}
+
+.top_controls .channel_controls .add_user_form label input {
+	padding: 2px;
+	font-size: 11px;
+	width: 192px;
+	border: 1px solid #bbb;
+	-moz-box-shadow: inset 0px 1px 1px #eee; 
+	-webkit-box-shadow: inset 0px 1px 1px #eee; 
+	box-shadow: inset 0px 1px 1px #eee; 
+}
+
+.top_controls .channel_controls .add_user_form label input:focus {
+	border: 1px solid #999;
+	background: #f3f6fa;
+	color: #565656;
+}
+
+.top_controls .add_user_form input.add_user_submit {
+	width: 70px;
+	text-align: center;
+	padding: 1px 10px 2px;
+	font-size: 11px;
+	margin: 0 0 0 5px;
+	background-color: #cccccc;
+background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #80b2ea),color-stop(0.03, #5593da),color-stop(1, #347acb));
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#347acb');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#347acb')";
+    border: 1px solid #266ab9;
+    color: #fff;
 }
 
 #message_post h2 {
@@ -257,7 +296,7 @@ background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%)
 	padding:0 10px 5px 10px;
 }
 
-#main .footer_controls {
+#main .bottom_controls {
 	clear: both;
 	margin: 0;
 	background-color: #cccccc;
@@ -270,15 +309,15 @@ background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%)
 	font-size: 11px;
 	padding: 5px;
 }
-#main .footer_controls:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
-#main .footer_controls li {
+#main .bottom_controls:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
+#main .bottom_controls li {
 	list-style: none;
 	float: left;
 	margin: 0;
 	padding: 0 10px;
 	display: inline;
 }
-#main .footer_controls li a {
+#main .bottom_controls li a {
 	color: #565656;
 	text-shadow: #fff 0px 1px;
 }
