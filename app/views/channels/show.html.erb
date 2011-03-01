@@ -9,9 +9,17 @@
 <div id="group_details">
 <div class="top_controls">
 	<div class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></div>
-	<div class="leave_channel"><% if @channel.users.include? @user %>
-	    <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
-	<% end %></div>
+	<div class="channel_controls">
+	    <div class="add_user_form">
+	        <%= form_tag('add_user') do %>
+	            <label for="user_alias">Add user:
+	            <%= text_field :user, :alias, :value => "" %>
+	            </label>
+	            <%= hidden_field_tag :id, @channel.id %>
+	            <%= submit_tag "Add User", :class => "add_user_submit" %>
+	        <% end %>
+	    </div>
+	</div>
 </div>
 
 <div id="message_post">
@@ -78,8 +86,10 @@ $('#msginput').keypress(function(event)
 </script>
 
 <ul class="bottom_controls">
-
+<li><%= link_to 'Back', channels_path %></li>
 <li><%= link_to 'Edit', edit_channel_path(@channel) %></li>
 <li><%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %></li>
-<li><%= link_to 'Back', channels_path %></li>
+<% if @channel.users.include? @user %>
+<li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %></li>
+<% end %>
 </ul>

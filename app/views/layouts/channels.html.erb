@@ -38,17 +38,6 @@
 					<% end %>
 				</ul>
 			</nav>
-			<div class="channel_controls">
-			    <div class="add_user_form">
-			        <%= form_tag('add_user') do %>
-			            <label for="user_alias">Add user:
-			            <%= text_field :user, :alias, :value => "" %>
-			            </label>
-			            <%= hidden_field_tag :id, @channel.id %>
-			            <%= submit_tag "Add User", :class => "add_user_submit" %>
-			        <% end %>
-			    </div>
-			</div>
 			<div class="new_channel">
 			<%= link_to 'New channel', new_channel_path %>
 			</div>
