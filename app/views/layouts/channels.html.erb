@@ -46,7 +46,7 @@
 			            <%= text_field :user, :alias, :value => "" %>
 			            </label>
 			            <%= hidden_field_tag :id, @channel.id %>
-			            <%= submit_tag :id => "user_add_submit", :value => "Add User" %>
+			            <%= submit_tag "Add User", :class => "add_user_submit" %>
 			        <% end %>
 			        <% if @channel.users.include? @user %>
 			            <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
