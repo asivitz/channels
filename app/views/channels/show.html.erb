@@ -40,14 +40,14 @@
     <% prev_message = nil %>
 	<ul id="message_list">
 	    <% @channel.grouped_messages.each do |group| %>
-	        	<li id="message_<%= m.id %>" class="message_row">
+	        	<li class="message_row">
 	            <div class="meta">
 	            	<p class="username"><%= group.poster %>:</p>
 				<p class="date"><%= group.date %></p>
 	            </div>
 	            <div class="message_content">
 	                    <% group.messages.reverse.each do |m| %>
-	                        <p><%= m.marked_up_content %></p>
+	                        <p id="message_<%= m.id %>"><%= m.marked_up_content %></p>
 	                    <% end %>
 	            </div>
 	            </li>

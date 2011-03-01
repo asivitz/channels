@@ -68,7 +68,7 @@ function addMessageToTable(id, username, time, content)
     }
     else
     {
-        var row = $('<li id=\"message_' + id + '\"><div class="meta"><p class=\"date\">' + time + '</p><p class=\"date\">' + namedisplay + '</p></div><div class=\"message_content\"><p>' + linehtml + '</p></div></li>');
+        var row = $('<li class="message_row"><div class="meta"><p class=\"date\">' + time + '</p><p class=\"date\">' + namedisplay + '</p></div><div class=\"message_content\"><p id=\"message_' + id + '\">' + linehtml + '</p></div></li>');
         row.prependTo('#message_list');
         added = row;
     }
