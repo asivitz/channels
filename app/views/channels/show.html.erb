@@ -12,9 +12,9 @@
 <%=h @channel.name %>
 </h2>
 
-<div>
-Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
-    <div>
+<div class="channel_controls">
+<p class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></p>
+    <div class="add_user_form">
         <%= form_tag('add_user') do %>
             Add user:
             <%= text_field :user, :alias, :value => "" %>
@@ -91,9 +91,9 @@ $('#msginput').keypress(function(event)
 });
 </script>
 
-<hr/>
+<ul class="footer_controls">
 
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %> |
-
-<%= link_to 'Back', channels_path %>
+<li><%= link_to 'Edit', edit_channel_path(@channel) %></li>
+<li><%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %></li>
+<li><%= link_to 'Back', channels_path %></li>
+</ul>
