@@ -82,3 +82,45 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset{margin-bottom:20px}
   font-size: 12px;
   list-style: square;
 }
+
+
+#message_list {
+	float: left;
+	width: 100%;
+}
+
+#message_row {
+	clear: both;
+	list-style: none;
+	width: 100%;
+	margin: 0 0 10px;
+	border-bottom: 1px dotted #ccc;
+}
+
+#message_row .meta {
+	float: left;
+	width: 15%;
+	text-align: right;
+}
+#message_row .meta p {
+	text-align: right;
+	padding-right: 10px;
+}
+#message_row .meta .username {
+	font-weight: bold;
+	color: #cc0000;
+	font-size: 12px;
+}
+#message_row .meta .date {
+	color: #666;
+	font-size: 11px;
+}
+
+#message_row .message_content {
+	float: right;
+	width: 85%;
+}
+#message_row .message_content {
+	padding: 0 0 5px;
+	color: #222;
+}
