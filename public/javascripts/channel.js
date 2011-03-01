@@ -52,11 +52,11 @@ function addMessageToTable(id, username, time, content)
         return;
 
     //find the last poster. if the names are the same, don't show a new username
-    var toprow = $('#messagetable tr').first();
+    var toprow = $('#message_list li').first();
     var last = jQuery.trim(toprow.children()[1].innerHTML);
 
     namedisplay = username + ":";
-    var linehtml = '<li id="message_' + id + '">' + content + '</li>';
+    var linehtml = '<p id="message_' + id + '">' + content + '</p>';
 
     var added = null;
     if (last == username + ":")
@@ -68,13 +68,10 @@ function addMessageToTable(id, username, time, content)
     }
     else
     {
-        var row = $('<tr id=\"message_' + id + '\"><td class=\"datecol\">' + time + '</td><td class=\"namecol\">' + namedisplay + '</td><td class=\"contentcol\"><ul>' + linehtml + '</ul></td></tr>');
-        row.prependTo('#messagetable');
+        var row = $('<li class="message_row"><div class="meta"><p class=\"username\">' + namedisplay + '</p><p class=\"date\">' + time + '</p></div><div class=\"message_content\">' + linehtml + '</div></li>');
+        row.prependTo('#message_list');
         added = row;
     }
-
-
-    added[0].style.color = 'blue';
     added[0].style.opacity = 0;
     added.animate(
             { opacity:1, color:'black' },

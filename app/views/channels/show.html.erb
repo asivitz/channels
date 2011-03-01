@@ -6,66 +6,53 @@
     var currentnumber = <%= @channel.messages.count %>;
     $(document).ready(function(){waitForMsg(<%= @channel.id %>);});
 </script>
-
-
-<h2>Showing Channel:
-<%=h @channel.name %>
-</h2>
-
-<div>
-Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
-    <div>
-        <%= form_tag('add_user') do %>
-            Add user:
-            <%= text_field :user, :alias, :value => "" %>
-            <%= hidden_field_tag :id, @channel.id %>
-            <%= submit_tag 'Add' %>
-        <% end %>
-        <% if @channel.users.include? @user %>
-            <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
-        <% end %>
-    </div>
+<div id="group_details">
+<div class="top_controls">
+	<div class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></div>
+	<div class="channel_controls">
+	    <div class="add_user_form">
+	        <%= form_tag('add_user') do %>
+	            <label for="user_alias">Add user:
+	            <%= text_field :user, :alias, :value => "" %>
+	            </label>
+	            <%= hidden_field_tag :id, @channel.id %>
+	            <%= submit_tag "Add User", :class => "add_user_submit" %>
+	        <% end %>
+	    </div>
+	</div>
 </div>
 
-<hr/>
-
+<div id="message_post">
+<h2><%=h @channel.name %></h2>
 <%= form_for [@channel, @message] do |f| %>
-    <p>
-    Post Message<br/>
-    <%= f.text_area :content, :size => "100x4", :id => "msginput" %>
-    </p>
+    <label for="msginput">Post Message
+    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
 <% end %>
 
-<a href="javascript:submitPost();">Post</a>
+<a href="javascript:submitPost();" class="message_post">Post</a>
 
-<hr/>
+</div>
 
 <% if @channel.messages.size == 0 %>
     This channel has no messages.
 <% end %>
 
-<table id="messagetable">
     <% prev_message = nil %>
-    <% @channel.grouped_messages.each do |group| %>
-        <tr>
-            <td class="datecol">
-                <%= group.date %> 
-            </td>
-            <td class="namecol">
-                <%= group.poster %>:
-            </td>
-            <td class="contentcol">
-                <ul>
-                    <% group.messages.reverse.each do |m| %>
-                        <li id="message_<%= m.id %>">
-                        <%= m.marked_up_content %>
-                        </li>
-                    <% end %>
-                </ul>
-            </td>
-        </tr>
-    <% end %>
-</table>
+	<ul id="message_list">
+	    <% @channel.grouped_messages.each do |group| %>
+	        	<li class="message_row">
+	            <div class="meta">
+	            	<p class="username"><%= group.poster %>:</p>
+				<p class="date"><%= group.date %></p>
+	            </div>
+	            <div class="message_content">
+	                    <% group.messages.reverse.each do |m| %>
+	                        <p id="message_<%= m.id %>"><%= m.marked_up_content %></p>
+	                    <% end %>
+	            </div>
+	            </li>
+	    <% end %>
+	</ul>
 
 
 <script type="text/javascript">
@@ -98,9 +85,11 @@ $('#msginput').keypress(function(event)
 });
 </script>
 
-<hr/>
-
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %> |
-
-<%= link_to 'Back', channels_path %>
+<ul class="bottom_controls">
+<li><%= link_to 'Back', channels_path %></li>
+<li><%= link_to 'Edit', edit_channel_path(@channel) %></li>
+<li><%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %></li>
+<% if @channel.users.include? @user %>
+<li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %></li>
+<% end %>
+</ul>

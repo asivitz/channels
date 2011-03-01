@@ -1,25 +1,20 @@
-<h1>select a channel</h1>
-
-<hr/>
-
-<!--
-<div style="color:blue;">
-	(debug list of all channels)
-	<ul id="channels_list">
-	    <% @channels.each do |channel| %>
-	        <li><%= link_to channel.name, channel %></li>
-	    <% end %>
-	</ul>
-</div>
-
-<hr/>
--->
-
-<div style="color:blue;">
-	(debug list of all users)
-	<ul id="user_list">
-	    <% @users.each do |user| %>
-	        <li><%= user.alias %></li>
-	    <% end %>
-	</ul>
+<div id="home_content">
+	<h2>Select a channel</h2>
+	<div id="channel_list">
+		<h4>All Channels</h4>
+		<ul class="channels_list">
+		    <% @channels.each do |channel| %>
+		        <li><%= link_to channel.name, channel %></li>
+		    <% end %>
+		</ul>
+	</div>
+	
+	<div id="user_list">
+		<h4>Users</h4>
+		<ul class="user_list">
+		    <% @users.each do |user| %>
+		        <li><%= user.alias %></li>
+		    <% end %>
+		</ul>
+	</div>
 </div>
