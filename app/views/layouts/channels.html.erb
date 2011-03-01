@@ -18,15 +18,14 @@
 <body>
 
 	<header id="header">
-	    Logged in as <%= @user.alias %> | <%= link_to 'Logout', '/user/logout' %>
+		<div id="header_left">
+			<h1><%= link_to 'channels', channels_path %></h1>
+		</div>
+		<div id="header_right">Logged in as <%= @user.alias %> | <%= link_to 'Logout', '/user/logout' %></div>
 	</header>
 	<!-- /end #header -->
 	<div id="wrapper">
-		<p style="color: green"><%= flash[:notice] %></p>
-		<p style="color: red"><%= flash[:warning] %></p>
 		<aside id="sidebar">
-			<h1><%= link_to 'channels', channels_path %></h1>
-			
 			<nav id="channel_nav">
 				<ul>
 					<% @user.channels(true).each do |channel| %>
@@ -46,6 +45,8 @@
 	
 	
 		<article id="main">
+			<%= flash[:notice] %>
+			<%= flash[:warning] %>
 			<%= yield %>
 		</article>
 		<!-- /end #main content -->

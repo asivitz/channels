@@ -44,24 +44,22 @@ Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %>
     This channel has no messages.
 <% end %>
 
-<div id="messages">
     <% prev_message = nil %>
-    <ul id="message_list">
-    <% @channel.grouped_messages.each do |group| %>
-        	<li class="message_row">
-            <div class="meta">
-            	<p class="username"><%= group.poster %>:</p>
-			<p class="date"><%= group.date %></p>
-            </div>
-            <div class="message_content">
-                    <% group.messages.reverse.each do |m| %>
-                        <p id="message_<%= m.id %>"><%= m.marked_up_content %></p>
-                    <% end %>
-            </div>
-            </li>
-    <% end %>
-    </ul>
-</div>
+	<ul id="message_list">
+	    <% @channel.grouped_messages.each do |group| %>
+	        	<li class="message_row">
+	            <div class="meta">
+	            	<p class="username"><%= group.poster %>:</p>
+				<p class="date"><%= group.date %></p>
+	            </div>
+	            <div class="message_content">
+	                    <% group.messages.reverse.each do |m| %>
+	                        <p id="message_<%= m.id %>"><%= m.marked_up_content %></p>
+	                    <% end %>
+	            </div>
+	            </li>
+	    <% end %>
+	</ul>
 
 
 <script type="text/javascript">
