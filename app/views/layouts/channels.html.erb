@@ -38,8 +38,23 @@
 					<% end %>
 				</ul>
 			</nav>
-			
+			<div class="channel_controls">
+			<p class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></p>
+			    <div class="add_user_form">
+			        <%= form_tag('add_user') do %>
+			            Add user:
+			            <%= text_field :user, :alias, :value => "" %>
+			            <%= hidden_field_tag :id, @channel.id %>
+			            <%= submit_tag 'Add' %>
+			        <% end %>
+			        <% if @channel.users.include? @user %>
+			            <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
+			        <% end %>
+			    </div>
+			</div>
+			<div class="new_channel">
 			<%= link_to 'New channel', new_channel_path %>
+			</div>
 		</aside>
 		<!-- /end left #sidebar -->
 	

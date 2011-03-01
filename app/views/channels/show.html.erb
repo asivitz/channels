@@ -8,26 +8,7 @@
 </script>
 
 <div id="message_post">
-<h2>Showing Channel:
-<%=h @channel.name %>
-</h2>
-
-<div class="channel_controls">
-<p class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></p>
-    <div class="add_user_form">
-        <%= form_tag('add_user') do %>
-            Add user:
-            <%= text_field :user, :alias, :value => "" %>
-            <%= hidden_field_tag :id, @channel.id %>
-            <%= submit_tag 'Add' %>
-        <% end %>
-        <% if @channel.users.include? @user %>
-            <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
-        <% end %>
-    </div>
-</div>
-
-
+<h2><%=h @channel.name %></h2>
 <%= form_for [@channel, @message] do |f| %>
     <label for="msginput">Post Message
     <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
