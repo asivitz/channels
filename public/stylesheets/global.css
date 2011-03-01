@@ -87,7 +87,6 @@ a:hover {
 }
 
 #sidebar div.new_channel {
-	border-top: 1px dotted #ccc;
 	margin-top: 10px;
 }
 
@@ -117,6 +116,33 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #f0f0f0 100%)
 	background: #fff;
 	border-left: 1px solid #ccc;
 }
+
+#main #home_content {
+	padding: 20px;
+}
+
+#main #home_content h2{
+	font-size: 28px;
+	line-height: 28px;
+	padding-bottom: 15px;
+}
+
+#main #home_content h4 {
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #666;
+	padding: 10px 0 5px;
+}
+
+#main #home_content li {
+	margin: 0 0 5px;
+	list-style: none;
+	color: #565656;
+	font-size: 12px;
+}
+
+
+/* Channel Styles */
 
 #main .top_controls {
 	float: left;
