@@ -56,7 +56,7 @@ function addMessageToTable(id, username, time, content)
     var last = jQuery.trim(toprow.children()[1].innerHTML);
 
     namedisplay = username + ":";
-    var linehtml = '<li id="message_' + id + '">' + content + '</li>';
+    var linehtml = '<p id="message_' + id + '">' + content + '</p>';
 
     var added = null;
     if (last == username + ":")
@@ -68,7 +68,7 @@ function addMessageToTable(id, username, time, content)
     }
     else
     {
-        var row = $('<li class="message_row"><div class="meta"><p class=\"date\">' + time + '</p><p class=\"date\">' + namedisplay + '</p></div><div class=\"message_content\"><p id=\"message_' + id + '\">' + linehtml + '</p></div></li>');
+        var row = $('<li class="message_row"><div class="meta"><p class=\"username\">' + namedisplay + '</p><p class=\"date\">' + time + '</p></div><div class=\"message_content\">' + linehtml + '</div></li>');
         row.prependTo('#message_list');
         added = row;
     }
