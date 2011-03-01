@@ -29,12 +29,12 @@
 			<nav id="channel_nav">
 				<ul>
 					<% @user.channels(true).each do |channel| %>
-                                            <li><%= link_to channel.name, channel %>
-                                            <% num_unread = channel.num_messages - @user.last_read(channel.id) - 1%>
-                                            <% if num_unread > 0 %>
-                                                (<%= num_unread %>)
-                                            <% end %>
-                                            </li>
+                             <li><%= link_to channel.name, channel %>
+                             <% num_unread = channel.num_messages - @user.last_read(channel.id) - 1%>
+                             <% if num_unread > 0 %>
+                                 (<%= num_unread %>)
+                             <% end %>
+                             </li>
 					<% end %>
 				</ul>
 			</nav>
@@ -42,10 +42,11 @@
 			<p class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></p>
 			    <div class="add_user_form">
 			        <%= form_tag('add_user') do %>
-			            Add user:
+			            <label for="user_alias">Add user:
 			            <%= text_field :user, :alias, :value => "" %>
+			            </label>
 			            <%= hidden_field_tag :id, @channel.id %>
-			            <%= submit_tag 'Add' %>
+			            <%= submit_tag :id => "user_add_submit", :value => "Add User" %>
 			        <% end %>
 			        <% if @channel.users.include? @user %>
 			            <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
