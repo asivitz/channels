@@ -29,13 +29,11 @@
 
 
 <%= form_for [@channel, @message] do |f| %>
-    <p>
-    Post Message<br/>
-    <%= f.text_area :content, :size => "100x4", :id => "msginput" %>
-    </p>
+    <label for="msginput">Post Message
+    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
 <% end %>
 
-<a href="javascript:submitPost();">Post</a>
+<a href="javascript:submitPost();" class="message_post">Post</a>
 
 </div>
 
