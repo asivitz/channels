@@ -39,7 +39,6 @@
 				</ul>
 			</nav>
 			<div class="channel_controls">
-			<p class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></p>
 			    <div class="add_user_form">
 			        <%= form_tag('add_user') do %>
 			            <label for="user_alias">Add user:
@@ -47,9 +46,6 @@
 			            </label>
 			            <%= hidden_field_tag :id, @channel.id %>
 			            <%= submit_tag "Add User", :class => "add_user_submit" %>
-			        <% end %>
-			        <% if @channel.users.include? @user %>
-			            <%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %>
 			        <% end %>
 			    </div>
 			</div>
