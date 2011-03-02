@@ -9,7 +9,6 @@
 	<![endif]-->
 	<%= stylesheet_link_tag 'reset' %>
 	<%= stylesheet_link_tag 'global' %>
-	<%= stylesheet_link_tag 'channels' %>
 	<%= javascript_include_tag 'jquery' %>
 	<%= javascript_include_tag 'jquerycolor' %>
 	<%= javascript_include_tag 'jquery.form' %>
@@ -26,6 +25,7 @@
 	<!-- /end #header -->
 	<div id="wrapper">
 		<aside id="sidebar">
+			<h3>Your Channels</h3>
 			<nav id="channel_nav">
 				<ul>
 					<% @user.channels(true).each do |channel| %>

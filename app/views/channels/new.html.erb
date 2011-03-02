@@ -1,15 +1,15 @@
-<h1>New channel</h1>
+<div id="create_new_channel">
+<h2>Start a New Channel</h2>
 
 <%= form_for(@channel) do |f| %>
-  <%= f.error_messages %>
+  <%- #f.error_messages %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+    <label for="channel_name">Enter a name for your channel:
+    <%= f.text_field :name, :class => "text_input" %>
+    </label>
+    <%= f.submit 'Start Channel', :class => "create_channel_submit" %>
 <% end %>
-
-<%= link_to 'Back', channels_path %>
+</div>
+<ul class="bottom_controls">
+	<li><%= link_to 'Cancel', channels_path %></li>
+</ul>

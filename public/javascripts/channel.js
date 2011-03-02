@@ -52,29 +52,24 @@ function addMessageToTable(id, username, time, content)
         return;
 
     //find the last poster. if the names are the same, don't show a new username
-    var toprow = $('#message_list li').first();
-    var last = jQuery.trim(toprow.children()[1].innerHTML);
+    var toprow = $('#message_list li:first');
+    var lastPoster = toprow.find('p.username').html();
 
     namedisplay = username + ":";
-    var linehtml = '<p id="message_' + id + '">' + content + '</p>';
+    var newPost = $('<p id="message_' + id + '">' + content + '</p>');
 
     var added = null;
-    if (last == username + ":")
-    {
-        var line = $(linehtml);
-        var ul = toprow.children().last().children().first();
-        line.appendTo(ul);
-        added = line;
-    }
-    else
-    {
-        var row = $('<li class="message_row"><div class="meta"><p class=\"username\">' + namedisplay + '</p><p class=\"date\">' + time + '</p></div><div class=\"message_content\">' + linehtml + '</div></li>');
+    if (lastPoster == username + ":") {
+        var ul = toprow.find('.message_content');
+        newPost.appendTo(ul);
+        added = newPost;
+    } else {
+        var row = $('<li class="message_row"><div class="meta"><p class=\"username\">' + namedisplay + '</p><p class=\"date\">' + time + '</p></div><div class=\"message_content\">' + newPost + '</div></li>');
         row.prependTo('#message_list');
         added = row;
     }
+    added[0].style.background = '#f3f6f9'
+    added[0].style.color = '#347acb';
     added[0].style.opacity = 0;
-    added.animate(
-            { opacity:1, color:'black' },
-           1000,
-          null);
+    added.animate({opacity:1, color:'black' },300,null);
 }
