@@ -21,19 +21,19 @@
 	    </div>
 	</div>
 </div>
-
-<div id="message_post">
-<h2><%=h @channel.name %></h2>
-<%= form_for [@channel, @message] do |f| %>
-    <label for="msginput">Post Message
-    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
-<% end %>
-
-<a href="javascript:submitPost();" class="message_post">Post</a>
-
-</div>
-
-    <% prev_message = nil %>
+<div id="main_content">
+	<div id="message_post">
+	<h2><%=h @channel.name %></h2>
+	<%= form_for [@channel, @message] do |f| %>
+	    <label for="msginput">Post Message
+	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
+	<% end %>
+	
+	<a href="javascript:submitPost();" class="message_post">Post</a>
+	
+	</div>
+	
+	<% prev_message = nil %>
 	<ul id="message_list">
 		<% if @channel.messages.size == 0 %>
 		   <li class="message_row"><p class="no_messages">This channel has no messages.</p></li>
@@ -52,38 +52,10 @@
 	            </li>
 	    <% end %>
 	</ul>
-
-
-<script type="text/javascript">
-    // attach handler to form's submit event 
-
-function submitPost()
-{
-    var text = $('#msginput').val();
-    var options = 
-    {
-        dataType: 'json',
-        success:    function(data, stat)
-        {
-            addMessageToTable(data['id'],"<%= @user.alias %>", data['time'], text);
-        }
-    };
-    $('#new_message').ajaxSubmit(options);
-    $('#msginput').val("");
-    //getNewMessages(<%= @channel.id %>);
-
-}
-
-$('#msginput').keypress(function(event) 
-{
-    if (event.which == '13' && !event.shiftKey) 
-    {
-      event.preventDefault();
-      submitPost();
-    }
-});
-</script>
-
+</div>
+<div id="media_content">
+	<p>Right column for media stuff (just an idea for now)</p>
+</div>
 <ul class="bottom_controls">
 <li><%= link_to 'Back', channels_path %></li>
 <li><%= link_to 'Edit', edit_channel_path(@channel) %></li>

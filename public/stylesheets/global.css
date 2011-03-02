@@ -125,12 +125,13 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #eeeeee 100%)
 
 #main {
 	margin-left: 220px;
-	background: #fff;
+	background: #f3f6f9;
 	border-left: 1px solid #ccc;
 }
 
 #main #home_content {
 	padding: 20px;
+	background: #fff;
 }
 
 #main #home_content h2{
@@ -154,6 +155,26 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #eeeeee 100%)
 }
 
 
+/* Channel columns */
+
+#main_content {
+	width: 70%;
+	float: left;
+	background: #fff;
+	border-right: 1px solid #ccc;
+}
+
+#media_content {
+	width: 30%;
+	float: right;
+	height: 100%;
+	background: #f3f6f9;
+}
+
+#media_content p {
+	padding: 20px;
+}
+
 /* Channel Styles */
 
 #main .top_controls {
@@ -164,7 +185,6 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #eeeeee 100%)
 	border-bottom: 1px solid #ccd4dd;
 	font-size: 11px;
 	padding: 5px 0;
-	margin: 0 0 20px;
 }
 #main .top_controls:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
 
@@ -381,6 +401,7 @@ background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%)
 
 #create_new_channel {
 	padding: 20px;
+	background: #fff;
 }
 
 #create_new_channel label {

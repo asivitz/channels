@@ -1,3 +1,16 @@
+// Do this on page load 
+
+$(function() {
+	// post submit
+	$('#msginput').keypress(function(event) {
+	    if (event.which == '13' && !event.shiftKey) 
+	    {
+	      event.preventDefault();
+	      submitPost();
+	    }
+	});
+});
+
 var waitMin = 5;
 var waitMax = 45;
 var waitReset = 10;
@@ -71,4 +84,21 @@ function addMessageToTable(id, username, time, content)
     added[0].style.color = '#347acb';
     added[0].style.opacity = 0;
     added.animate({opacity:1, color:'black' },300,null);
+}
+
+// attach handler to form's submit event 
+
+function submitPost(){
+    var text = $('#msginput').val();
+    var options = 
+    {
+        dataType: 'json',
+        success:    function(data, stat)
+        {
+            addMessageToTable(data['id'],"<%= @user.alias %>", data['time'], text);
+        }
+    };
+    $('#new_message').ajaxSubmit(options);
+    $('#msginput').val("");
+    //getNewMessages(<%= @channel.id %>);
 }
