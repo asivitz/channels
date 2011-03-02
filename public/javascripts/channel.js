@@ -68,7 +68,6 @@ function addMessageToTable(id, username, time, content)
         row.prependTo('#message_list');
         added = row;
     }
-    added[0].style.background = '#f3f6f9'
     added[0].style.color = '#347acb';
     added[0].style.opacity = 0;
     added.animate({opacity:1, color:'black' },300,null);
