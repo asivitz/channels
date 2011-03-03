@@ -56,13 +56,13 @@ function addMessageToTable(id, username, time, content)
     var lastPoster = toprow.find('p.username').html();
 
     namedisplay = username + ":";
-    var newPost = $('<p id="message_' + id + '">' + content + '</p>');
+    var newPost = '<p id="message_' + id + '">' + content + '</p>';
 
     var added = null;
     if (lastPoster == username + ":") {
         var ul = toprow.find('.message_content');
-        newPost.appendTo(ul);
-        added = newPost;
+        $(newPost).appendTo(ul);
+        added = $(newPost);
     } else {
         var row = $('<li class="message_row"><div class="meta"><p class=\"username\">' + namedisplay + '</p><p class=\"date\">' + time + '</p></div><div class=\"message_content\">' + newPost + '</div></li>');
         row.prependTo('#message_list');
