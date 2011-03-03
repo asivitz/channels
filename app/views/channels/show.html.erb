@@ -68,6 +68,13 @@
 
 <script type="text/javascript">
 
+    $(document).ready(
+            function()
+            {
+            $('#msginput').focus();
+            waitForMsg(<%= @channel.id %>);
+            });
+
     weHaveFocus = true;
 
     isShowingAltTitle = false;
@@ -128,12 +135,6 @@ function startNotify(name)
 }
 
 var currentnumber = <%= @channel.messages.count %>;
-$(document).ready(
-        function()
-        {
-        $('#msginput').focus();
-        waitForMsg(<%= @channel.id %>);
-        });
 
 // post submit
 $('#msginput').keypress(function(event) {
