@@ -64,3 +64,21 @@
 <li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %></li>
 <% end %>
 </ul>
+<script>
+// attach handler to form's submit event 
+
+function submitPost(){
+    var text = $('#msginput').val();
+    var options = 
+    {
+        dataType: 'json',
+        success:    function(data, stat)
+        {
+            addMessageToTable(data['id'],'<%= @user.alias %>', data['time'], text);
+        }
+    };
+    $('#new_message').ajaxSubmit(options);
+    $('#msginput').val("");
+    //getNewMessages(<%= @channel.id %>);
+}
+</script>
