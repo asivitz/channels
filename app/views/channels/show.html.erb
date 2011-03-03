@@ -2,10 +2,6 @@
     <%= javascript_include_tag "channel" %>
 <% end %>
 
-<script type="text/javascript">
-    var currentnumber = <%= @channel.messages.count %>;
-    $(document).ready(function(){waitForMsg(<%= @channel.id %>);});
-</script>
 <div id="group_details">
 <div class="top_controls">
 	<div class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></div>
@@ -67,28 +63,84 @@
     </div>
     <div class="overlay_bg"></div>
 </div>
-<script>
-	// post submit
-	$('#msginput').keypress(function(event) {
-	    if (event.which == '13' && !event.shiftKey) 
-	    {
-	      event.preventDefault();
-	      submitPost();
-	    }
-	});
-	// attach handler to form's submit event 
-	function submitPost(){
-	    var text = $('#msginput').val();
-	    var options = 
-	    {
-	        dataType: 'json',
-	        success:    function(data, stat)
-	        {
-	            addMessageToTable(data['id'],'<%= @user.alias %>', data['date'], data['content']);
-	        }
-	    };
-	    $('#new_message').ajaxSubmit(options);
-	    $('#msginput').val("");
-	    //getNewMessages(<%= @channel.id %>);
-	}
+<script type="text/javascript">
+
+    weHaveFocus = true;
+
+    isShowingAltTitle = false;
+    notifyTimer = null;
+
+window.onfocus = function()
+{
+    weHaveFocus = true;
+
+    stopNotify();
+
+    var newtitle = "Channels: <%= @channel.name %>" ;
+    document.title = newtitle;
+
+}
+
+window.onblur = function()
+{
+    weHaveFocus = false;
+}
+
+
+function stopNotify()
+{
+    if (notifyTimer != null)
+    {
+        clearTimeout(notifyTimer);
+        notifyTimer = null;
+    }
+}
+
+function notify(name)
+{
+    if (isShowingAltTitle)
+    {
+        document.title = "Channels: <%= @channel.name %>";
+    }
+    else
+    {
+        document.title = name + " says...";
+    }
+    isShowingAltTitle = !isShowingAltTitle;
+
+    notifyTimer = setTimeout("notify('" + name + "')", 1500);
+}
+
+function startNotify(name)
+{
+    if (notifyTimer == null)
+        notifyTimer = setTimeout("notify('" + name + "')", 1500);
+}
+
+var currentnumber = <%= @channel.messages.count %>;
+$(document).ready(function(){waitForMsg(<%= @channel.id %>);});
+
+// post submit
+$('#msginput').keypress(function(event) {
+        if (event.which == '13' && !event.shiftKey) 
+        {
+        event.preventDefault();
+        submitPost();
+        }
+        });
+// attach handler to form's submit event 
+function submitPost(){
+    var text = $('#msginput').val();
+    var options = 
+    {
+dataType: 'json',
+          success:    function(data, stat)
+          {
+              addMessageToTable(data['id'],'<%= @user.alias %>', data['date'], data['content']);
+          }
+    };
+    $('#new_message').ajaxSubmit(options);
+    $('#msginput').val("");
+    //getNewMessages(<%= @channel.id %>);
+}
 </script>

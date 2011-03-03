@@ -51,6 +51,9 @@ function addMessageToTable(id, username, time, content)
     if (existing.length > 0)
         return;
 
+    if (!weHaveFocus)
+        startNotify(username);
+
     //find the last poster. if the names are the same, don't show a new username
     var toprow = $('#message_list li:first');
     var lastPoster = toprow.find('p.username').html();
