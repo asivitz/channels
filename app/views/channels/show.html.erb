@@ -63,12 +63,21 @@
     </div>
     <div class="overlay_bg"></div>
 </div>
+
+<div id="sound_element"></div>
+
 <script type="text/javascript">
 
     weHaveFocus = true;
 
     isShowingAltTitle = false;
     notifyTimer = null;
+
+function playDing()
+{
+    sound_file_url = "/sounds/ding.mp3";
+    $('#sound_element').html( "<embed src='"+sound_file_url+"' hidden=true autostart=true loop=false>");
+}
 
 window.onfocus = function()
 {
@@ -115,6 +124,7 @@ function startNotify(name)
 {
     if (notifyTimer == null)
         notifyTimer = setTimeout("notify('" + name + "')", 1500);
+    playDing();
 }
 
 var currentnumber = <%= @channel.messages.count %>;
