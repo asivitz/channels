@@ -128,7 +128,12 @@ function startNotify(name)
 }
 
 var currentnumber = <%= @channel.messages.count %>;
-$(document).ready(function(){waitForMsg(<%= @channel.id %>);});
+$(document).ready(
+        function()
+        {
+        $('#msginput').focus();
+        waitForMsg(<%= @channel.id %>);
+        });
 
 // post submit
 $('#msginput').keypress(function(event) {
