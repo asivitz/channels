@@ -36,7 +36,7 @@
 	            </div>
 	            <div class="message_content">
 	                    <% group.messages.reverse.each do |m| %>
-	                        <p id="message_<%= m.id %>"><%= m.marked_up_content %></p>
+	                        <p id="message_<%= m.id %>"><%= raw [m.marked_up_content] %></p>
 	                    <% end %>
 	            </div>
 	            </li>
@@ -84,7 +84,7 @@
 	        dataType: 'json',
 	        success:    function(data, stat)
 	        {
-	            addMessageToTable(data['id'],'<%= @user.alias %>', data['time'], text);
+	            addMessageToTable(data['id'],'<%= @user.alias %>', data['time'], data['content']);
 	        }
 	    };
 	    $('#new_message').ajaxSubmit(options);

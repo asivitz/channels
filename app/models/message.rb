@@ -4,9 +4,10 @@ class Message < ActiveRecord::Base
 
     def marked_up_content
         msg = self.content
+        msg = CGI::escapeHTML(msg)
         matches = msg.scan(/https?:\/\/\S+/)
         matches.uniq.each do |word|
-            msg.gsub!(word, "<a href=\"#{word}\">#{word}</a>")
+            msg.gsub!(word, "<a href=\\\"#{word}\\\">#{word}</a>")
         end
         msg
     end

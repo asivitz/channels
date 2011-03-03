@@ -12,6 +12,6 @@ class MessagesController < ApplicationController
         @message.save
         #redirect_to @channel
 
-        render :text => "{\"id\":\"#{@message.id}\", \"time\":\"#{@message.pretty_updated_at}\"}"
+        render :text => "{\"id\":\"#{@message.id}\", \"time\":\"#{@message.pretty_updated_at}\", \"content\":\"#{@message.marked_up_content}\"}"
     end
 end
