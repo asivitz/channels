@@ -65,20 +65,27 @@
 <% end %>
 </ul>
 <script>
-// attach handler to form's submit event 
-
-function submitPost(){
-    var text = $('#msginput').val();
-    var options = 
-    {
-        dataType: 'json',
-        success:    function(data, stat)
-        {
-            addMessageToTable(data['id'],'<%= @user.alias %>', data['time'], text);
-        }
-    };
-    $('#new_message').ajaxSubmit(options);
-    $('#msginput').val("");
-    //getNewMessages(<%= @channel.id %>);
-}
+	// post submit
+	$('#msginput').keypress(function(event) {
+	    if (event.which == '13' && !event.shiftKey) 
+	    {
+	      event.preventDefault();
+	      submitPost();
+	    }
+	});
+	// attach handler to form's submit event 
+	function submitPost(){
+	    var text = $('#msginput').val();
+	    var options = 
+	    {
+	        dataType: 'json',
+	        success:    function(data, stat)
+	        {
+	            addMessageToTable(data['id'],'<%= @user.alias %>', data['time'], text);
+	        }
+	    };
+	    $('#new_message').ajaxSubmit(options);
+	    $('#msginput').val("");
+	    //getNewMessages(<%= @channel.id %>);
+	}
 </script>

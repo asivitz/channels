@@ -1,16 +1,3 @@
-// Do this on page load 
-
-$(function() {
-	// post submit
-	$('#msginput').keypress(function(event) {
-	    if (event.which == '13' && !event.shiftKey) 
-	    {
-	      event.preventDefault();
-	      submitPost();
-	    }
-	});
-});
-
 var waitMin = 5;
 var waitMax = 45;
 var waitReset = 10;
