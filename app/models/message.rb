@@ -7,9 +7,13 @@ class Message < ActiveRecord::Base
         msg = CGI::escapeHTML(msg)
         matches = msg.scan(/https?:\/\/\S+/)
         matches.uniq.each do |word|
-            msg.gsub!(word, "<a href=\\\"#{word}\\\">#{word}</a>")
+            msg.gsub!(word, "<a href=\"#{word}\">#{word}</a>")
         end
         msg
+    end
+
+    def escape_quotes string
+        string.gsub('"', '\"')
     end
 
     def pretty_updated_at
@@ -17,6 +21,7 @@ class Message < ActiveRecord::Base
     end
 
     def to_json
-         "{\"id\":#{self.id},\"name\":\"#{self.poster}\",\"date\":\"#{self.pretty_updated_at}\",\"content\":\"#{self.marked_up_content}\"}"
+        content = escape_quotes(self.marked_up_content)
+         "{\"id\":#{self.id},\"name\":\"#{self.poster}\",\"date\":\"#{self.pretty_updated_at}\",\"content\":\"#{content}\"}"
     end
 end

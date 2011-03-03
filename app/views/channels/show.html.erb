@@ -84,7 +84,7 @@
 	        dataType: 'json',
 	        success:    function(data, stat)
 	        {
-	            addMessageToTable(data['id'],'<%= @user.alias %>', data['time'], data['content']);
+	            addMessageToTable(data['id'],'<%= @user.alias %>', data['date'], data['content']);
 	        }
 	    };
 	    $('#new_message').ajaxSubmit(options);
