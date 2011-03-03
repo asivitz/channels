@@ -45,7 +45,7 @@
 <ul class="bottom_controls">
 <li><%= link_to 'Back', channels_path %></li>
 <li><%= link_to 'Edit', edit_channel_path(@channel) %></li>
-<li><%= link_to 'Delete Channel', @channel, :confirm => 'Are you sure?', :method => :delete %></li>
+<li><%= link_to 'Delete Channel', channel_path(@channel), :confirm => "Are you sure?", :method => :delete %></li>
 <% if @channel.users.include? @user %>
 <li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %></li>
 <% end %>
