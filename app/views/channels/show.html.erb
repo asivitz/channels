@@ -9,17 +9,7 @@
 <div id="group_details">
 <div class="top_controls">
 	<div class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></div>
-	<div class="channel_controls">
-	    <div class="add_user_form">
-	        <%= form_tag('add_user') do %>
-	            <label for="user_alias">Add user:
-	            <%= text_field :user, :alias, :value => "" %>
-	            </label>
-	            <%= hidden_field_tag :id, @channel.id %>
-	            <%= submit_tag "Add User", :class => "add_user_submit" %>
-	        <% end %>
-	    </div>
-	</div>
+	<a href="javascript:showOverlay();" class="add_user">Add User</a>
 </div>
 <div id="main_content">
 	<div id="message_post">
@@ -64,6 +54,19 @@
 <li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %></li>
 <% end %>
 </ul>
+<div id="overlay" class="overlay">
+    <div class="overlay_content add_user_form">
+    <a href="#" class="close_overlay">Cancel</a>
+        <%= form_tag('add_user') do %>
+            <label for="user_alias">Add user:
+            <%= text_field :user, :alias, :value => "" %>
+            </label>
+            <%= hidden_field_tag :id, @channel.id %>
+            <%= submit_tag "Add User", :class => "add_user_submit" %>
+        <% end %>
+    </div>
+    <div class="overlay_bg"></div>
+</div>
 <script>
 	// post submit
 	$('#msginput').keypress(function(event) {

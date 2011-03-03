@@ -72,3 +72,14 @@ function addMessageToTable(id, username, time, content)
     added[0].style.opacity = 0;
     added.animate({opacity:1, color:'black' },300,null);
 }
+
+function showOverlay() {
+	$('#overlay').fadeIn(300);
+	$('#overlay .overlay_bg').click(function() {
+		$(this).parent().fadeOut(300);
+	});
+	$('#overlay .close_overlay, #overlay .add_user_submit').click(function() {
+		$('#overlay').fadeOut(300);
+		return false;
+	});
+}

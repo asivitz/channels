@@ -9,9 +9,8 @@ h4{font-size:19px}
 h5{font-size:17px}
 h6{font-size:15px}
 ol{list-style:decimal}
-ul{list-style:disc;;}
+ul{list-style:disc;}
 li{margin-left:30px}
-
 a {
 	color: #347acb;
 	text-decoration: none;
@@ -20,6 +19,17 @@ a {
 a:hover {
 	text-decoration: underline;
 }
+
+input.text-input, textarea {
+	display: block;
+	padding: 5px;
+	border: 1px solid #bbb;
+	-moz-box-shadow: inset 0px 1px 1px #eee; 
+	-webkit-box-shadow: inset 0px 1px 1px #eee; 
+	box-shadow: inset 0px 1px 1px #eee; 
+	color: #999;
+}
+
 
 #header {
 	padding: 0;
@@ -194,48 +204,22 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #eeeeee 100%)
 	line-height: 18px;
 	color: #666;
 }
-.top_controls .channel_controls .add_user_form {
+
+#main .top_controls .add_user {
+	width: 60px;
 	float: right;
-	height: 20px;
-	overflow: hidden;
-	padding: 0 5px;
-}
-.top_controls .channel_controls .add_user_form label {
-	color: #666;
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 10px;
-}
-
-.top_controls .channel_controls .add_user_form label input {
-	padding: 2px;
-	font-size: 11px;
-	width: 192px;
-	border: 1px solid #bbb;
-	-moz-box-shadow: inset 0px 1px 1px #eee; 
-	-webkit-box-shadow: inset 0px 1px 1px #eee; 
-	box-shadow: inset 0px 1px 1px #eee; 
-}
-
-.top_controls .channel_controls .add_user_form label input:focus {
-	border: 1px solid #999;
-	background: #f3f6fa;
-	color: #565656;
-}
-
-.top_controls .add_user_form input.add_user_submit {
-	width: 70px;
+	margin-right: 5px;
+	display: inline;
 	text-align: center;
 	padding: 1px 10px 2px;
 	font-size: 11px;
-	margin: 0 0 0 5px;
-	background-color: #cccccc;
-background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%);
-    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #80b2ea),color-stop(0.03, #5593da),color-stop(1, #347acb));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#347acb');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#347acb')";
-    border: 1px solid #266ab9;
-    color: #fff;
+	background-color: #eeeeee;
+background-image: -moz-linear-gradient(top, #ffffff 0%,#f5f5f5 3%, #eeeeee 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(0.03, #f5f5f5),color-stop(1, #eee));
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#f5f5f5');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f5f5f5', EndColorStr='#eeeeee')";
+    border: 1px solid #999;
+    color: #222222;
 }
 
 #message_post h2 {
@@ -464,40 +448,76 @@ background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%)
 	background: #347acb;
 }
 
-/* Previous styles from scaffold. Not sure where these apply yet */
+/* Add User Overlay */
 
-.fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+#overlay {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+}
+#overlay .overlay_bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0, .6);
+	z-index: 1001;
+}
+#overlay .overlay_content {
+	position: relative;
+	width: 200px;
+	z-index: 1002;
+	background: #fff;
+	margin: 20% auto;
+	padding: 40px;
 }
 
-#errorExplanation {
-  width: 400px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+#overlay .overlay_content .close_overlay {
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 
-#errorExplanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  background-color: #c00;
-  color: #fff;
+.add_user_form label {
+	color: #666;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 10px;
 }
 
-#errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 5px;
+.add_user_form label input {
+	display: block;
+	margin: 10px 0;
+	padding: 2px;
+	font-size: 11px;
+	width: 90%;
+	border: 1px solid #bbb;
+	-moz-box-shadow: inset 0px 1px 1px #eee; 
+	-webkit-box-shadow: inset 0px 1px 1px #eee; 
+	box-shadow: inset 0px 1px 1px #eee; 
 }
 
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: square;
+.channel_controls .add_user_form label input:focus {
+	border: 1px solid #999;
+	background: #f3f6fa;
+	color: #565656;
+}
+
+.add_user_form input.add_user_submit {
+	width: 70px;
+	text-align: center;
+	padding: 1px 10px 2px;
+	font-size: 11px;
+	background-color: #cccccc;
+background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #80b2ea),color-stop(0.03, #5593da),color-stop(1, #347acb));
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#347acb');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#347acb')";
+    border: 1px solid #266ab9;
+    color: #fff;
 }
