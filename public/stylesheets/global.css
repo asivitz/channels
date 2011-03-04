@@ -338,7 +338,20 @@ background-image: -moz-linear-gradient(top, #80b2ea 0%,#5593da 3%, #347acb 100%)
 	font-size: 12px;
 	line-height: 18px;
 	border-left: 1px solid #eee;
-	padding:0 10px 5px 10px;
+	padding:0 20px 5px 10px;
+        position: relative;
+}
+
+#message_list .message_row .message_content p .buttons {
+    position: absolute;
+    text-align:right;
+    width:100%;
+    right:10px;
+    visibility:hidden;
+}
+
+#message_list .message_row .message_content p:hover .buttons{
+    visibility:visible;
 }
 
 #message_list p.no_messages {

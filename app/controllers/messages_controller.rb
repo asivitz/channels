@@ -14,4 +14,12 @@ class MessagesController < ApplicationController
 
         render :text => "#{@message.to_json}"
     end
+
+    def destroy
+        @channel = Channel.find(params[:channel_id])
+        @message = @channel.messages.find(params[:id])
+        if @message.poster == @user.alias
+            @message.destroy
+        end
+    end
 end

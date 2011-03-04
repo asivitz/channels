@@ -1,0 +1,17 @@
+/* Eliminate the message by fading it out */
+var msg = $('#message_<%= @message.id %>');
+var parent = msg.parent();
+if (parent.children().size() == 1)
+{
+    parent.parent().fadeOut();
+}
+else
+{
+    msg.fadeOut('fast', 
+            function()
+            {
+                msg.remove();
+            }
+            );
+}
+
