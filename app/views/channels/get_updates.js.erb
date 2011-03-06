@@ -1,0 +1,34 @@
+<% @new_messages.each do |m| %>
+
+//see if we already have this message
+var existing = $('#message_<%= m.id %>');
+if (existing.length == 0)
+{
+    if (!weHaveFocus)
+        startNotify('<%= m.poster %>');
+
+    var added = null;
+
+    var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => m) %>");
+    var latestContainer = null;
+
+    if (topPoster() == '<%= m.poster %>:')
+    {
+        latestContainer = getLatestContainer();
+        added = msg;
+    }
+    else
+    {
+        latestContainer = addContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
+        added = latestContainer;
+    }
+
+    var ul = latestContainer.find('.message_content');
+    msg.appendTo(ul);
+
+    added.hide().fadeIn();
+}
+
+<% end %>
+
+currentnumber = <%= @channel.messages.count %>;

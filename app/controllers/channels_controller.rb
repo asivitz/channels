@@ -110,14 +110,7 @@ class ChannelsController < ApplicationController
 
       if last_read_s
           last_read = last_read_s.to_i
-          json = "["
-          (last_read...@channel.num_messages).each do |i|
-              message = @channel.messages[i]
-              json << message.to_json
-              json << "," if i != @channel.num_messages - 1
-          end
-          json << "]"
-          render :text => json
+          @new_messages = @channel.messages[last_read...@channel.num_messages]
       end
   end
 end
