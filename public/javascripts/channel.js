@@ -44,6 +44,29 @@ function getNewMessages(channelid)
         return false;
 }
 
+function topPoster()
+{
+    var lastPoster = getLatestContainer().find('p.username').html();
+    return lastPoster;
+}
+
+function getLatestContainer()
+{
+    return $('#message_list li:first');
+}
+
+function addContainer(username, time)
+{
+    var row = $('<li class="message_row">' +
+        '<div class="meta">' +
+        '<p class="username">' + username + ':</p>' +
+        '<p class="date">' + time + '</p>' +
+        '</div>' +
+        '<div class="message_content"></div>');
+    row.prependTo($('#message_list'));
+    return row;
+}
+
 function addMessageToTable(id, username, time, content)
 {
     //see if we already have this message

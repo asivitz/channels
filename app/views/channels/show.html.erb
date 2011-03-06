@@ -33,13 +33,7 @@
                 </div>
                 <div class="message_content">
                     <% group.messages.reverse.each do |m| %>
-                        <p id="message_<%= m.id %>">
-                            <% if m.poster == @user.alias %>
-                                <span class="buttons"><%= link_to 'X', [@channel, m], :confirm => "Are you sure?",
-                                    :method => :delete, :remote => true %></span>
-                            <% end %>
-                            <%= raw [m.marked_up_content] %>
-                        </p>
+                        <%= render :partial => "message", :object => m %>
                     <% end %>
                 </div>
                 </li>

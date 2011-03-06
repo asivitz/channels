@@ -1,7 +1,22 @@
-addMessageToTable(
-        '<%= @message.id %>',
-        '<%= @message.poster %>', 
-        '<%= @message.pretty_updated_at %>',
-        '<%= @message.marked_up_content %>');
+var added;
+
+var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => @message) %>");
+var latestContainer = null;
+
+if (topPoster() == '<%= @message.poster %>:')
+{
+    latestContainer = getLatestContainer();
+    added = msg;
+}
+else
+{
+    latestContainer = addContainer('<%= @message.poster %>', '<%= @message.pretty_updated_at %>');
+    added = latestContainer;
+}
+
+var ul = latestContainer.find('.message_content');
+msg.appendTo(ul);
+
+added.hide().fadeIn();
 
 $('#msginput').val("");

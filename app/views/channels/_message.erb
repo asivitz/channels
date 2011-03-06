@@ -1,0 +1,7 @@
+<p id="message_<%= message.id %>">
+<% if message.poster == @user.alias %>
+    <span class="buttons"><%= link_to 'X', [@channel, message], :confirm => "Are you sure?",
+        :method => :delete, :remote => true %></span>
+<% end %>
+<%= raw [message.marked_up_content] %>
+</p>
