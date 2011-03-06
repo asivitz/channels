@@ -10,12 +10,13 @@
 <div id="main_content">
 	<div id="message_post">
 	<h2><%=h @channel.name %></h2>
-	<%= form_for [@channel, @message] do |f| %>
+        <%= form_for [@channel, @message] , :remote => true do |f| %>
 	    <label for="msginput">Post Message
 	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
+
+            <a href="javascript:$('#new_message').submit();" class="message_post">Post</a>
 	<% end %>
 	
-	<a href="javascript:submitPost();" class="message_post">Post</a>
 	
 	</div>
 	
@@ -142,27 +143,14 @@ function startNotify(name)
 
 var currentnumber = <%= @channel.messages.count %>;
 
+
 // post submit
 $('#msginput').keypress(function(event) {
         if (event.which == '13' && !event.shiftKey) 
         {
         event.preventDefault();
-        submitPost();
+        $('#new_message').submit();
         }
         });
-// attach handler to form's submit event 
-function submitPost(){
-    var text = $('#msginput').val();
-    var options = 
-    {
-dataType: 'json',
-          success:    function(data, stat)
-          {
-              addMessageToTable(data['id'],'<%= @user.alias %>', data['date'], data['content']);
-          }
-    };
-    $('#new_message').ajaxSubmit(options);
-    $('#msginput').val("");
-    //getNewMessages(<%= @channel.id %>);
-}
+
 </script>

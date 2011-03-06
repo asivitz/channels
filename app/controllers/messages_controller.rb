@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
         @message.save
         #redirect_to @channel
 
-        render :text => "#{@message.to_json}"
+        #render :text => "#{@message.to_json}"
     end
 
     def destroy

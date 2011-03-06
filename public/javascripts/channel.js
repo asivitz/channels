@@ -65,8 +65,8 @@ function addMessageToTable(id, username, time, content)
     if (lastPoster == username + ":") 
     {
         var ul = toprow.find('.message_content');
-        $(newPost).appendTo(ul);
-        added = $(newPost);
+        var np = $(newPost).appendTo(ul);
+        added = np;
     } 
     else 
     {
@@ -74,9 +74,7 @@ function addMessageToTable(id, username, time, content)
         row.prependTo('#message_list');
         added = row;
     }
-    added[0].style.color = '#347acb';
-    added[0].style.opacity = 0;
-    added.animate({opacity:1, color:'black' },300,null);
+    added.hide().fadeIn();
 }
 
 function showOverlay() {

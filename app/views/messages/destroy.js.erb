@@ -3,7 +3,12 @@ var msg = $('#message_<%= @message.id %>');
 var parent = msg.parent();
 if (parent.children().size() == 1)
 {
-    parent.parent().fadeOut();
+    parent.parent().fadeOut('fast',
+            function()
+            {
+                parent.parent().remove();
+            }
+            );
 }
 else
 {
