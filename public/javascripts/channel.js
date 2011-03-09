@@ -28,7 +28,7 @@ function getNewMessages(channelid)
 {
     $.ajax(
         {
-            url:"/channels/get_updates/" + channelid + "?last_read=" + currentnumber,
+            url:"/channels/get_updates/" + channelid + "?previous_check=" + last_checked,
             cache: false,
         }
         );

@@ -19,7 +19,10 @@ class ChannelsController < ApplicationController
   # GET /channels/1.xml
   def show
     @message = Message.new # to add a new message
-    @user.last_read_map[@channel.id] = @channel.num_messages - 1
+
+    @channelconfig = @user.channelconfigs.where(:channel_id => @channel.id).first
+    @channelconfig.last_checked = Time.now
+    @channelconfig.save
 
     respond_to do |format|
       format.html # show.html.erb
@@ -105,12 +108,17 @@ class ChannelsController < ApplicationController
       redirect_to :action => "index"
   end
 
-  def get_updates
-      last_read_s = params[:last_read]
+  def get_updates 
+      previous_check = params[:previous_check]
+      if previous_check
+          prevtime = Time.at(previous_check.to_i)
 
-      if last_read_s
-          last_read = last_read_s.to_i
-          @new_messages = @channel.messages[last_read...@channel.num_messages]
+          @new_messages = Message.where(:channel_id => @channel.id).since(prevtime).all
+          if not @new_messages.empty?
+              @channelconfig = @user.channelconfigs.where(:channel_id => @channel.id).first
+              @channelconfig.last_checked = Time.now
+              @channelconfig.save
+          end
       end
   end
 end

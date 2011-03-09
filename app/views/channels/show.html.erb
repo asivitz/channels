@@ -135,7 +135,7 @@ function startNotify(name)
     playDing();
 }
 
-var currentnumber = <%= @channel.messages.count %>;
+var last_checked = '<%= Time.now.to_i %>';
 
 
 // post submit

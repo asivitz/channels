@@ -35,15 +35,16 @@
 			<h3>Your Channels</h3>
 			<nav id="channel_nav">
 				<ul>
-					<% @user.channels(true).each do |channel| %>
-                             <li><%= link_to channel.name, channel %>
-                             <% num_unread = channel.num_messages - @user.last_read(channel.id) - 1%>
-                             <% if num_unread > 0 %>
-                                 (<%= num_unread %>)
-                             <% end %>
-                             </li>
-					<% end %>
-				</ul>
+                                    <% @user.channels(true).each do |channel| %>
+                                        <li>
+                                        <%= link_to channel.name, channel %>
+                                        <% unread = @user.unread_messages(channel.id) %>
+                                        <% if unread.count > 0 %>
+                                            (<%= unread.count %>)
+                                        <% end %>
+                                        </li>
+                                    <% end %>
+                                </ul>
 			</nav>
 			<div class="new_channel">
 			<%= link_to 'New channel', new_channel_path %>

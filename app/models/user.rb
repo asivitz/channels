@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
     validates_uniqueness_of :alias
     validates_confirmation_of :password
 
-    has_and_belongs_to_many :channels
+    has_many :channelconfigs
+    has_many :channels, :through => :channelconfigs
 
     attr_protected :id, :salt
     attr_accessor :password, :password_confirmation
@@ -38,13 +39,9 @@ class User < ActiveRecord::Base
         nil
     end  
     
-    def last_read_map
-        @last_read_map ||= {}
-    end
-
-    def last_read channel_id
-        msgnum = self.last_read_map[channel_id]
-        return 0 if not msgnum
-        return msgnum
+    def unread_messages channel_id
+        config = Channelconfig.where(:channel_id => channel_id, :user_id => self.id).first
+        last_checked = config.last_checked
+        Message.where("channel_id = ? AND poster <> ?", channel_id, self.alias).since(last_checked)
     end
 end

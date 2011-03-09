@@ -2,6 +2,8 @@ class Message < ActiveRecord::Base
     validates_presence_of :poster, :content
     belongs_to :channel
 
+    scope :since, lambda {|time| where("updated_at > ?", time)}
+
     def marked_up_content
         msg = self.content
         msg = CGI::escapeHTML(msg)
