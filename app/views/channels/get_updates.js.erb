@@ -19,7 +19,8 @@ if (existing.length == 0)
     }
     else
     {
-        latestContainer = addContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
+        latestContainer = makeContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
+        latestContainer.prependTo($('#message_list'));
         added = latestContainer;
     }
 

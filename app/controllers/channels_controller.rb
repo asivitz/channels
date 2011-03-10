@@ -1,6 +1,6 @@
 class ChannelsController < ApplicationController
     before_filter :login_required
-    before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit]
+    before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit, :get_page]
 
 
   # GET /channels
@@ -23,6 +23,8 @@ class ChannelsController < ApplicationController
     @channelconfig = @user.channelconfigs.where(:channel_id => @channel.id).first
     @channelconfig.last_checked = Time.now
     @channelconfig.save
+
+    get_page
 
     respond_to do |format|
       format.html # show.html.erb
@@ -106,6 +108,31 @@ class ChannelsController < ApplicationController
       @channel.users.delete @user
       @channel.save
       redirect_to :action => "index"
+  end
+
+  def get_page
+      pagesize = 20
+      from_date = params[:from_date]
+      if from_date 
+          date = Time.at(from_date.to_i)
+          page = @channel.messages.where("updated_at < ?", date).limit(pagesize).order("updated_at DESC").all.reverse
+      else
+          page = @channel.messages.limit(pagesize).order("updated_at DESC").all.reverse
+      end
+
+      @message_groups = []
+      while page.length > 0
+          message = page.pop
+          group = OpenStruct.new
+          group.poster = message.poster
+          group.date = message.pretty_updated_at
+          group.messages = [message]
+          while page.length > 0 and page.last.poster == group.poster
+              group.messages << page.pop
+          end
+          @message_groups << group
+      end
+      return @message_groups
   end
 
   def get_updates 

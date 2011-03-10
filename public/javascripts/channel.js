@@ -41,12 +41,23 @@ function topPoster()
     return lastPoster;
 }
 
+function bottomPoster()
+{
+    var lastPoster = getOldestContainer().find('p.username').html();
+    return lastPoster;
+}
+
 function getLatestContainer()
 {
     return $('#message_list li:first');
 }
 
-function addContainer(username, time)
+function getOldestContainer()
+{
+    return $('#message_list li:last');
+}
+
+function makeContainer(username, time)
 {
     var row = $('<li class="message_row">' +
         '<div class="meta">' +
@@ -54,7 +65,6 @@ function addContainer(username, time)
         '<p class="date">' + time + '</p>' +
         '</div>' +
         '<div class="message_content"></div>');
-    row.prependTo($('#message_list'));
     return row;
 }
 

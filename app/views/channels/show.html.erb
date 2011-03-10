@@ -22,10 +22,10 @@
 	
 	<% prev_message = nil %>
 	<ul id="message_list">
-            <% if @channel.messages.size == 0 %>
+            <% if @message_groups.size == 0 %>
                 <li class="message_row"><p class="no_messages">This channel has no messages.</p></li>
             <% end %>
-	    <% @channel.grouped_messages.each do |group| %>
+	    <% @message_groups.each do |group| %>
                 <li class="message_row">
                 <div class="meta">
                     <p class="username"><%= group.poster %>:</p>
@@ -39,6 +39,12 @@
                 </li>
             <% end %>
         </ul>
+
+        <% last_message = @message_groups.last.messages.last %>
+
+        <div style="text-align:center;">
+            <%= link_to 'More', "/channels/get_page/#{@channel.id}?from_date=#{last_message.updated_at.to_i}", :remote => true, :id => "more_link" %>
+        </div>
 </div>
 <div id="media_content">
 	<p>Right column for media stuff (just an idea for now)</p>
