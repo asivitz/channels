@@ -15,7 +15,8 @@ class UserController < ApplicationController
             end
 
             if @user.save
-                session[:user] = User.authenticate(@user.alias, @user.password)
+                User.authenticate(@user.alias, @user.password)
+                session[:user_id]  = @user.id
                 flash[:message] = "Signup successful"
                 redirect_to :action => "welcome"          
             else
@@ -28,7 +29,7 @@ class UserController < ApplicationController
 
     def login
         if request.post?
-            if session[:user] = User.authenticate(params[:user][:alias], params[:user][:password])
+            if session[:user_id] = User.authenticate(params[:user][:alias], params[:user][:password]).id
                 flash[:message]  = "Login successful"
                 redirect_to_stored
             else
@@ -38,13 +39,14 @@ class UserController < ApplicationController
     end
 
     def logout
-        session[:user] = nil
+        session[:user_id] = nil
         flash[:message] = 'Logged out'
         redirect_to :action => 'login'
     end
 
     def change_password
-        @user=session[:user]
+        uid = session[:user_id]
+        @user = User.where(:id => uid).first
         if request.post?
             @user.update_attributes(:password=>params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
             if @user.save

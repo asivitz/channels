@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   def login_required
-      if session[:user]
-          @user = session[:user]
+      if session[:user_id]
+          @user = current_user
           return true
       end
       flash[:warning]='Please login to continue'
@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def member_required
+      @user = current_user
       @channel = Channel.find(params[:id])
       if @channel.users.include? @user
           return true
@@ -28,7 +29,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-      session[:user]
+      uid = session[:user_id]
+      User.where(:id => uid).first
   end
 
   def redirect_to_stored

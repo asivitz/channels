@@ -51,14 +51,17 @@ class ChannelsController < ApplicationController
   # POST /channels.xml
   def create
     @channel = Channel.new(params[:channel])
-    @channel.users << @user
 
     respond_to do |format|
       if @channel.save
+          @channel.users << @user
+          @channel.save
         flash[:notice] = 'Channel was successfully created.'
         format.html { redirect_to(@channel) }
         format.xml  { render :xml => @channel, :status => :created, :location => @channel }
       else
+        flash[:notice] = 'Could not create channel'
+        logger.debug @channel.errors.full_messages
         format.html { render :action => "new" }
         format.xml  { render :xml => @channel.errors, :status => :unprocessable_entity }
       end

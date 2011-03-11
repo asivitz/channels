@@ -42,11 +42,13 @@
             <% end %>
         </ul>
 
-        <% last_message = @message_groups.last.messages.last %>
+        <% if not @message_groups.empty? %>
+            <% last_message = @message_groups.last.messages.last %>
 
-        <div style="text-align:center;">
-            <%= link_to 'More', "/channels/get_page/#{@channel.id}?from_date=#{last_message.updated_at.to_i}", :remote => true, :id => "more_link" %>
-        </div>
+            <div style="text-align:center;">
+                <%= link_to 'More', "/channels/get_page/#{@channel.id}?from_date=#{last_message.updated_at.to_i}", :remote => true, :id => "more_link" %>
+            </div>
+        <% end %>
 </div>
 <div id="media_content">
 	<p>Right column for media stuff (just an idea for now)</p>
