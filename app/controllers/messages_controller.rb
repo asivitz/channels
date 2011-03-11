@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'sanitize'
+
 class MessagesController < ApplicationController
     before_filter :login_required
 
@@ -8,8 +11,14 @@ class MessagesController < ApplicationController
             redirect_to :controller => "channels", :action => "index"
         end
         @message = @channel.messages.build(params[:message])
-        @message.poster = @user.alias
-        @message.save
+        @message.content = Sanitize.clean(@message.content, Sanitize::Config::BASIC)
+        @message.content.gsub!("\n","<br/>")
+        if @message.content.length > 0
+            @message.poster = @user.alias
+            @message.save
+        else
+            @message = nil
+        end
         #redirect_to @channel
 
         #render :text => "#{@message.to_json}"
