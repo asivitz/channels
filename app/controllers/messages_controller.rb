@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
             redirect_to :controller => "channels", :action => "index"
         end
         @message = @channel.messages.build(params[:message])
-        @message.content = Sanitize.clean(@message.content, Sanitize::Config::BASIC)
+        @message.content = Sanitize.clean(@message.content, :elements => %w[abbr b br cite code em i pre q small strike strong sup sub u])
         @message.content.gsub!("\n","<br/>")
         if @message.content.length > 0
             @message.poster = @user.alias
