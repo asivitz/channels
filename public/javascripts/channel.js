@@ -78,3 +78,13 @@ function showOverlay() {
 		return false;
 	});
 }
+
+function spinOn()
+{
+    $('#spinner').css('visibility','visible');
+}
+
+function spinOff()
+{
+    $('#spinner').css('visibility','hidden');
+}

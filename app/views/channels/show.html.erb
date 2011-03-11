@@ -9,16 +9,18 @@
 </div>
 <div id="main_content">
 	<div id="message_post">
+        <img id="spinner" style="float:right;visibility:hidden;" src="/images/spinner.gif"/>
 	<h2><%=h @channel.name %></h2>
         <%= form_for [@channel, @message] , :remote => true do |f| %>
 	    <label for="msginput">Post Message
 	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
 
-            <a href="javascript:$('#new_message').submit();" class="message_post">Post</a>
+            <a href="javascript:spinOn();$('#new_message').submit();" class="message_post">Post</a>
 	<% end %>
 	
 	
 	</div>
+
 	
 	<% prev_message = nil %>
 	<ul id="message_list">

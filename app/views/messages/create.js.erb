@@ -10,7 +10,8 @@ if (topPoster() == '<%= @message.poster %>:')
 }
 else
 {
-    latestContainer = addContainer('<%= @message.poster %>', '<%= @message.pretty_updated_at %>');
+    latestContainer = makeContainer('<%= @message.poster %>', '<%= @message.pretty_updated_at %>');
+    latestContainer.prependTo('#message_list');
     added = latestContainer;
 }
 
@@ -20,3 +21,5 @@ msg.appendTo(ul);
 added.hide().fadeIn();
 
 $('#msginput').val("");
+
+spinOff();
