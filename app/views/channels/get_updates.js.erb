@@ -33,3 +33,8 @@ if (existing.length == 0)
 <% end %>
 
 last_checked = '<%= Time.now.to_i %>';
+
+if (weHaveFocus)
+{
+    fadeUnread();
+}

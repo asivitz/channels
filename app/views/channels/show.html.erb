@@ -98,6 +98,14 @@ function playDing()
     $('#sound_element').html( "<embed src='"+sound_file_url+"' hidden=true autostart=true loop=false>");
 }
 
+function fadeUnread()
+{
+    var marked_unread = $('.message_content p').filter(function() {
+                return $(this).css('borderLeftColor') != '#eee';
+                });
+    marked_unread.animate({ borderLeftColor: '#eee'}, 12000);
+}
+
 window.onfocus = function()
 {
     weHaveFocus = true;
@@ -107,12 +115,7 @@ window.onfocus = function()
     var newtitle = "Channels: <%= @channel.name %>" ;
     document.title = newtitle;
 
-    var marked_unread = $('.message_content p').filter(function() {
-                return $(this).css('borderLeftColor') != '#eee';
-                });
-    marked_unread.animate({ borderLeftColor: '#eee'}, 12000);
-
-
+    fadeUnread();
 }
 
 window.onblur = function()
