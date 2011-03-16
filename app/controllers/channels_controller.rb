@@ -21,6 +21,8 @@ class ChannelsController < ApplicationController
     @message = Message.new # to add a new message
 
     @channelconfig = @user.channelconfigs.where(:channel_id => @channel.id).first
+    @previously_last_checked = @channelconfig.last_checked
+    @previously_last_checked = Time.now if @previously_last_checked.nil?
     @channelconfig.last_checked = Time.now
     @channelconfig.save
 

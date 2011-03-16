@@ -107,6 +107,12 @@ window.onfocus = function()
     var newtitle = "Channels: <%= @channel.name %>" ;
     document.title = newtitle;
 
+    var marked_unread = $('.message_content p').filter(function() {
+                return $(this).css('borderLeftColor') != '#eee';
+                });
+    marked_unread.animate({ borderLeftColor: '#eee'}, 12000);
+
+
 }
 
 window.onblur = function()
