@@ -64,12 +64,13 @@
 <div id="overlay" class="overlay">
     <div class="overlay_content add_user_form">
     <a href="#" class="close_overlay">Cancel</a>
-        <%= form_tag('add_user') do %>
+        <%= form_tag('add_user', :id => 'add_user_form') do %>
             <label for="user_alias">Add user:
             <%= text_field :user, :alias, :value => "" %>
             </label>
             <%= hidden_field_tag :id, @channel.id %>
-            <%= submit_tag "Add User", :class => "add_user_submit" %>
+
+            <a href="javascript:$('#add_user_form').submit();" >Add User</a>
         <% end %>
     </div>
     <div class="overlay_bg"></div>
