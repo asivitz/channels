@@ -116,6 +116,8 @@ class ChannelsController < ApplicationController
   end
 
   def get_page
+      @previously_last_checked = Time.now if @previously_last_checked.nil? # these messages shouldn't appear unread
+
       pagesize = 20
       from_date = params[:from_date]
       if from_date 
