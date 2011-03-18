@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def login_required
       if session[:user_id]
           @user = current_user
-          return true
+          return true if @user
       end
       flash[:warning]='Please login to continue'
       session[:return_to]=request.fullpath

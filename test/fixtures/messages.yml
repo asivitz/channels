@@ -1,7 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  content: MyText
+  content: "Hey guys what's up?"
+  poster: axis
+  channel: chat
+  branch: master
 
 two:
-  content: MyText
+  content: "Today I ate pizza."
+  poster: axis
+  channel: chat
+  branch: master
+
+three:
+  content: "And then I played golf."
+  poster: axis
+  channel: chat
+  branch: master

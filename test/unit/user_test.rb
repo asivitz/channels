@@ -45,15 +45,15 @@ class UserTest < ActiveSupport::TestCase
     #too short
     u.password = u.password_confirmation = "tiny" 
     assert !u.save     
-    assert u.errors.invalid?('password')
+    assert u.errors['password'].any?
     #too long
     u.password = u.password_confirmation = "hugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehugehuge"
     assert !u.save     
-    assert u.errors.invalid?('password')
+    assert u.errors['password'].any?
     #empty
     u.password = u.password_confirmation = ""
     assert !u.save    
-    assert u.errors.invalid?('password')
+    assert u.errors['password'].any?
     #ok
     u.password = u.password_confirmation = "bobs_secure_password"
     assert u.save     
@@ -67,15 +67,15 @@ class UserTest < ActiveSupport::TestCase
     #too short
     u.alias = "x"
     assert !u.save     
-    assert u.errors.invalid?('alias')
+    assert u.errors['alias'].any?
     #too long
     u.alias = "hugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhug"
     assert !u.save     
-    assert u.errors.invalid?('alias')
+    assert u.errors['alias'].any?
     #empty
     u.alias = ""
     assert !u.save
-    assert u.errors.invalid?('alias')
+    assert u.errors['alias'].any?
     #ok
     u.alias = "okbob"
     assert u.save  

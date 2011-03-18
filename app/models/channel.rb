@@ -2,6 +2,7 @@ require 'ostruct'
 
 class Channel < ActiveRecord::Base
       validates_presence_of :name
+      has_many :branches, :dependent => :destroy
       has_many :messages, :dependent => :destroy
 
       has_many :channelconfigs
