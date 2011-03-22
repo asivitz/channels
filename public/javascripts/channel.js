@@ -145,6 +145,6 @@ function messageResizing() {
 }
 
 function messageScrollBottom() {
-	$("#messages").attr({ scrollTop: $("#messages").attr("scrollHeight") });
+	$("#messages").animate({ scrollTop: $("#messages").attr("scrollHeight") });
 	//console.log('test');
 }
