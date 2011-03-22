@@ -4,15 +4,12 @@ var added;
 var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => @message) %>");
 var latestContainer = null;
 
-if (topPoster() == '<%= @message.poster %>:')
-{
+if (topPoster() == '<%= @message.poster %>:'){
     latestContainer = getLatestContainer();
     added = msg;
-}
-else
-{
+}else{
     latestContainer = makeContainer('<%= @message.poster %>', '<%= @message.pretty_updated_at %>');
-    latestContainer.prependTo('#message_list');
+    latestContainer.appendTo('#message_list');
     added = latestContainer;
 }
 

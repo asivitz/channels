@@ -20,7 +20,7 @@ if (existing.length == 0)
     else
     {
         latestContainer = makeContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
-        latestContainer.prependTo($('#message_list'));
+        latestContainer.appendTo($('#message_list'));
         added = latestContainer;
     }
 
