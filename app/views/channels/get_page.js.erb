@@ -6,21 +6,23 @@
         var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => m) %>");
         var oldestContainer = null;
 
-        if (bottomPoster() == '<%= m.poster %>:'){
+        if (bottomPoster() == '<%= m.poster %>:')
+        {
             oldestContainer = getOldestContainer();
             added = msg;
-        }else{
+        }
+        else
+        {
 
             oldestContainer = makeContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
-            oldestContainer.appendTo($('#message_list'));
+            oldestContainer.prependTo($('#message_list'));
             added = oldestContainer;
         }
 
         var ul = oldestContainer.find('.message_content');
-        msg.appendTo(ul);
+        msg.prependTo(ul);
 		
 		added.hide().fadeIn();
-		messageScrollBottom();
     <% end %>
 
 <% end %>
