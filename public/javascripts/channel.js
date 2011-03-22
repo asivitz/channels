@@ -3,6 +3,11 @@ var waitMax = 45;
 var waitReset = 10;
 var waitTime = waitReset;
 
+$(function() {
+	$("#nav li").hover(dropDownsOver, dropDownsOut);
+	$("#settings li").hover(dropDownsOver, dropDownsOut);
+});
+
 function waitForMsg(channelid)
 {
     var newmsgs = getNewMessages(channelid);
@@ -49,12 +54,12 @@ function bottomPoster()
 
 function getLatestContainer()
 {
-    return $('#message_list li:first');
+    return $('#message_list li:last');
 }
 
 function getOldestContainer()
 {
-    return $('#message_list li:last');
+    return $('#message_list li:first');
 }
 
 function makeContainer(username, time)
@@ -87,4 +92,59 @@ function spinOn()
 function spinOff()
 {
     $('#spinner').css('visibility','hidden');
+}
+
+// Navigation Dropdowns
+function dropDownsOver() {
+	$(this).find(".sub").stop().css('top','22px');
+	$(function() {
+	   function calcSubWidth() {
+	       rowWidth = 0;
+	       //Calculate row
+	       $(this).find("ul").each(function() {
+	           rowWidth += $(this).width();
+	       });
+	   };
+	}); 
+}
+function dropDownsOut(){
+	$(this).find(".sub").stop().css('top','-9999px');
+}
+
+// Get Browser Window Size
+var browserWidth,browserHeight;
+function getBrowserSize() {
+	if (self.innerHeight) // all except Explorer
+	{
+		browserWidth = self.innerWidth;
+		browserHeight = self.innerHeight;
+	}
+	else if (document.documentElement && document.documentElement.clientHeight)
+		// Explorer 6 Strict Mode
+	{
+		browserWidth = document.documentElement.clientWidth;
+		browserHeight = document.documentElement.clientHeight;
+	}
+	else if (document.body) // other Explorers
+	{
+		browserWidth = document.body.clientWidth;
+		browserHeight = document.body.clientHeight;
+	}
+}
+
+function messageResizing() {
+	getBrowserSize();
+	var postAreaHeight = 120;
+	var headerHeight = 50;
+	var messageListHeight = browserHeight - postAreaHeight - headerHeight;
+	//console.log(browserHeight, messageListHeight);
+	var cssHeight = messageListHeight+'px';
+	var postAreaWidth = browserWidth - 220;
+	$('#post_area').css('width', postAreaWidth+'px');
+	$('#messages').css('height', cssHeight);
+}
+
+function messageScrollBottom() {
+	$("#messages").attr({ scrollTop: $("#messages").attr("scrollHeight") });
+	console.log('test');
 }

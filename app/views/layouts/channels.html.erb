@@ -17,6 +17,7 @@
 	<%= javascript_include_tag 'jquery' %>
 	<%= javascript_include_tag 'jquerycolor' %>
 	<%= javascript_include_tag 'jquery.form' %>
+	<%= javascript_include_tag 'channel' %>
         <%= javascript_include_tag 'rails' %>
         <%= csrf_meta_tag %>
 
@@ -25,40 +26,36 @@
 <body>
 	<header id="header">
 		<div id="header_left">
-			<h1><%= link_to 'channels', channels_path %></h1>
+			<h1><%= link_to 'channels', channels_path, :id => 'logo' %></h1>
 		</div>
-		<div id="header_right">Logged in as <%= @user.alias %> | <%= link_to 'Logout', '/user/logout' %></div>
+		<nav id="nav">
+			<ul>
+				<li>
+					<a href="javascript:void(0)" class="dropdown navlink" title="My Channels">My Channels <span></span></a>
+					<ul class="sub">
+						<% @user.channels(true).each do |channel| %>
+						<li>
+							<%= link_to channel.name, channel %>
+							<% unread = @user.unread_messages(channel.id) %>
+							<% if unread.count > 0 %>
+							(<%= unread.count %>)
+							<% end %>
+						</li>
+						<% end %>
+					</ul>
+				</li>
+				<li><%= link_to 'Create Group', new_channel_path, :class => 'new_channel navlink' %></li>
+			</ul>
+		</nav>
+		<ul id="settings">
+		<li><a href="javascript:void(0)" title="My Settings" class="dropdown"><%= @user.alias %><span></span></a><ul class="sub"><li><%= link_to 'Logout', '/user/logout' %></li></ul></li>
+		</ul>
 	</header>
 	<!-- /end #header -->
 	<div id="wrapper">
-		<aside id="sidebar">
-			<h3>Your Channels</h3>
-			<nav id="channel_nav">
-				<ul>
-                                    <% @user.channels(true).each do |channel| %>
-                                        <li>
-                                        <%= link_to channel.name, channel %>
-                                        <% unread = @user.unread_messages(channel.id) %>
-                                        <% if unread.count > 0 %>
-                                            (<%= unread.count %>)
-                                        <% end %>
-                                        </li>
-                                    <% end %>
-                                </ul>
-			</nav>
-			<div class="new_channel">
-			<%= link_to 'New channel', new_channel_path %>
-			</div>
-		</aside>
-		<!-- /end left #sidebar -->
-	
-	
-		<article id="main">
-			<%= flash[:notice] %>
-			<%= flash[:warning] %>
-			<%= yield %>
-		</article>
-		<!-- /end #main content -->
+		<%= flash[:notice] %>
+		<%= flash[:warning] %>
+		<%= yield %>
 	</div>
 	<!-- /end #wrapper -->
 </body>
