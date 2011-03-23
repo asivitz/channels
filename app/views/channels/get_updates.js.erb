@@ -2,8 +2,7 @@
 
 //see if we already have this message
 var existing = $('#message_<%= m.id %>');
-if (existing.length == 0)
-{
+if (existing.length == 0){
     if (!weHaveFocus)
         startNotify('<%= m.poster %>');
 
@@ -12,15 +11,12 @@ if (existing.length == 0)
     var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => m) %>");
     var latestContainer = null;
 
-    if (topPoster() == '<%= m.poster %>:')
-    {
+    if (topPoster() == '<%= m.poster %>:'){
         latestContainer = getLatestContainer();
         added = msg;
-    }
-    else
-    {
+    }else{
         latestContainer = makeContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
-        latestContainer.prependTo($('#message_list'));
+        latestContainer.appendTo($('#message_list'));
         added = latestContainer;
     }
 
@@ -28,6 +24,7 @@ if (existing.length == 0)
     msg.appendTo(ul);
 
     added.hide().fadeIn();
+    messageScrollBottom();
 }
 
 <% end %>
@@ -36,5 +33,5 @@ last_checked = '<%= Time.now.to_i %>';
 
 if (weHaveFocus)
 {
-    fadeUnread();
+	fadeUnread();
 }

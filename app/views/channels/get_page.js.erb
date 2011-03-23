@@ -15,15 +15,14 @@
         {
 
             oldestContainer = makeContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
-            oldestContainer.appendTo($('#message_list'));
+            oldestContainer.prependTo($('#message_list'));
             added = oldestContainer;
         }
 
         var ul = oldestContainer.find('.message_content');
         msg.prependTo(ul);
-
-        added.hide().fadeIn();
-
+		
+		added.hide().fadeIn();
     <% end %>
 
 <% end %>
@@ -32,6 +31,5 @@
 <% last = @message_groups.last.messages.last %>
 $('#more_link').attr('href', "/channels/get_page/<%= @channel.id %>?from_date=<%= last.updated_at.to_i %>");
 <% end %>
-
 
 //last_checked = '<%= Time.now.to_i %>';
