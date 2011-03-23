@@ -28,9 +28,9 @@ class Branch < ActiveRecord::Base
     def get_page pagesize, from_date=nil
         page = []
         if from_date
-            page = self.messages.where("updated_at < ?", from_date).limit(pagesize).order("updated_at DESC").all.reverse
+            page = self.messages.where("updated_at < ?", from_date).limit(pagesize).order("updated_at DESC").all
         else
-            page = self.messages.limit(pagesize).order("updated_at DESC").all.reverse
+            page = self.messages.limit(pagesize).order("updated_at DESC").all
         end
 
         if page.size < pagesize
