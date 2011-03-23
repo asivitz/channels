@@ -32,11 +32,6 @@ ActiveRecord::Schema.define(:version => 20110318213317) do
     t.datetime "updated_at"
   end
 
-  create_table "channels_users", :id => false, :force => true do |t|
-    t.integer "channel_id"
-    t.integer "user_id"
-  end
-
   create_table "messages", :force => true do |t|
     t.string   "poster"
     t.text     "content"

@@ -1,34 +1,62 @@
 <% content_for :head do %>
     <%= javascript_include_tag "channel" %>
 <% end %>
-
-<div id="group_details">
-<div class="top_controls">
-	<div class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></div>
-        <div class="users_in_channel">Branches: <% @channel.branches.each do |b| %> <%= link_to b.id, "/channels/#{@channel.id}?branch_id=#{b.id}" %> <% end %></div>
-	<a href="javascript:showOverlay();" class="add_user">Add User</a>
-</div>
-<div id="main_content">
-	<div id="message_post">
-        <img id="spinner" style="float:right;visibility:hidden;" src="/images/spinner.gif"/>
+<div id="sidebar">
 	<h2><%=h @channel.name %></h2>
+	<nav id="channel_nav">
+		<ul>
+		<li><%= link_to content_tag(:span, '')+'Edit Group', edit_channel_path(@channel), :class => 'edit_group' %><span></span></li>
+		<li><a href="javascript:void(0)" class="visual_map"><span></span> Visual Map</a></li>
+		<li><a href="javascript:void(0)" class="notification_settings"><span></span> Notification Settings</a></li>
+		<li><a href="javascript:void(0)" title="<% @channel.users.each do |u| %> <%= u.alias %> <% end %>" class="members"><span></span> Members</a></li>
+		</ul>
+	</nav>
+	<a href="javascript:showOverlay();" class="invite_people">+ Invite People</a>
+	<ul class="bad_controls">
+		<li><%= link_to 'Delete Channel', channel_path(@channel), :confirm => "Are you sure?", :method => :delete, :class => 'delete_channel' %></li>
+		<% if @channel.users.include? @user %>
+		<li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}", :class => 'leave_channel' %></li>
+		<% end %>
+	</ul>
+
+        Branches: 
+        <ul>
+            <% @channel.branches.each do |b| %>  
+                <li>
+                <%= link_to b.id, "/channels/#{@channel.id}?branch_id=#{b.id}" %>
+                </li>
+            <% end %>
+        </ul>
+</div>
+<!-- /end left #sidebar -->
+<section id="main">
+<div id="group_details"
+<div id="main_content">
+	<div id="post_area">
+		<div class="post_area_inner">
+        <img id="spinner" style="float:right;visibility:hidden;" src="/images/spinner.gif"/>
+	
         <%= form_for [@channel, @message] , :remote => true do |f| %>
-	    <label for="msginput">Post Message
-	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
             <%= f.hidden_field(:branch_id, :value => @branch.id) %>
+	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %>
             <a href="javascript:spinOn();$('#new_message').submit();" class="message_post">Post</a>
 	<% end %>
-	
+	</div>
 	
 	</div>
 
-	
+	<div id="messages">
 	<% prev_message = nil %>
+	<% if not @message_groups.empty? %>
+		<% last_message = @message_groups.last.messages.last %>
+		
+		<%= link_to 'Load Earlier Posts', "/channels/get_page/#{@channel.id}?from_date=#{last_message.updated_at.to_i}", :remote => true, :id => "more_link" %>
+	<% end %>
 	<ul id="message_list">
             <% if @message_groups.size == 0 %>
                 <li class="message_row"><p class="no_messages">This channel has no messages.</p></li>
             <% end %>
-	    <% @message_groups.each do |group| %>
+	    <% @message_groups.reverse.each do |group| %>
                 <li class="message_row">
                 <div class="meta">
                     <p class="username"><%= group.poster %>:</p>
@@ -42,26 +70,8 @@
                 </li>
             <% end %>
         </ul>
-
-        <% if not @message_groups.empty? %>
-            <% last_message = @message_groups.last.messages.last %>
-
-            <div style="text-align:center;">
-                <%= link_to 'More', "/channels/get_page/#{@channel.id}?from_date=#{last_message.updated_at.to_i}", :remote => true, :id => "more_link" %>
-            </div>
-        <% end %>
+        </div>
 </div>
-<div id="media_content">
-	<p>Right column for media stuff (just an idea for now)</p>
-</div>
-<ul class="bottom_controls">
-<li><%= link_to 'Back', channels_path %></li>
-<li><%= link_to 'Edit', edit_channel_path(@channel) %></li>
-<li><%= link_to 'Delete Channel', channel_path(@channel), :confirm => "Are you sure?", :method => :delete %></li>
-<% if @channel.users.include? @user %>
-<li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}" %></li>
-<% end %>
-</ul>
 <div id="overlay" class="overlay">
     <div class="overlay_content add_user_form">
     <a href="#" class="close_overlay">Cancel</a>
@@ -78,15 +88,16 @@
 </div>
 
 <div id="sound_element"></div>
-
+</section>
 <script type="text/javascript">
 
-    $(document).ready(
-            function()
-            {
-            $('#msginput').focus();
-            waitForMsg(<%= @channel.id %>);
-            });
+	$(document).ready(function() {
+		messageResizing();
+		$(window).resize(messageResizing);
+		messageScrollBottom();
+		$('#msginput').focus();
+		waitForMsg(<%= @channel.id %>);
+	});
 
     weHaveFocus = true;
 
@@ -161,11 +172,10 @@ var last_checked = '<%= Time.now.to_i %>';
 
 // post submit
 $('#msginput').keypress(function(event) {
-        if (event.which == '13' && !event.shiftKey) 
-        {
-        event.preventDefault();
-        $('#new_message').submit();
-        }
-        });
+	if (event.which == '13' && !event.shiftKey) {
+		event.preventDefault();
+		$('#new_message').submit();
+	}
+});
 
 </script>

@@ -1,20 +1,25 @@
-<h1>User#register</h1>
-
-<%= form_for(@user, :url => 'register') do |f| %>
-
-<label for="user_alias">Username</label><br/>
-<%= f.text_field "alias", :size => 20 %><br/>
-
-<label for="user_password">Password</label><br/>
-<%= f.password_field "password", :size => 20 %><br/>
-
-<label for="user_password_confirmation">Password Confirmation</label><br/>
-<%= f.password_field "password_confirmation", :size => 20 %><br/>
-
-<label >Registration Code</label><br/>
-<%= text_field_tag :register_code, '', :size => 20 %><br/>
-
-
-<%= f.submit "Register" %>
-
-<% end %>
+<div id="signup">
+	<h1>Sign Up!</h1>
+	
+	<%= form_for(@user, :url => 'register') do |f| %>
+	
+	<label for="user_alias">Username
+	<%= f.text_field "alias", :size => 20, :class => 'text-input' %>
+	</label>
+	
+	<label for="user_password">Password
+	<%= f.password_field "password", :size => 20, :class => 'text-input' %>
+	</label>
+	
+	<label for="user_password_confirmation">Password Confirmation
+	<%= f.password_field "password_confirmation", :size => 20, :class => 'text-input' %>
+	</label>
+		
+	<label >Registration Code
+	<%= text_field_tag :register_code, '', :size => 20, :class => 'text-input' %>
+	</label>	
+	
+	<%= f.submit "Register", :class => 'submit-button' %>
+	
+	<% end %>
+</div>
