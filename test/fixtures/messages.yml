@@ -1,19 +1,25 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+hi:
   content: "Hey guys what's up?"
   poster: axis
   channel: chat
   branch: master
+  created_at: <%= 3.hour.ago.to_s(:db) %> 
+  updated_at: <%= 3.hour.ago.to_s(:db) %> 
 
-two:
+pizza:
   content: "Today I ate pizza."
   poster: axis
   channel: chat
   branch: master
+  created_at: <%= 2.hour.ago.to_s(:db) %> 
+  updated_at: <%= 2.hour.ago.to_s(:db) %> 
 
-three:
+golf:
   content: "And then I played golf."
   poster: axis
   channel: chat
   branch: master
+  created_at: <%= 1.hour.ago.to_s(:db) %> 
+  updated_at: <%= 1.hour.ago.to_s(:db) %> 

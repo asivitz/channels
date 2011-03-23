@@ -6,7 +6,9 @@ style="border-left:1px solid #347acb;"
 >
 <% if message.poster == @user.alias %>
     <span class="buttons"><%= link_to 'X', [@channel, message], :confirm => "Are you sure?",
-        :method => :delete, :remote => true %></span>
+        :method => :delete, :remote => true %>
+        <%= link_to '>>', "/channels/create_branch/#{@channel.id}?root_message_id=#{message.id}" %>
+    </span>
 <% end %>
 <%= raw [message.marked_up_content] %>
 </p>

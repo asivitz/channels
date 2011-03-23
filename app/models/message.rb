@@ -27,4 +27,13 @@ class Message < ActiveRecord::Base
         content = escape_quotes(self.marked_up_content)
          "{\"id\":#{self.id},\"name\":\"#{self.poster}\",\"date\":\"#{self.pretty_updated_at}\",\"content\":\"#{content}\"}"
     end
+
+    def make_branch
+        new_branch = Branch.new
+        new_branch.channel = self.channel
+        new_branch.parent_branch_id = self.branch.id
+        new_branch.root_message_id = self.id
+
+        return new_branch
+    end
 end

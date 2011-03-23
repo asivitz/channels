@@ -1,6 +1,6 @@
 class ChannelsController < ApplicationController
     before_filter :login_required
-    before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit, :get_page]
+    before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit, :get_page, :create_branch]
     before_filter :find_branch, :only => [:get_updates, :show]
 
 
@@ -123,9 +123,9 @@ class ChannelsController < ApplicationController
 
       if params[:from_date]
           date = Time.at(params[:from_date].to_i)
-          @message_groups = @branch.get_page date
+          @message_groups = @branch.get_page_in_groups date
       else
-          @message_groups = @branch.get_page
+          @message_groups = @branch.get_page_in_groups
       end
 
   end
@@ -142,6 +142,14 @@ class ChannelsController < ApplicationController
               @channelconfig.save
           end
       end
+  end
+
+  def create_branch
+      root_message_id = params[:root_message_id]
+      root_message = Message.find(root_message_id)
+      @branch = root_message.make_branch
+      @branch.save
+      redirect_to "/channels/#{@channel.id}?branch_id=#{@branch.id}"
   end
 
   def find_branch

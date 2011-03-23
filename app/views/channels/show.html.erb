@@ -5,6 +5,7 @@
 <div id="group_details">
 <div class="top_controls">
 	<div class="users_in_channel">Users in channel: <% @channel.users.each do |u| %> <%= u.alias %> <% end %></div>
+        <div class="users_in_channel">Branches: <% @channel.branches.each do |b| %> <%= link_to b.id, "/channels/#{@channel.id}?branch_id=#{b.id}" %> <% end %></div>
 	<a href="javascript:showOverlay();" class="add_user">Add User</a>
 </div>
 <div id="main_content">
@@ -14,7 +15,7 @@
         <%= form_for [@channel, @message] , :remote => true do |f| %>
 	    <label for="msginput">Post Message
 	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %></label>
-
+            <%= f.hidden_field(:branch_id, :value => @branch.id) %>
             <a href="javascript:spinOn();$('#new_message').submit();" class="message_post">Post</a>
 	<% end %>
 	

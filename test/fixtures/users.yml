@@ -18,6 +18,18 @@ longbob:
   hashed_password: 00728d3362c26746ec25963f71be022b152237a9 # longtest
   salt: 1000
 
+axis:
+  id: 1000004
+  alias: axis
+  salt: 1000
+  hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+
+micah:
+  id: 1000005
+  alias: micah
+  salt: 1000
+  hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+
 # one:
 #   column: value
 #
