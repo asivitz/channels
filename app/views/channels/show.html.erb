@@ -65,6 +65,19 @@
                 <div class="message_content">
                     <% group.messages.each do |m| %>
                         <%= render :partial => "message", :object => m %>
+                        <% num_branches = m.child_branches.size %>
+                        <% if num_branches > 0 %>
+                            <div class="branchpoint">
+                                <% if num_branches == 1 %>
+                                    <%= link_to "Branch >>", "/channels/#{@channel.id}?branch_id=#{m.child_branches.first.id}" %>
+                                <% else %>
+                                    Branches: 
+                                    <% m.child_branches.all.each do |b| %>
+                                        <%= link_to b.id, "/channels/#{@channel.id}?branch_id=#{b.id}" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        <% end %>
                     <% end %>
                 </div>
                 </li>

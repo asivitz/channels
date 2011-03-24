@@ -36,4 +36,8 @@ class Message < ActiveRecord::Base
 
         return new_branch
     end
+
+    def child_branches
+        return Branch.where(:root_message_id => self.id)
+    end
 end

@@ -615,6 +615,21 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 	width: 85%;
 	word-wrap: break-word;
 }
+
+#message_list .message_content .branchpoint
+{
+    font-weight:bold;
+    background: #026c70;
+    color: #fdb928;
+    padding:4px 0px 4px 4px;
+    margin-bottom:4px;
+}
+
+#message_list .message_content .branchpoint a
+{
+    color: #fdb928;
+}
+
 #message_list .message_row .message_content p{
 	margin: 0 0 7px;
 	color: #333333;
@@ -636,6 +651,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 #message_list .message_row .message_content p:hover .buttons{
     visibility:visible;
 }
+
 
 #message_list p.no_messages {
 	margin: 0 20px;
