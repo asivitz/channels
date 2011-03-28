@@ -21,9 +21,13 @@
 
         Branches: 
         <ul>
-            <% @channel.branches.each do |b| %>  
+            <% @channel.branch_ids.each do |bid| %>  
                 <li>
-                <%= link_to b.id, "/channels/#{@channel.id}?branch_id=#{b.id}" %>
+                <% if bid %>
+                    <%= link_to bid, "/channels/#{@channel.id}?branch_id=#{bid}" %>
+                <% else %>
+                    <%= link_to "Main", @channel %>
+                <% end %>
                 </li>
             <% end %>
         </ul>
@@ -37,7 +41,7 @@
         <img id="spinner" style="float:right;visibility:hidden;" src="/images/spinner.gif"/>
 	
         <%= form_for [@channel, @message] , :remote => true do |f| %>
-            <%= f.hidden_field(:branch_id, :value => @branch.id) %>
+            <%= f.hidden_field(:branch_id, :value => params[:branch_id]) %>
 	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %>
             <a href="javascript:spinOn();$('#new_message').submit();" class="message_post">Post</a>
 	<% end %>
@@ -65,17 +69,9 @@
                 <div class="message_content">
                     <% group.messages.each do |m| %>
                         <%= render :partial => "message", :object => m %>
-                        <% num_branches = m.child_branches.size %>
-                        <% if num_branches > 0 %>
+                        <% if m.has_branch? %>
                             <div class="branchpoint">
-                                <% if num_branches == 1 %>
-                                    <%= link_to "Branch >>", "/channels/#{@channel.id}?branch_id=#{m.child_branches.first.id}" %>
-                                <% else %>
-                                    Branches: 
-                                    <% m.child_branches.all.each do |b| %>
-                                        <%= link_to b.id, "/channels/#{@channel.id}?branch_id=#{b.id}" %>
-                                    <% end %>
-                                <% end %>
+                                <%= link_to "Show Other Conversation (3)", "/channels/#{@channel.id}?branch_id=#{m.id}" %>
                             </div>
                         <% end %>
                     <% end %>

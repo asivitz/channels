@@ -2,29 +2,29 @@ require 'test_helper'
 
 class BranchTest < ActiveSupport::TestCase
   test "get the latest messages" do
-      master = branches(:master)
-      message_groups = master.get_page_in_groups
+      chat = channels(:chat)
+      message_groups = chat.get_page_in_groups
       assert_equal 1, message_groups.size
       group = message_groups.first
       assert_equal 3, group.messages.size
   end
 
-  test "add a new message to master" do
+  test "add a new message to root" do
       axis = users(:axis)
-      master = branches(:master)
+
+      chat = channels(:chat)
 
       msg = Message.new
       msg.content = "Wow! I just saw an elephant!"
       msg.poster = axis.alias
 
-      master.messages << msg
-      msg.channel = master.channel
+      chat.messages << msg
       assert msg.save
 
       # check it
       assert_equal 4, msg.channel.messages.size
 
-      message_groups = master.get_page_in_groups
+      message_groups = chat.get_page_in_groups
       assert_equal 1, message_groups.size
       group = message_groups.first
       assert_equal 4, group.messages.size
@@ -32,26 +32,23 @@ class BranchTest < ActiveSupport::TestCase
 
   test "someone else make a new branch" do
       micah = users(:micah)
-      master = branches(:master)
+      chat = channels(:chat)
       pizza_message = messages(:pizza)
-      channel = master.channel
 
-      twig = pizza_message.make_branch
+      twig = pizza_message.branch_message
+
+      twig.content = "I love pizza!"
+      twig.poster = micah.alias
+
+      chat.messages << twig
       assert twig.save
 
-      msg = Message.new
-      msg.content = "I love pizza!"
-      msg.poster = micah.alias
-
-      twig.messages << msg
-      msg.channel = channel
-      assert msg.save
-
       #check the new branch
-      assert_equal 2, channel.branches.size
-      assert_equal 4, channel.messages.size
+      assert_equal 4, chat.messages.size
       
-      message_groups = twig.get_page_in_groups
+      message_groups = chat.get_page_in_groups(twig.branch_id)
+      #p "Groups:"
+      #p message_groups
       assert_equal 2, message_groups.size
       first_group = message_groups.first
       second_group = message_groups.last
@@ -59,7 +56,7 @@ class BranchTest < ActiveSupport::TestCase
       assert_equal 1, second_group.messages.size
 
       #check the old branch
-      message_groups = master.get_page_in_groups
+      message_groups = chat.get_page_in_groups
       assert_equal 1, message_groups.size
       first_group = message_groups.first
       assert_equal 3, first_group.messages.size

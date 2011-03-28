@@ -1,8 +1,6 @@
 class ChannelsController < ApplicationController
     before_filter :login_required
     before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit, :get_page, :create_branch]
-    before_filter :find_branch, :only => [:get_updates, :show]
-
 
   # GET /channels
   # GET /channels.xml
@@ -59,7 +57,6 @@ class ChannelsController < ApplicationController
     respond_to do |format|
       if @channel.save
           @channel.users << @user
-          @channel.branches << Branch.new
           @channel.save
         flash[:notice] = 'Channel was successfully created.'
         format.html { redirect_to(@channel) }
@@ -123,9 +120,9 @@ class ChannelsController < ApplicationController
 
       if params[:from_date]
           date = Time.at(params[:from_date].to_i)
-          @message_groups = @branch.get_page_in_groups date
+          @message_groups = @channel.get_page_in_groups(params[:branch_id], date)
       else
-          @message_groups = @branch.get_page_in_groups
+          @message_groups = @channel.get_page_in_groups(params[:branch_id])
       end
 
   end
@@ -135,29 +132,12 @@ class ChannelsController < ApplicationController
       if previous_check
           prevtime = Time.at(previous_check.to_i)
 
-          @new_messages = Message.where(:branch_id => @branch.id).since(prevtime).all
+          @new_messages = Message.where(:branch_id => params[:branch_id]).since(prevtime).all
           if not @new_messages.empty?
               @channelconfig = @user.channelconfigs.where(:channel_id => @channel.id).first
               @channelconfig.last_checked = Time.now
               @channelconfig.save
           end
-      end
-  end
-
-  def create_branch
-      root_message_id = params[:root_message_id]
-      root_message = Message.find(root_message_id)
-      @branch = root_message.make_branch
-      @branch.save
-      redirect_to "/channels/#{@channel.id}?branch_id=#{@branch.id}"
-  end
-
-  def find_branch
-      branch_id = params[:branch_id]
-      if (branch_id)
-          @branch = Branch.find(branch_id)
-      else
-          @branch = @channel.branches.where(:parent_branch_id => nil).first
       end
   end
 end
