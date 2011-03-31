@@ -681,6 +681,20 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 .message_content a.delete_post:hover {background-position: -36px -12px;text-decoration: none;}
 .message_content a.delete_post:active {background-position: -36px -24px;}
 
+.message_content a.make_branch {
+	display: block;
+	width: 12px;
+	height: 12px;
+	text-indent: -9999px;
+	position: absolute;
+	top: 0;
+	right: 14px;
+	background: url(/images/icons-group.png) no-repeat -24px 0px;
+}
+
+.message_content a.make_branch:hover {background-position: -24px -12px;text-decoration: none;}
+.message_content a.make_branch:active {background-position: -24px -24px;}
+
 #more_link {
 	display: block;
 	text-align: center;
