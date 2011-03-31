@@ -622,13 +622,13 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
     display:inline;
     float:right;
     right:60px;
+    bottom:30px;
     font-weight:bold;
     border: solid 2px #026c70;
     background-color: #026c70;
     color: white;
     //color: #fdb928;
     padding:4px 4px 4px 4px;
-    margin-bottom:4px;
     text-align:right;
 }
 
