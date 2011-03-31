@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def login_required
       if session[:user_id]
-          @user = current_user
+          @user = current_user if @user.nil?
           return true if @user
       end
       flash[:warning]='Please login to continue'
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def member_required
-      @user = current_user
+      @user = current_user if @user.nil?
       @channel = Channel.find(params[:id])
       if @channel.users.include? @user
           return true
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
       uid = session[:user_id]
-      User.where(:id => uid).first
+      User.find(uid)
   end
 
   def redirect_to_stored

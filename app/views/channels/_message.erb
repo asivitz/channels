@@ -12,3 +12,16 @@ style="border-left:1px solid #347acb;"
 <% end %>
 <%= raw [message.marked_up_content] %>
 </p>
+
+<% if message.has_branch? %>
+    <% branch_message = message.successor_for_branch message.branch_link %>
+    <% if branch_message %>
+        <div class="branchpoint">
+            <% if message.branch_link %>
+                <%= link_to "Show Conversation: #{branch_message.summarize}", "/channels/#{@channel.id}?branch_id=#{message.branch_link}" %>
+            <% else %>
+                <%= link_to "Show Conversation: #{branch_message.summarize}", "/channels/#{@channel.id}" %>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>

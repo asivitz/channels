@@ -69,11 +69,6 @@
                 <div class="message_content">
                     <% group.messages.each do |m| %>
                         <%= render :partial => "message", :object => m %>
-                        <% if m.has_branch? %>
-                            <div class="branchpoint">
-                                <%= link_to "Show Other Conversation (3)", "/channels/#{@channel.id}?branch_id=#{m.id}" %>
-                            </div>
-                        <% end %>
                     <% end %>
                 </div>
                 </li>

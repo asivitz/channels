@@ -42,8 +42,13 @@ class Channel < ActiveRecord::Base
             page = self.messages.where(:branch_id => branch_id).limit(pagesize).order("created_at DESC").all
         end
 
+        page.each do |msg|
+            msg.branch_link = msg.id if msg.has_branch? # the unused branch id must be its own id
+        end
+
         if page.size < pagesize and not branch_id.nil?
             root_message = Message.find(branch_id)
+            root_message.branch_link = root_message.branch_id # the unused branch id must be it own branch
             page << root_message
             date = root_message.created_at
             page.concat self.get_page(root_message.branch_id, pagesize - page.size, date)

@@ -2,7 +2,9 @@ class Message < ActiveRecord::Base
     validates_presence_of :poster, :content
     belongs_to :channel
 
-    scope :since, lambda {|time| where("updated_at > ?", time)}
+    scope :since, lambda {|time| where("created_at > ?", time)}
+
+    attr_accessor :branch_link
 
     def marked_up_content
         msg = self.content
@@ -37,4 +39,17 @@ class Message < ActiveRecord::Base
         return bud
     end
 
+    def successor_for_branch in_branch_id
+        if in_branch_id
+            return Message.where("branch_id = ? AND created_at > ?", in_branch_id, self.created_at).first
+        else
+            return Message.where("channel_id = ? AND branch_id IS NULL AND created_at > ?", self.channel_id, self.created_at).first
+        end
+    end
+
+    def summarize
+        words = self.content.split(' ')
+        return self.content if words.size <= 5
+        return words.slice(0,5).join(' ') + "..."
+    end
 end
