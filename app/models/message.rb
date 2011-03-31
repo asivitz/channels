@@ -47,8 +47,7 @@ class Message < ActiveRecord::Base
         end
     end
 
-    def summarize
-        chars = 15
+    def summarize chars=15
         return self.content if self.content.length <= chars
         return self.content[0..chars-3] + "..."
     end

@@ -24,9 +24,9 @@
             <% @channel.branch_ids.each do |bid| %>  
                 <li>
                 <% if bid %>
-                    <%= link_to @channel.latest_for_branch(bid).summarize, "/channels/#{@channel.id}?branch_id=#{bid}" %>
+                    <%= link_to @channel.latest_for_branch(bid).summarize(30), "/channels/#{@channel.id}?branch_id=#{bid}" %>
                 <% else %>
-                    <%= link_to @channel.latest_for_branch(bid).summarize, @channel %>
+                    <%= link_to @channel.latest_for_branch(bid).summarize(30), @channel %>
                 <% end %>
                 </li>
             <% end %>
