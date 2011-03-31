@@ -48,8 +48,8 @@ class Message < ActiveRecord::Base
     end
 
     def summarize
-        words = self.content.split(' ')
-        return self.content if words.size <= 5
-        return words.slice(0,5).join(' ') + "..."
+        chars = 15
+        return self.content if self.content.length <= chars
+        return self.content[0..chars-3] + "..."
     end
 end

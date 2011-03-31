@@ -618,18 +618,24 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 
 #message_list .message_content .branchpoint
 {
+    position:relative;
+    display:inline;
+    float:right;
+    right:60px;
     font-weight:bold;
     border: solid 2px #026c70;
-    color: #026c70;
+    background-color: #026c70;
+    color: white;
     //color: #fdb928;
-    padding:4px 0px 4px 4px;
+    padding:4px 4px 4px 4px;
     margin-bottom:4px;
+    text-align:right;
 }
 
 #message_list .message_content .branchpoint a
 {
     //color: #fdb928;
-    color: #026c70;
+    color: white;
 }
 
 #message_list .message_row .message_content p{
@@ -640,13 +646,13 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 	border-left: 1px solid #eee;
 	padding:0 20px 5px 10px;
         position: relative;
+        width:80%;
 }
 
 #message_list .message_row .message_content p .buttons {
     position: absolute;
     text-align:right;
-    width:100%;
-    right:10px;
+    right:-11px;
     visibility:hidden;
 }
 
