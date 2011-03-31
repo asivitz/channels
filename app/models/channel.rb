@@ -61,4 +61,12 @@ class Channel < ActiveRecord::Base
         arr = Message.select("DISTINCT(branch_id)").map(&:branch_id)
         return arr
     end
+
+    def latest_for_branch(in_branch_id)
+        if in_branch_id
+            return Message.where("branch_id = ?", in_branch_id).last
+        else
+            return Message.where("channel_id = ? AND branch_id IS NULL", self.id).last
+        end
+    end
 end
