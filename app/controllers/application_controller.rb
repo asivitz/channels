@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
       uid = session[:user_id]
-      User.find(uid)
+      User.where(:id => uid).first
   end
 
   def redirect_to_stored
