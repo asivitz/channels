@@ -5,11 +5,11 @@ style="border-left:1px solid #347acb;"
 <% end %>
 >
     <span class="buttons">
-        <% if message.poster == @user.alias %>
-            <%= link_to content_tag(:span, ''), [@channel, message], :confirm => "Are you sure?",
-                :method => :delete, :remote => true, :class => 'delete_post' %>
-        <% end %>
         <% if not message.has_branch? %>
+            <% if message.poster == @user.alias %>
+                <%= link_to content_tag(:span, ''), [@channel, message], :confirm => "Are you sure?",
+                    :method => :delete, :remote => true, :class => 'delete_post' %>
+            <% end %>
             <%= link_to content_tag(:span, ''), "/channels/#{@channel.id}?branch_id=#{message.id}", :class => 'make_branch' %>
         <% end %>
     </span>
