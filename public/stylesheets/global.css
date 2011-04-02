@@ -30,6 +30,9 @@ input.text-input, textarea {
 	box-shadow: inset 0px 1px 1px #eee; 
 	color: #999;
 }
+input.text-input:focus, textarea:focus {
+	color: #333;
+}
 
 
 #header {
