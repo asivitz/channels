@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
 
     def create
         @channel = Channel.find(params[:channel_id])
+
         if not @channel.users.include? @user
             flash[:warning] = 'You are not a member of this channel.'
             redirect_to :controller => "channels", :action => "index"
@@ -16,6 +17,14 @@ class MessagesController < ApplicationController
         if @message.content.length > 0
             @message.poster = @user.alias
             @message.save
+
+            branch_id = params[:message][:branch_id]
+
+            if (branch_id and branch_id.length > 0)
+                root_msg = Message.find(branch_id)
+                root_msg.has_branch = true
+                root_msg.save
+            end
         else
             @message = nil
         end

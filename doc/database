@@ -1,0 +1,28 @@
+Message Tree Structure
+----------------------
+A separate table encodes the tree
+Each row represents a branch
+
+Each row contains:
+Root Message ID: The message ID that we branch from
+Parent branch ID: The branch ID of the Root Message ID
+
+Each row in the message table has a branch ID
+
+To get the root message on all branches:
+Get all branches, read root message Id
+
+To get the latest message on a branch:
+Get all messages with a branchid
+Find the latest one
+
+To get all messages for a particular branch showing branch points:
+Get all messages with a branchid
+Get all branches with a parent branch id of branchid
+Get the root message Id's of those branches
+
+To make a branch from a message:
+Add a row to branch table with the root message id and parent branch id
+
+
+

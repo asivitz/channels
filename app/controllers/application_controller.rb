@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
 
   def login_required
       if session[:user_id]
-          @user = current_user
-          return true
+          @user = current_user if @user.nil?
+          return true if @user
       end
       flash[:warning]='Please login to continue'
       session[:return_to]=request.fullpath
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def member_required
-      @user = current_user
+      @user = current_user if @user.nil?
       @channel = Channel.find(params[:id])
       if @channel.users.include? @user
           return true

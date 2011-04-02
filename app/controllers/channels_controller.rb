@@ -1,7 +1,6 @@
 class ChannelsController < ApplicationController
     before_filter :login_required
-    before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit, :get_page]
-
+    before_filter :member_required, :only => [:show, :update, :destroy, :add_user, :leave_channel, :get_updates, :get_message, :edit, :get_page, :create_branch]
 
   # GET /channels
   # GET /channels.xml
@@ -19,6 +18,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1.xml
   def show
     @message = Message.new # to add a new message
+
 
     @channelconfig = @user.channelconfigs.where(:channel_id => @channel.id).first
     @previously_last_checked = @channelconfig.last_checked
@@ -116,28 +116,15 @@ class ChannelsController < ApplicationController
   end
 
   def get_page
-      pagesize = 20
-      from_date = params[:from_date]
-      if from_date 
-          date = Time.at(from_date.to_i)
-          page = @channel.messages.where("updated_at < ?", date).limit(pagesize).order("updated_at DESC").all.reverse
+      @previously_last_checked = Time.now if @previously_last_checked.nil? # these messages shouldn't appear unread
+
+      if params[:from_date]
+          date = Time.at(params[:from_date].to_i)
+          @message_groups = @channel.get_page_in_groups(params[:branch_id], date)
       else
-          page = @channel.messages.limit(pagesize).order("updated_at DESC").all.reverse
+          @message_groups = @channel.get_page_in_groups(params[:branch_id])
       end
 
-      @message_groups = []
-      while page.length > 0
-          message = page.pop
-          group = OpenStruct.new
-          group.poster = message.poster
-          group.date = message.pretty_updated_at
-          group.messages = [message]
-          while page.length > 0 and page.last.poster == group.poster
-              group.messages << page.pop
-          end
-          @message_groups << group
-      end
-      return @message_groups
   end
 
   def get_updates 
@@ -145,9 +132,9 @@ class ChannelsController < ApplicationController
       if previous_check
           prevtime = Time.at(previous_check.to_i)
 
-          @new_messages = Message.where(:channel_id => @channel.id).since(prevtime).all
+          @new_messages = Message.where(:branch_id => params[:branch_id]).since(prevtime).all
           if not @new_messages.empty?
-              @channelconfig = @user.channelconfigs.where(:channel_id => @channel.id).first
+              @channelconfig = Channelconfig.where("user_id = ? AND channel_id = ?", @user.id, @channel.id).first
               @channelconfig.last_checked = Time.now
               @channelconfig.save
           end

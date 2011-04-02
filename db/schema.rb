@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110309172433) do
+ActiveRecord::Schema.define(:version => 20110328175559) do
 
   create_table "channelconfigs", :force => true do |t|
     t.integer  "channel_id"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20110309172433) do
     t.integer  "channel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "branch_id"
+    t.boolean  "has_branch"
   end
 
   create_table "users", :force => true do |t|
