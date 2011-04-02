@@ -1,3 +1,5 @@
+/* @override http://localhost:3000/stylesheets/global.css?1301782977 */
+
 * {margin: 0;padding: 0;}
 body{font:13px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif; background: #f9f9f9;}
 html, body {width: 100%;height: 100%;}
@@ -294,68 +296,67 @@ input.text-input:focus, textarea:focus {
 	background: #fdb928;
 }
 
-#sidebar {
-	display: inline;
+#sub_header {
+	height: 23px;
+	padding: 8px;
+	border-bottom: 1px solid #c8b498;
+	background-color: #cccccc;
+background-image: -moz-linear-gradient(top, #ffffff 0%,#fcfcfc 3%, #fbfbfb 50%, #f4f4f4 50%, #f0f0f0 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(0.03, #faf7f4), color-stop(1, #f8f5f0));
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#f8f5f0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#f8f5f0')";
+}
+#sub_header :after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
+
+#sub_header h2.channel_title {
+	width: 245px;
 	float: left;
-	width: 200px;
-	padding: 10px;
-	height: 100%;
-}
-
-#sidebar h3 {
-	clear: both;
+	font-size: 18px;
+	line-height: 21px;
+	padding: 0;
 	margin: 0;
-	border-bottom: 1px dotted #ccc;
-	font-size: 10px;
-	padding: 5px;
-	color: #777;
-	text-transform: uppercase;
-	line-height: 14px;
 	text-shadow: #fff 0px 1px;
+	color: #292928;
 }
 
-#sidebar #channel_nav {
-	padding: 10px 0;
-	margin-bottom: 10px;
-	border-bottom: 1px dotted #ccc;
+#channel_nav {
+	float: right;
+	height: 14px;
+	margin: 2px 0 0;
 }
-#sidebar #channel_nav:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
 
-
-#sidebar li {
+#channel_nav li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	display: block;
-	clear: both;
-}
-
-#sidebar li a {
-	font-size: 12px;
 	height: 14px;
-	line-height: 14px;
-	padding: 5px 0;
-	color: #6a6a6a;
 	display: block;
+	float: left;
+	margin-right: 15px;
 }
 
-#sidebar li a span {
+#channel_nav li a {
+	font-size: 12px;
+	line-height: 14px;
+	color: #6a6a6a;
+	height: 14px;
+}
+
+#channel_nav li a span {
 	width: 16px;
 	height: 14px;
+	margin: 3px 5px 0 0;
 	display: block;
 	float: left;
-	margin-right: 5px;
 	background: url(/images/icons-sidebar.png) no-repeat left top;
 }
-#sidebar li a.visual_map span {background-position: -16px 0;}
-#sidebar li a.notification_settings span {background-position: -32px 0;}
-#sidebar li a.members span {background-position: -48px 0;}
+#channel_nav li a.visual_map span {background-position: -16px 0;}
+#channel_nav li a.notification_settings span {background-position: -32px 0;}
+#channel_nav li a.members span {background-position: -48px 0;}
 
-#sidebar a.invite_people {
-	margin: 10px 0;
-	float: left;
-	padding: 3px;
-	clear: both;
+#sub_header a.invite_people {
+	float: right;
+	padding: 2px 3px;
 	width: 100px;
 	font-size: 12px;
 	line-height: 18px;
@@ -378,40 +379,51 @@ input.text-input:focus, textarea:focus {
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#499093', EndColorStr='#136f73')";
 }
 
-#sidebar .channel_controls {
-	margin: 10px 0;
+
+#sidebar {
+	display: inline;
+	float: left;
+	width: 169px;
+	padding: 10px 0;
+	height: 100%;
 }
 
-#sidebar div.new_channel {
-	margin-top: 10px;
+#sidebar h3 {
+	clear: both;
+	margin: 0 0 5px;
+	font-size: 12px;
+	padding: 5px 10px;
+	color: #292928;
+	line-height: 14px;
+	text-shadow: #fff 0px 1px;
 }
-
-#sidebar div.new_channel a {
+#sidebar ul {
+	padding: 0px 0 15px;
+	list-style: none;
+	float: none;
+	clear: both;
 	display: block;
-	width: 80px;
-	font-size: 11px;
-	text-align: center;
-	padding: 2px 10px 3px;
-	background-color: #eeeeee;
-background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #eeeeee 100%);
-    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(0.03, #f6f6f6),color-stop(1, #eeeeee));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f6f6f6', EndColorStr='#eeeeee');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f6f6f6', EndColorStr='#eeeeee')";
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    color: #565656;
-    text-shadow: #fff 0px 1px;
-    -khtml-border-radius: 25px;
-	-moz-border-radius: 25px;
-	-webkit-border-radius: 25px;
-	border-radius: 25px;
+	width: 170px;
 }
+#sidebar ul li {
+	height: 14px;
+	font-size: 12px;
+	line-height: 12px;
+	padding: 10px;
+	margin: 0;
+	overflow: hidden;
+}
+
 
 #main {
-	margin-left: 220px;
-	background: #f3f6f9;
-	border-left: 1px solid #ccc;
+	margin-left: 170px;
+	background: #fff;
+	border-left: 1px solid #cccdce;
+	-moz-box-shadow: inset -1px 0px 3px rgba(0,0,0, .1); 
+	-webkit-box-shadow: inset 1px 0px 3px rgba(0,0,0, .1); 
+	box-shadow: inset 1px 0px 3px rgba(0,0,0, .1); 
 }
+#main:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
 
 #home_content {
 	padding: 20px;
@@ -443,56 +455,17 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f6f6f6 3%, #eeeeee 100%)
 
 /* Channel columns */
 
-#main_content {
-	float: left;
-	background: #fff;
-	border-right: 1px solid #ccc;
-}
-
+#main_content:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
 /* Channel Styles */
-
-#main .top_controls {
-	float: left;
-	width: 100%;
-	margin: 0;
-	background: #f3f6f9;
-	border-bottom: 1px solid #ccd4dd;
-	font-size: 11px;
-	padding: 5px 0;
-}
-#main .top_controls:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
-
-#main .top_controls .users_in_channel {
-	float: left;
-	padding: 0 0 0 10px;
-	line-height: 18px;
-	color: #666;
-}
-
-#main .top_controls .add_user {
-	width: 60px;
-	float: right;
-	margin-right: 5px;
-	display: inline;
-	text-align: center;
-	padding: 1px 10px 2px;
-	font-size: 11px;
-	background-color: #eeeeee;
-background-image: -moz-linear-gradient(top, #ffffff 0%,#f5f5f5 3%, #eeeeee 100%);
-    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(0.03, #f5f5f5),color-stop(1, #eee));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#5593da', EndColorStr='#f5f5f5');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f5f5f5', EndColorStr='#eeeeee')";
-    border: 1px solid #999;
-    color: #222222;
-}
 
 #post_area {
 	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
 	position: fixed;
 	bottom: 0px;
-	left: 220px;
+	left: 170px;
 	z-index:100;
-	height: 119px;
+	height: 79px;
 	overflow: hidden;
 	background-color: #cccccc;
 background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%);
@@ -504,15 +477,13 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 	-webkit-box-shadow: 0px -1px 1px rgba(0,0,0, .1); 
 	box-shadow: 0px -1px 1px rgba(0,0,0, .1); 
 }
-#post_area .post_area_inner {
-}
 
 #post_area .post_area_inner form#new_message {
 	position: absolute;
 	width: 100%;
 }
 #post_area textarea {
-	margin: 20px 0 0 20px;
+	margin: 10px 0 0 10px;
 	display: block;
 	height: 20px;
 	font-size: 14px;
@@ -537,11 +508,11 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 
 #post_area a.message_post {
 	display: block;
-	padding: 5px 10px;
+	padding: 2px 10px;
 	font-size: 12px;
 	float: left;
 	line-height: 18px;
-	margin: 10px 0 0 20px;
+	margin: 7px 0 0 10px;
 	text-shadow: #fff 0px 1px;
 	display: inline;
 	border: 1px solid #de9800;
@@ -575,18 +546,16 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 #messages {
 	float: left;
 	width: 100%;
+	overflow: hidden;
 	overflow-y: scroll;
-	height: 300px;
-	margin-bottom: 120px;
-	background: #fff;
 }
 
 #message_list .message_row {
 	clear: both;
 	list-style: none;
 	width: 100%;
-	margin: 5px 0;
-	padding: 5px 0;
+	margin: 0;
+	padding: 0;
 	border-bottom: 1px dotted #ccc;
 }
 #message_list .message_row:last-child {
@@ -595,34 +564,35 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 #message_list .message_row:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
 #message_list .message_row .meta {
 	float: left;
-	width: 15%;
+	width: 24px;
+	margin: 5px 10px;
 	text-align: right;
 }
-#message_list .message_row .meta p {
-	text-align: right;
-	padding: 0 10px 5px 0;
-	margin: 0;
+
+#message_list .message_row .meta a.user_pic {
+	width: 24px;
+	height: 24px;
+	display: block;
+	border: 1px solid #fff;
+	-moz-box-shadow: 0px 0px 3px rgba(0,0,0, .2); 
+	-webkit-box-shadow: 0px 0px 3px rgba(0,0,0, .2); 
+	box-shadow: 0px 0px 3px rgba(0,0,0, .2); 
 }
-#message_list .message_row .meta .username {
+
+#message_list .message_row .username {
 	font-weight: bold;
 	color: #026c70;
 	font-size: 12px;
 }
-#message_list .message_row .meta .date {
-	color: #999;
-	font-size: 11px;
-}
 
 #message_list .message_row .message_content {
-	float: right;
-	width: 85%;
 	word-wrap: break-word;
+	padding-left: 44px;
 }
 
-#message_list .message_content .branchpoint
-{
+#message_list .message_content .branchpoint {
     position:relative;
-    display:inline;
+    display: block;
     float:right;
     right:60px;
     bottom:30px;
@@ -642,14 +612,12 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 }
 
 #message_list .message_row .message_content p{
-	margin: 0 0 7px;
+	margin: 5px 0;
 	color: #333333;
 	font-size: 12px;
 	line-height: 18px;
-	border-left: 1px solid #eee;
-	padding:0 20px 5px 10px;
-        position: relative;
-        width:80%;
+    position: relative;
+    width: 98%;
 }
 
 #message_list .message_row .message_content p .buttons {
@@ -722,34 +690,6 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#fcfcfc 3%, #fbfbfb 50%, 
 	-webkit-border-radius: 25px;
 	border-radius: 25px;
 }
-
-/* Messages footer */
-#main .bottom_controls {
-	clear: both;
-	margin: 0;
-	background-color: #cccccc;
-	background-image: -moz-linear-gradient(top, #ffffff 0%,#fcfcfc 3%, #eeeeee 100%);
-	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff), color-stop(0.03, #f3f3f3),color-stop(1, #eee));
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#eeeeee');
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#eeeeee')";
-	border-bottom: 1px solid #ccc;
-	border-top: 1px solid #ccc;
-	font-size: 11px;
-	padding: 5px;
-}
-#main .bottom_controls:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
-#main .bottom_controls li {
-	list-style: none;
-	float: left;
-	margin: 0;
-	padding: 0 10px;
-	display: inline;
-}
-#main .bottom_controls li a {
-	color: #565656;
-	text-shadow: #fff 0px 1px;
-}
-
 
 /* New Channel Page */
 

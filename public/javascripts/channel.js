@@ -134,12 +134,12 @@ function getBrowserSize() {
 
 function messageResizing() {
 	getBrowserSize();
-	var postAreaHeight = 120;
-	var headerHeight = 50;
+	var postAreaHeight = 80;
+	var headerHeight = 90;
 	var messageListHeight = browserHeight - postAreaHeight - headerHeight;
 	//console.log(browserHeight, messageListHeight);
 	var cssHeight = messageListHeight+'px';
-	var postAreaWidth = browserWidth - 220;
+	var postAreaWidth = browserWidth - 170;
 	$('#post_area').css('width', postAreaWidth+'px');
 	$('#messages').css('height', cssHeight);
 }
