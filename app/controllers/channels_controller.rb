@@ -62,7 +62,7 @@ class ChannelsController < ApplicationController
         format.html { redirect_to(@channel) }
         format.xml  { render :xml => @channel, :status => :created, :location => @channel }
       else
-        flash[:notice] = 'Could not create channel'
+        flash[:warning] = 'Could not create channel'
         logger.debug @channel.errors.full_messages
         format.html { render :action => "new" }
         format.xml  { render :xml => @channel.errors, :status => :unprocessable_entity }

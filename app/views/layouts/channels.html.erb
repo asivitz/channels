@@ -44,7 +44,6 @@
 						<% end %>
 					</ul>
 				</li>
-				<li><%= link_to 'Create Group', new_channel_path, :class => 'new_channel navlink' %></li>
 			</ul>
 		</nav>
 		<ul id="settings">
@@ -53,8 +52,14 @@
 	</header>
 	<!-- /end #header -->
 	<div id="wrapper">
-		<%= flash[:notice] %>
-		<%= flash[:warning] %>
+		<% if flash[:notice] %>
+			<script>$(function(){initNotice()});</script>
+			<p class="notice good"><%= flash[:notice] %></p>
+		<% end %>
+		<% if flash[:warning] %>
+			<script>$(function(){initNotice()});</script>
+			<p class="notice bad"><%= flash[:warning] %></p>
+		<% end %>
 		<%= yield %>
 	</div>
 	<!-- /end #wrapper -->

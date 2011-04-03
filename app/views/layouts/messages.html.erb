@@ -12,9 +12,14 @@
 	<%= stylesheet_link_tag 'global' %>
 </head>
 <body>
-
-	<p style="color: green"><%= flash[:notice] %></p>
-	
+	<% if flash[:notice] %>
+		<script>$(function(){initNotice()});</script>
+		<p class="notice good"><%= flash[:notice] %></p>
+	<% end %>
+	<% if flash[:warning] %>
+		<script>$(function(){initNotice()});</script>
+		<p class="notice bad"><%= flash[:warning] %></p>
+	<% end %>
 	<%= yield %>
 
 </body>

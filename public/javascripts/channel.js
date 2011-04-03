@@ -96,7 +96,7 @@ function spinOff()
 
 // Navigation Dropdowns
 function dropDownsOver() {
-	$(this).find(".sub").stop().css('top','22px');
+	$(this).find(".sub").stop().css('top','23px');
 	$(function() {
 	   function calcSubWidth() {
 	       rowWidth = 0;
@@ -141,10 +141,36 @@ function messageResizing() {
 	var cssHeight = messageListHeight+'px';
 	var postAreaWidth = browserWidth - 170;
 	$('#post_area').css('width', postAreaWidth+'px');
+	$('#post_area .input_wrapper, #msginput').css('width', postAreaWidth-32+'px');
 	$('#messages').css('height', cssHeight);
 }
 
 function messageScrollBottom() {
 	$("#messages").animate({ scrollTop: $("#messages").attr("scrollHeight") });
 	//console.log('test');
+}
+
+function initNotice() {
+	$('.notice').hide();
+	$('.notice').slideDown(300);
+	function hideNotice() {
+		$('.notice').slideUp(300);
+	}
+	setTimeout(hideNotice, 3000);
+}
+
+function inputFocusState() {
+	$('.input_wrapper').addClass('focused');
+	$('#msginput').focus(function() {
+		$('.input_wrapper').addClass('focused');
+	});
+	$('#msginput').keydown(function() {
+		$('.input_wrapper label').hide();
+	});	
+	$('#msginput').blur(function() {
+		$('.input_wrapper').removeClass('focused');
+		if($(this).attr('value') == '') {
+			$('.input_wrapper label').fadeIn(100);
+		}
+	});
 }

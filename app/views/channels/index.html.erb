@@ -1,11 +1,12 @@
 <div id="home_content">
 	<h2>Select a channel</h2>
 	<div id="channel_list">
-		<h4>All Channels</h4>
+		<h4>All Clusters</h4>
 		<ul class="channels_list">
 		    <% @channels.each do |channel| %>
 		        <li><%= link_to channel.name, channel %></li>
 		    <% end %>
+		    <li><%= link_to 'Create New Cluster', new_channel_path, :class => 'new_channel navlink' %></li>
 		</ul>
 	</div>
 	
