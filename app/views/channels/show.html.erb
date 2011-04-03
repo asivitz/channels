@@ -1,35 +1,39 @@
 <% content_for :head do %>
     <%= javascript_include_tag "channel" %>
 <% end %>
+<div id="sub_header">
+	<h2 class="channel_title"><%=h @channel.name %></h2>
+	<div class="sub_header_right">
+		<a href="javascript:showOverlay();" class="invite_people">+ Invite People</a>
+		<nav id="channel_nav">
+			<ul>
+			<li><%= link_to content_tag(:span, '')+'Edit Group', edit_channel_path(@channel), :class => 'edit_group' %><span></span></li>
+			<li><a href="javascript:void(0)" class="visual_map"><span></span> Visual Map</a></li>
+			<li><a href="javascript:void(0)" class="notification_settings"><span></span> Notification Settings</a></li>
+			<li><a href="javascript:void(0)" title="<% @channel.users.each do |u| %> <%= u.alias %> <% end %>" class="members"><span></span> Members</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
 <div id="sidebar">
-	<h2><%=h @channel.name %></h2>
-	<nav id="channel_nav">
-		<ul>
-		<li><%= link_to content_tag(:span, '')+'Edit Group', edit_channel_path(@channel), :class => 'edit_group' %><span></span></li>
-		<li><a href="javascript:void(0)" class="visual_map"><span></span> Visual Map</a></li>
-		<li><a href="javascript:void(0)" class="notification_settings"><span></span> Notification Settings</a></li>
-		<li><a href="javascript:void(0)" title="<% @channel.users.each do |u| %> <%= u.alias %> <% end %>" class="members"><span></span> Members</a></li>
-		</ul>
-	</nav>
-	<a href="javascript:showOverlay();" class="invite_people">+ Invite People</a>
-	<ul class="bad_controls">
-		<li><%= link_to 'Delete Channel', channel_path(@channel), :confirm => "Are you sure?", :method => :delete, :class => 'delete_channel' %></li>
-		<% if @channel.users.include? @user %>
-		<li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}", :class => 'leave_channel' %></li>
-		<% end %>
-	</ul>
-
-        Branches: 
-        <ul>
+        <h3>Branches:</h3>
+        <ul class="branch_list">
             <% @channel.branch_ids.each do |bid| %>  
                 <li>
                 <% if bid %>
-                    <%= link_to @channel.latest_for_branch(bid).summarize(30), "/channels/#{@channel.id}?branch_id=#{bid}" %>
+                    <%= link_to @channel.latest_for_branch(bid).summarize(22), "/channels/#{@channel.id}?branch_id=#{bid}" %>
                 <% else %>
-                    <%= link_to @channel.latest_for_branch(bid).summarize(30), @channel %>
+                    <%= link_to @channel.latest_for_branch(bid).summarize(22), @channel %>
                 <% end %>
                 </li>
             <% end %>
+        </ul>
+        <h3>Other controls</h3>
+        <ul class="bad_controls">
+        	<li><%= link_to 'Delete Channel', channel_path(@channel), :confirm => "Are you sure?", :method => :delete, :class => 'delete_channel' %></li>
+        	<% if @channel.users.include? @user %>
+        	<li><%= link_to "Leave Channel", "/channels/leave_channel/#{@channel.id}", :class => 'leave_channel' %></li>
+        	<% end %>
         </ul>
 </div>
 <!-- /end left #sidebar -->
@@ -41,9 +45,12 @@
         <img id="spinner" style="float:right;visibility:hidden;" src="/images/spinner.gif"/>
 	
         <%= form_for [@channel, @message] , :remote => true do |f| %>
-            <%= f.hidden_field(:branch_id, :value => params[:branch_id]) %>
-	    <%= f.text_area :content, :size => "100x4", :id => "msginput" %>
-            <a href="javascript:spinOn();$('#new_message').submit();" class="message_post">Post</a>
+			<%= f.hidden_field(:branch_id, :value => params[:branch_id]) %>
+			<div class="input_wrapper">
+				<label for="msginput">Enter your message here...</label>
+				<%= f.text_field :content, :id => "msginput" %>
+			</div>
+           <p class="form_note">To post your message hit the return/enter key. Simple HTML characters are allowed.</p>
 	<% end %>
 	</div>
 	
@@ -63,10 +70,10 @@
 	    <% @message_groups.each do |group| %>
                 <li class="message_row">
                 <div class="meta">
-                    <p class="username"><%= group.poster %>:</p>
-                    <p class="date"><%= group.date %></p>
+                    <a href="javascript:void(0)" class="user_pic" title="<%= group.poster %>"><img src="/images/user-default.jpg" width="24" height="24" alt="<%= group.poster %>" /></a>
                 </div>
                 <div class="message_content">
+                	<p class="username"><%= group.poster %>:</p>
                     <% group.messages.each do |m| %>
                         <%= render :partial => "message", :object => m %>
                     <% end %>
@@ -101,6 +108,7 @@
 		messageScrollBottom();
 		$('#msginput').focus();
 		waitForMsg(<%= @channel.id %>);
+		inputFocusState();
 	});
 
     weHaveFocus = true;
@@ -116,10 +124,8 @@ function playDing()
 
 function fadeUnread()
 {
-    var marked_unread = $('.message_content p').filter(function() {
-                return $(this).css('borderLeftColor') != '#eee';
-                });
-    marked_unread.animate({ borderLeftColor: '#eee'}, 12000);
+    var marked_unread = $('.message_content p').filter('.unread');
+    marked_unread.animate({ background: '#fff'}, 10000);
 }
 
 window.onfocus = function()

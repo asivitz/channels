@@ -62,14 +62,12 @@ function getOldestContainer()
     return $('#message_list li:first');
 }
 
-function makeContainer(username, time)
-{
+function makeContainer(username, time) {
     var row = $('<li class="message_row">' +
         '<div class="meta">' +
-        '<p class="username">' + username + ':</p>' +
-        '<p class="date">' + time + '</p>' +
+        '<a href="javascript:void(0)" class="user_pic" title="' + username + '"><img src="/images/user-default.jpg" width="24" height="24" alt="' + username + '" /></a>' +
         '</div>' +
-        '<div class="message_content"></div>');
+        '<div class="message_content"><p class="username">' + username + '</p></div>');
     return row;
 }
 
@@ -134,17 +132,43 @@ function getBrowserSize() {
 
 function messageResizing() {
 	getBrowserSize();
-	var postAreaHeight = 120;
-	var headerHeight = 50;
+	var postAreaHeight = 80;
+	var headerHeight = 90;
 	var messageListHeight = browserHeight - postAreaHeight - headerHeight;
 	//console.log(browserHeight, messageListHeight);
 	var cssHeight = messageListHeight+'px';
-	var postAreaWidth = browserWidth - 220;
+	var postAreaWidth = browserWidth - 170;
 	$('#post_area').css('width', postAreaWidth+'px');
+	$('#post_area .input_wrapper, #msginput').css('width', postAreaWidth-32+'px');
 	$('#messages').css('height', cssHeight);
 }
 
 function messageScrollBottom() {
-	$("#messages").animate({ scrollTop: $("#messages").attr("scrollHeight") });
+	$("#messages").attr({ scrollTop: $("#messages").attr("scrollHeight") });
 	//console.log('test');
+}
+
+function initNotice() {
+	$('.notice').hide();
+	$('.notice').slideDown(300);
+	function hideNotice() {
+		$('.notice').slideUp(300);
+	}
+	setTimeout(hideNotice, 3000);
+}
+
+function inputFocusState() {
+	$('.input_wrapper').addClass('focused');
+	$('#msginput').focus(function() {
+		$('.input_wrapper').addClass('focused');
+	});
+	$('#msginput').keydown(function() {
+		$('.input_wrapper label').hide();
+	});	
+	$('#msginput').blur(function() {
+		$('.input_wrapper').removeClass('focused');
+		if($(this).attr('value') == '') {
+			$('.input_wrapper label').fadeIn(100);
+		}
+	});
 }

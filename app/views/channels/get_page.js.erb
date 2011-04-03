@@ -2,17 +2,13 @@
     <% group.messages.each do |m| %>
 
         var added = null;
-
         var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => m) %>");
         var oldestContainer = null;
 
-        if (bottomPoster() == '<%= m.poster %>:')
-        {
+        if (bottomPoster() == '<%= m.poster %>:'){
             oldestContainer = getOldestContainer();
             added = msg;
-        }
-        else
-        {
+        }else{
 
             oldestContainer = makeContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
             oldestContainer.prependTo($('#message_list'));
@@ -20,7 +16,7 @@
         }
 
         var ul = oldestContainer.find('.message_content');
-        msg.prependTo(ul);
+        msg.appendTo(ul);
 		
 		added.hide().fadeIn();
     <% end %>

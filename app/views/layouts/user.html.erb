@@ -24,8 +24,12 @@
         </header>
         <!-- /end #header -->
         <div id="wrapper">
-        	<%= flash[:notice] %>
-        	<%= flash[:warning] %>
+        	<% if flash[:notice] %>
+        		<p class="notice good"><%= flash[:notice] %></p>
+        	<% end %>
+        	<% if flash[:warning] %>
+        		<p class="notice bad"><%= flash[:warning] %></p>
+        	<% end %>
         	<%= yield %>
         </div>
     </body>
