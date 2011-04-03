@@ -96,7 +96,7 @@ function spinOff()
 
 // Navigation Dropdowns
 function dropDownsOver() {
-	$(this).find(".sub").stop().css('top','23px');
+	$(this).find(".sub").stop().css('top','22px');
 	$(function() {
 	   function calcSubWidth() {
 	       rowWidth = 0;

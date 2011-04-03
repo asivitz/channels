@@ -476,6 +476,10 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#fcfcfc 3%, #fbfbfb 50%, 
 	margin: 0;
 	overflow: hidden;
 }
+#sidebar ul li a {
+	color: #757575;
+	text-shadow: #ffffff 0px 1px;
+}
 
 
 #main {
@@ -620,7 +624,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 #message_list .message_row .meta {
 	float: left;
 	width: 24px;
-	margin: 5px 10px;
+	margin: 3px 10px;
 	text-align: right;
 }
 
@@ -682,11 +686,15 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 
 #message_list .message_row .message_content p{
 	margin: 5px 0;
+	padding-left: 5px;
 	color: #333333;
 	font-size: 12px;
 	line-height: 18px;
     position: relative;
     width: 98%;
+}
+#message_list .message_row .message_content p.unread {
+	background: #eff7f7;
 }
 
 #message_list .message_row .message_content p .buttons {
