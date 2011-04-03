@@ -62,14 +62,12 @@ function getOldestContainer()
     return $('#message_list li:first');
 }
 
-function makeContainer(username, time)
-{
+function makeContainer(username, time) {
     var row = $('<li class="message_row">' +
         '<div class="meta">' +
-        '<p class="username">' + username + ':</p>' +
-        '<p class="date">' + time + '</p>' +
+        '<a href="javascript:void(0)" class="user_pic" title="' + username + '"><img src="/images/user-default.jpg" width="24" height="24" alt="' + username + '" /></a>' +
         '</div>' +
-        '<div class="message_content"></div>');
+        '<div class="message_content"><p class="username">' + username + '</p></div>');
     return row;
 }
 
@@ -146,7 +144,7 @@ function messageResizing() {
 }
 
 function messageScrollBottom() {
-	$("#messages").animate({ scrollTop: $("#messages").attr("scrollHeight") });
+	$("#messages").attr({ scrollTop: $("#messages").attr("scrollHeight") });
 	//console.log('test');
 }
 
