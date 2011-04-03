@@ -41,7 +41,7 @@ input.text-input:focus, textarea:focus {
 	color: #ffffff;
 	width: 100%;
 	background-color: #026c70;
-	background-image: -moz-linear-gradient(top, #6facae 0%,#3e8f92 3%, #026c70 100%);
+	background-image: -moz-linear-gradient(top, #6facae 0%, #3e8f92 3%, #026c70 100%);
     background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #6facae),color-stop(0.03, #3e8f92),color-stop(1, #026c70));
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#026c70');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#026c70')";
