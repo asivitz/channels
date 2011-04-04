@@ -2,10 +2,10 @@
 <div class="meta">
     <a href="javascript:void(0)" class="user_pic" title="<%= message_group.poster %>"><img src="/images/user-default.jpg" width="24" height="24" alt="<%= message_group.poster %>" /></a>
 </div>
-<div class="username"><%= message_group.poster %></div>
+<p class="username"><%= message_group.poster %></p>
 <div class="message_content">
     <% message_group.messages.each do |m| %>
-        <%= render :partial => "message", :object => m %>
+        <%= render :partial => "channels/message", :object => m %>
     <% end %>
 </div>
 </li>

@@ -1,22 +1,21 @@
 <% if @message %>
-var added;
 
-var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => @message) %>");
-var latestContainer = null;
+if (topPoster() == '<%= @message.poster %>')
+{
+    var latestContainer = getLatestContainer();
+    var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => @message) %>");
+    var ul = latestContainer.find('.message_content');
+    msg.appendTo(ul);
+    msg.hide().fadeIn();
 
-if (topPoster() == '<%= @message.poster %>'){
-    latestContainer = getLatestContainer();
-    added = msg;
-}else{
-    latestContainer = makeContainer('<%= @message.poster %>', '<%= @message.pretty_updated_at %>');
-    latestContainer.appendTo('#message_list');
-    added = latestContainer;
+}
+else
+{
+    var group = $("<%= escape_javascript(render :partial => "channels/message_group", :object => @message_group) %>");
+    group.appendTo('#message_list');
+    group.hide().fadeIn();
 }
 
-var ul = latestContainer.find('.message_content');
-msg.appendTo(ul);
-
-added.hide().fadeIn();
 messageScrollBottom();
 
 $('#msginput').val("");

@@ -18,6 +18,11 @@ class MessagesController < ApplicationController
             @message.poster = @user.alias
             @message.save
 
+            @message_group = OpenStruct.new
+            @message_group.poster = @message.poster
+            @message_group.date = @message.pretty_updated_at
+            @message_group.messages = [@message]
+
             branch_id = params[:message][:branch_id]
 
             if (branch_id and branch_id.length > 0)
