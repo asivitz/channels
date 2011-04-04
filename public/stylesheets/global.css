@@ -661,39 +661,32 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 }
 
 #message_list .message_content .branchpoint {
-	float: right;
-	height: 20px;
+	height: 19px;
 }
 
 #message_list .message_content .branchpoint a.branch_link{
 	display: block;
-	float: right;
-	height: 20px;
+	height: 19px;
 	padding-right: 10px;
-	background: url(/images/bg-branch.png) no-repeat right top;
+	//background: url(/images/bg-branch.png) right top;
 	font-size: 11px;
-	line-height: 18px;
+	line-height: 19px;
 	color:#444;
 	margin: 0 0 0 5px;
 	text-shadow: #fef4e0 0px 1px;
+
+        border-width:0px 33px 0px 33px;
+        -moz-border-image:url(/images/bg-branch.png) 0 33 0 33 repeat stretch;
+        -webkit-border-image:url(/images/bg-branch.png) 0 33 0 33 repeat stretch;
+        border-image:url(/images/bg-branch.png) 0 33 0 33 repeat stretch;
+        float:left;
 }
 #message_list .message_content .branchpoint a.branch_link:hover {
 	text-decoration: none;
 }
 #message_list .message_content .branchpoint a.branch_link:active {
-	background-position: right bottom;
 }
 
-#message_list .message_content .branchpoint a.branch_link span {
-	width: 25px;
-	height: 20px;
-	display: block;
-	background: url(/images/bg-branch.png) no-repeat left top;
-	float: left;
-}
-#message_list .message_content .branchpoint a.branch_link:active span {
-	background-position: left bottom;
-}
 
 #message_list .message_row .message_content p{
 	margin: 5px 0;

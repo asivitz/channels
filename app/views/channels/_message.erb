@@ -1,18 +1,5 @@
-
 <p id="message_<%= message.id %>" 
 <% if message.poster != @user.alias and (@previously_last_checked.nil? or @previously_last_checked < message.updated_at) %>class="unread"<% end %>>
-<% if message.has_branch? %>
-    <% branch_message = message.successor_for_branch message.branch_link %>
-    <% if branch_message %>
-        <span class="branchpoint">
-            <% if message.branch_link %>
-                <%= link_to content_tag(:span, '')+"#{branch_message.summarize}", "/channels/#{@channel.id}?branch_id=#{message.branch_link}", :class => 'branch_link', :title => 'Click to view this branch.' %>
-            <% else %>
-                <%= link_to content_tag(:span, '')+"#{branch_message.summarize}", "/channels/#{@channel.id}", :class => 'branch_link', :title => 'Click to view this branch.' %>
-            <% end %>
-        </span>
-    <% end %>
-<% end %>
 <span class="buttons">
     <% if message.poster == @user.alias %>
         <%= link_to content_tag(:span, ''), [@channel, message], :confirm => "Are you sure?",
@@ -25,3 +12,17 @@
 <%= raw [message.marked_up_content] %>
 
 </p>
+
+<% if message.has_branch? %>
+    <% branch_message = message.successor_for_branch message.branch_link %>
+    <% if branch_message %>
+        <div class="branchpoint">
+            <% if message.branch_link %>
+                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(40)}", "/channels/#{@channel.id}?branch_id=#{message.branch_link}", :class => 'branch_link', :title => 'Click to view this branch.' %>
+            <% else %>
+                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(40)}", "/channels/#{@channel.id}", :class => 'branch_link', :title => 'Click to view this branch.' %>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>
+
