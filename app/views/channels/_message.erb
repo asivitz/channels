@@ -18,9 +18,9 @@
     <% if branch_message %>
         <div class="branchpoint">
             <% if message.branch_link %>
-                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(40)}", "/channels/#{@channel.id}?branch_id=#{message.branch_link}", :class => 'branch_link', :title => 'Click to view this branch.' %>
+                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(80)}", "/channels/#{@channel.id}?branch_id=#{message.branch_link}", :class => 'branch_link', :title => 'Click to view this branch.' %>
             <% else %>
-                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(40)}", "/channels/#{@channel.id}", :class => 'branch_link', :title => 'Click to view this branch.' %>
+                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(80)}", "/channels/#{@channel.id}", :class => 'branch_link', :title => 'Click to view this branch.' %>
             <% end %>
         </div>
     <% end %>
