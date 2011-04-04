@@ -34,6 +34,10 @@ input.text-input:focus, textarea:focus {
 	color: #333;
 }
 
+input, input:focus {
+	outline: none;
+	-moz-outline:none;
+}
 
 #header {
 	padding: 0;
@@ -41,11 +45,14 @@ input.text-input:focus, textarea:focus {
 	color: #ffffff;
 	width: 100%;
 	background-color: #026c70;
-	background-image: -moz-linear-gradient(top, #6facae 0%,#3e8f92 3%, #026c70 100%);
-    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #6facae),color-stop(0.03, #3e8f92),color-stop(1, #026c70));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#026c70');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#026c70')";
-    border-bottom: 1px solid #005053;
+	background-image: -moz-linear-gradient(top, #3e8f92 0%, #026c70 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #3e8f92),color-stop(1, #026c70));
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#026c70');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#026c70')";
+	-moz-box-shadow: inset 0px 1px 0px #6facae; 
+	-webkit-box-shadow: inset 0px 1px 0px #6facae; 
+	box-shadow: inset 0px 1px 0px #6facae; 
+	border-bottom: 1px solid #005053;
 }
 
 #header:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
@@ -341,10 +348,10 @@ input.text-input:focus, textarea:focus {
 	padding: 8px;
 	border-bottom: 1px solid #c8b498;
 	background-color: #cccccc;
-background-image: -moz-linear-gradient(top, #ffffff 0%,#fcfcfc 3%, #fbfbfb 50%, #f4f4f4 50%, #f0f0f0 100%);
+background-image: -moz-linear-gradient(top, #ffffff 0%,#faf7f4 3%, #f8f5f0 100%);
     background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(0.03, #faf7f4), color-stop(1, #f8f5f0));
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#f8f5f0');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcfcfc', EndColorStr='#f8f5f0')";
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#faf7f4', EndColorStr='#f8f5f0');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#faf7f4', EndColorStr='#f8f5f0')";
 }
 #sub_header :after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
 
@@ -404,7 +411,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#fcfcfc 3%, #fbfbfb 50%, 
 	float: right;
 	padding: 4px 12px 7px 12px;
 	font-size: 11px;
-	line-height: 10px;
+	line-height: 11px;
 	height: 10px;
 	text-shadow: #ffe8b8 0px 1px;
 	display: block;
