@@ -481,6 +481,10 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#fcfcfc 3%, #fbfbfb 50%, 
 	text-shadow: #ffffff 0px 1px;
 }
 
+.selectedbranch {
+    background-color:#FDBC31;
+}
+
 
 #main {
 	margin-left: 170px;

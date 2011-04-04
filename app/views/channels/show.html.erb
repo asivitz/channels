@@ -19,12 +19,10 @@
         <h3>Branches:</h3>
         <ul class="branch_list">
             <% @channel.branch_ids.each do |bid| %>  
-                <li>
-                <% if bid %>
-                    <%= link_to @channel.latest_for_branch(bid).summarize(22), "/channels/#{@channel.id}?branch_id=#{bid}" %>
-                <% else %>
-                    <%= link_to @channel.latest_for_branch(bid).summarize(22), @channel %>
-                <% end %>
+                <li <%= "class='selectedbranch'" if bid.to_s == params[:branch_id].to_s %>>
+                <a href="/channels/<%= @channel.id %><%= "?branch_id=#{bid}" if bid %>" >
+                    <%= @channel.latest_for_branch(bid).summarize(22) %>
+                </a>
                 </li>
             <% end %>
         </ul>
