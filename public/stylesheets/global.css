@@ -661,6 +661,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 }
 
 #message_list .message_content .branchpoint {
+    margin:7px 0px 7px 0px;
 	height: 19px;
 }
 
