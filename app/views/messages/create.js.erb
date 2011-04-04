@@ -4,7 +4,7 @@ var added;
 var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => @message) %>");
 var latestContainer = null;
 
-if (topPoster() == '<%= @message.poster %>:'){
+if (topPoster() == '<%= @message.poster %>'){
     latestContainer = getLatestContainer();
     added = msg;
 }else{

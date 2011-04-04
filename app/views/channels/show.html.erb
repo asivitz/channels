@@ -71,7 +71,7 @@
                     <a href="javascript:void(0)" class="user_pic" title="<%= group.poster %>"><img src="/images/user-default.jpg" width="24" height="24" alt="<%= group.poster %>" /></a>
                 </div>
                 <div class="message_content">
-                	<p class="username"><%= group.poster %>:</p>
+                	<p class="username"><%= group.poster %></p>
                     <% group.messages.each do |m| %>
                         <%= render :partial => "message", :object => m %>
                     <% end %>
