@@ -1,31 +1,29 @@
-<% @message_groups.each do |group| %>
-    <% group.messages.each do |m| %>
+<% @message_groups.reverse.each do |group| %>
 
-        var added = null;
-        var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => m) %>");
-        var oldestContainer = null;
+    if (bottomPoster() == '<%= group.poster %>')
+    {
+        var oldestContainer = getOldestContainer();
 
-        if (bottomPoster() == '<%= m.poster %>:'){
-            oldestContainer = getOldestContainer();
-            added = msg;
-        }else{
+        <% group.messages.reverse.each do |m| %>
+            var msg = $("<%= escape_javascript(render :partial => "channels/message", :object => m) %>");
+            var ul = oldestContainer.find('.message_content');
+            msg.prependTo(ul);
 
-            oldestContainer = makeContainer('<%= m.poster %>', '<%= m.pretty_updated_at %>');
-            oldestContainer.prependTo($('#message_list'));
-            added = oldestContainer;
-        }
-
-        var ul = oldestContainer.find('.message_content');
-        msg.appendTo(ul);
-		
-		added.hide().fadeIn();
-    <% end %>
+            msg.hide().fadeIn();
+        <% end %>
+    }
+    else
+    {
+        var msggroup = $("<%= escape_javascript(render :partial => "channels/message_group", :object => group) %>");
+        msggroup.prependTo($('#message_list'));
+        msggroup.hide().fadeIn();
+    }
 
 <% end %>
 
 <% if not @message_groups.empty? %>
-<% last = @message_groups.last.messages.last %>
-$('#more_link').attr('href', "/channels/get_page/<%= @channel.id %>?from_date=<%= last.updated_at.to_i %>");
+<% last = @message_groups.first.messages.first %>
+$('#more_link').attr('href', "/channels/get_page/<%= @channel.id %>?<%= last.branch_id.to_s + "&" if last.branch_id %>from_date=<%= last.updated_at.to_i %>");
 <% end %>
 
 //last_checked = '<%= Time.now.to_i %>';

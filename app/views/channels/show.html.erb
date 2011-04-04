@@ -57,26 +57,16 @@
 	<div id="messages">
 	<% prev_message = nil %>
 	<% if not @message_groups.empty? %>
-		<% last_message = @message_groups.last.messages.last %>
+		<% last_message = @message_groups.first.messages.first %>
 		
-		<%= link_to 'Load Earlier Posts', "/channels/get_page/#{@channel.id}?from_date=#{last_message.updated_at.to_i}", :remote => true, :id => "more_link" %>
+                <%= link_to 'Load Earlier Posts', "/channels/get_page/#{@channel.id}?#{"branch_id=" + last_message.branch_id.to_s + "&" if last_message.branch_id}from_date=#{last_message.created_at.to_i}", :remote => true, :id => "more_link" %>
 	<% end %>
 	<ul id="message_list">
             <% if @message_groups.size == 0 %>
                 <li class="message_row"><p class="no_messages">This channel has no messages.</p></li>
             <% end %>
 	    <% @message_groups.each do |group| %>
-                <li class="message_row">
-                <div class="meta">
-                    <a href="javascript:void(0)" class="user_pic" title="<%= group.poster %>"><img src="/images/user-default.jpg" width="24" height="24" alt="<%= group.poster %>" /></a>
-                </div>
-                <div class="message_content">
-                	<p class="username"><%= group.poster %></p>
-                    <% group.messages.each do |m| %>
-                        <%= render :partial => "message", :object => m %>
-                    <% end %>
-                </div>
-                </li>
+                <%= render :partial => "message_group", :object => group %>
             <% end %>
         </ul>
         </div>

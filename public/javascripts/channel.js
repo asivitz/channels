@@ -62,15 +62,6 @@ function getOldestContainer()
     return $('#message_list li:first');
 }
 
-function makeContainer(username, time) {
-    var row = $('<li class="message_row">' +
-        '<div class="meta">' +
-        '<a href="javascript:void(0)" class="user_pic" title="' + username + '"><img src="/images/user-default.jpg" width="24" height="24" alt="' + username + '" /></a>' +
-        '</div>' +
-        '<div class="message_content"><p class="username">' + username + '</p></div>');
-    return row;
-}
-
 function showOverlay() {
 	$('#overlay').fadeIn(300);
 	$('#overlay .overlay_bg').click(function() {

@@ -653,6 +653,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 	font-weight: bold;
 	color: #026c70;
 	font-size: 12px;
+        padding-left:49px;
 }
 
 #message_list .message_row .message_content {
