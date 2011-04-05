@@ -167,6 +167,12 @@ function startNotify(name)
 
 var last_checked = '<%= Time.now.to_i %>';
 
+<% if params[:branch_id] %>
+    var current_branch = '<%= params[:branch_id] %>';
+<% else %>
+    var current_branch = null;
+<% end %>
+
 
 // post submit
 $('#msginput').keypress(function(event) {

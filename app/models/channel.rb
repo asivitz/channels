@@ -11,6 +11,22 @@ class Channel < ActiveRecord::Base
         Message.count(:conditions => "channel_id = #{self.id}")
     end
 
+    def self.group messages
+        message_groups = []
+        while messages.length > 0
+            message = messages.pop
+            group = OpenStruct.new
+            group.poster = message.poster
+            group.date = message.pretty_updated_at
+            group.messages = [message]
+            while messages.length > 0 and messages.last.poster == group.poster
+                group.messages << messages.pop
+            end
+            message_groups << group
+        end
+        return message_groups
+    end
+
     def get_page_in_groups(branch_id=nil, from_date=nil)
         pagesize = 50
 
@@ -19,18 +35,8 @@ class Channel < ActiveRecord::Base
 
         page = get_page(branch_id, pagesize, date)
 
-        message_groups = []
-        while page.length > 0
-            message = page.pop
-            group = OpenStruct.new
-            group.poster = message.poster
-            group.date = message.pretty_updated_at
-            group.messages = [message]
-            while page.length > 0 and page.last.poster == group.poster
-                group.messages << page.pop
-            end
-            message_groups << group
-        end
+        message_groups = Channel.group page
+
         return message_groups
     end
 

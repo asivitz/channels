@@ -132,8 +132,8 @@ class ChannelsController < ApplicationController
       if previous_check
           prevtime = Time.at(previous_check.to_i)
 
-          @new_messages = Message.where(:branch_id => params[:branch_id]).since(prevtime).all
-          if not @new_messages.empty?
+          @new_message_groups = Channel.group(Message.where(:branch_id => params[:branch_id]).since(prevtime).all)
+          if not @new_message_groups.empty?
               @channelconfig = Channelconfig.where("user_id = ? AND channel_id = ?", @user.id, @channel.id).first
               @channelconfig.last_checked = Time.now
               @channelconfig.save

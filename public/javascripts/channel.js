@@ -31,9 +31,14 @@ function waitForMsg(channelid)
 
 function getNewMessages(channelid)
 {
+    var branch_string = "";
+    if (current_branch != null)
+    {
+        branch_string = "&branch_id=" + current_branch;
+    }
     $.ajax(
         {
-            url:"/channels/get_updates/" + channelid + "?previous_check=" + last_checked,
+            url:"/channels/get_updates/" + channelid + "?previous_check=" + last_checked + branch_string,
             cache: false,
         }
         );
