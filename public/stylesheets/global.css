@@ -444,7 +444,6 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#faf7f4 3%, #f8f5f0 100%)
 
 
 #sidebar {
-	display: inline;
 	float: left;
 	width: 170px;
 	height: 100%;
@@ -476,21 +475,43 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#faf7f4 3%, #f8f5f0 100%)
 	width: 170px;
 }
 #sidebar ul li {
-	height: 14px;
+	height: 27px;
+	width: 170px;
+	position: relative;
 	font-size: 11px;
 	line-height: 12px;
-	padding: 10px;
 	margin: 0;
-	overflow: hidden;
 }
 #sidebar ul li a {
 	color: #757575;
 	text-shadow: #ffffff 0px 1px;
+	height: 17px;
+	padding: 5px 10px;
+	display: block;
 }
 
-.selectedbranch {
-    background-color:#FDBC31;
+#sidebar ul li a:hover {
+	background: #eee;
+	text-decoration: none;
 }
+
+#sidebar ul li.selectedbranch a{
+	background: url(/images/highlight-branches.png) repeat-x left top;
+	color: #444;
+}
+#sidebar ul li.selectedbranch a:hover {
+	text-decoration: none;
+}
+#sidebar ul li.selectedbranch a span {
+	width: 10px;
+	height: 27px;
+	display: block;
+	background: url(/images/highlight-branches-right.png) no-repeat left top;
+	position: absolute;
+	right: -10px;
+	top:0px;
+}
+
 
 
 #main {
@@ -635,7 +656,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 #message_list .message_row .meta {
 	float: left;
 	width: 24px;
-	margin: 3px 10px;
+	margin: 3px 10px 3px 15px;
 	text-align: right;
 }
 
