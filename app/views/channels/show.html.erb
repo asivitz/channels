@@ -22,7 +22,7 @@
                 <li <%= "class='selectedbranch'" if bid.to_s == params[:branch_id].to_s %>>
                 <a href="/channels/<%= @channel.id %><%= "?branch_id=#{bid}" if bid %>" >
                     <%= @channel.latest_for_branch(bid).summarize(22) %>
-                </a>
+                <span></span></a>
                 </li>
             <% end %>
         </ul>
