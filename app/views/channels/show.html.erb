@@ -46,7 +46,7 @@
 			<%= f.hidden_field(:branch_id, :value => params[:branch_id]) %>
 			<div class="input_wrapper">
 				<label for="msginput">Enter your message here...</label>
-				<%= f.text_field :content, :id => "msginput" %>
+				<%= f.text_field :content, :id => "msginput", :autoselect => 'true', :tabindex => '1' %>
 			</div>
            <p class="form_note">To post your message hit the return/enter key. Simple HTML characters are allowed.</p>
 	<% end %>
