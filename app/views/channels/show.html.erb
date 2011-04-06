@@ -19,7 +19,11 @@
         <h3>Active Branches:</h3>
         <ul class="branch_list">
             <% active_branches = @channel.top_active_branches %>  
-            <% active_branches << params[:branch_id] if not active_branches.include? params[:branch_id].to_i %>
+            <% if params[:branch_id].nil? %>
+                <% active_branches << nil if not active_branches.include? nil %>
+            <% else %>
+                <% active_branches << params[:branch_id] if not active_branches.include? params[:branch_id].to_i %>
+            <% end %>
             <% active_branches.each do |bid| %>  
                 <li <%= "class='selectedbranch'" if bid.to_s == params[:branch_id].to_s %>>
                 <a href="/channels/<%= @channel.id %><%= "?branch_id=#{bid}" if bid %>" >
