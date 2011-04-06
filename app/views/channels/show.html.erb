@@ -16,9 +16,11 @@
 	</div>
 </div>
 <div id="sidebar">
-        <h3>Branches:</h3>
+        <h3>Active Branches:</h3>
         <ul class="branch_list">
-            <% @channel.branch_ids.each do |bid| %>  
+            <% active_branches = @channel.top_active_branches %>  
+            <% active_branches << params[:branch_id] if not active_branches.include? params[:branch_id].to_i %>
+            <% active_branches.each do |bid| %>  
                 <li <%= "class='selectedbranch'" if bid.to_s == params[:branch_id].to_s %>>
                 <a href="/channels/<%= @channel.id %><%= "?branch_id=#{bid}" if bid %>" >
                     <%= @channel.latest_for_branch(bid).summarize(22) %>

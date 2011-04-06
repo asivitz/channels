@@ -75,4 +75,8 @@ class Channel < ActiveRecord::Base
             return Message.where("channel_id = ? AND branch_id IS NULL", self.id).last
         end
     end
+
+    def top_active_branches
+        Message.where("created_at > ?", Time.now - (24 * 50 * 60)).select("DISTINCT(branch_id)").map(&:branch_id)
+    end
 end
