@@ -85,6 +85,6 @@ class Channel < ActiveRecord::Base
     end
 
     def child_branches_for_branch in_branch_id
-        return self.messages.where(:branch_id => in_branch_id, :has_branch => true).all.map(&:id)
+        return self.messages.where(:branch_id => in_branch_id, :has_branch => true).order("id DESC").limit(5).all.reverse.map(&:id)
     end
 end
