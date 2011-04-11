@@ -83,4 +83,8 @@ class Channel < ActiveRecord::Base
     def first_message_for_branch in_branch_id
         return self.messages.where(:branch_id => in_branch_id).first
     end
+
+    def child_branches_for_branch in_branch_id
+        return self.messages.where(:branch_id => in_branch_id, :has_branch => true).all.map(&:id)
+    end
 end

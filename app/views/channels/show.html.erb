@@ -45,6 +45,15 @@
                     <span></span></a>
                 </li>
             <% end %>
+
+            <% children = @channel.child_branches_for_branch bid %>
+            <% children.each do |child_bid| %>
+                <li class="childbranch">
+                <a href="/channels/<%= @channel.id %><%= "?branch_id=#{child_bid}" %>" >
+                    <%= @channel.first_message_for_branch(child_bid).summarize(22) %>
+                    <span></span></a>
+                </li>
+            <% end %>
         </ul>
         <h3>Other controls</h3>
         <ul class="bad_controls">
