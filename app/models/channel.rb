@@ -48,18 +48,6 @@ class Channel < ActiveRecord::Base
             page = self.messages.where(:branch_id => branch_id).limit(pagesize).order("created_at DESC").all
         end
 
-        page.each do |msg|
-            msg.branch_link = msg.id if msg.has_branch? # the unused branch id must be its own id
-        end
-
-        if page.size < pagesize and not branch_id.nil?
-            root_message = Message.find(branch_id)
-            root_message.branch_link = root_message.branch_id # the unused branch id must be it own branch
-            page << root_message
-            date = root_message.created_at
-            page.concat self.get_page(root_message.branch_id, pagesize - page.size, date)
-        end
-
         return page
     end
 
@@ -78,5 +66,21 @@ class Channel < ActiveRecord::Base
 
     def top_active_branches
         Message.where("created_at > ?", Time.now - (24 * 50 * 60)).select("DISTINCT(branch_id)").map(&:branch_id)
+    end
+
+    def parents_for_branch(in_branch_id)
+        parents = []
+        root_msg = Message.find(in_branch_id)
+        parent_bid = root_msg.branch_id
+        while not parent_bid.nil?
+            root_msg = Message.find(parent_bid)
+            parents << root_msg.id
+            parent_bid = root_msg.branch_id
+        end
+        return parents.compact
+    end
+
+    def first_message_for_branch in_branch_id
+        return self.messages.where(:branch_id => in_branch_id).first
     end
 end

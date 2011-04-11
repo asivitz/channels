@@ -14,14 +14,10 @@
 </p>
 
 <% if message.has_branch? %>
-    <% branch_message = message.successor_for_branch message.branch_link %>
+    <% branch_message = @channel.first_message_for_branch message.id %>
     <% if branch_message %>
         <div class="branchpoint">
-            <% if message.branch_link %>
-                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(80)}", "/channels/#{@channel.id}?branch_id=#{message.branch_link}", :class => 'branch_link', :title => 'Click to view this branch.' %>
-            <% else %>
-                <%= link_to content_tag(:span, '')+"#{branch_message.summarize(80)}", "/channels/#{@channel.id}", :class => 'branch_link', :title => 'Click to view this branch.' %>
-            <% end %>
+            <%= link_to content_tag(:span, '')+"#{branch_message.summarize(80)}", "/channels/#{@channel.id}?branch_id=#{message.id}", :class => 'branch_link', :title => 'Click to view this branch.' %>
         </div>
     <% end %>
 <% end %>

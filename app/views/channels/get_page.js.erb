@@ -23,7 +23,9 @@
 
 <% if not @message_groups.empty? %>
 <% last = @message_groups.first.messages.first %>
-$('#more_link').attr('href', "/channels/get_page/<%= @channel.id %>?<%= last.branch_id.to_s + "&" if last.branch_id %>from_date=<%= last.updated_at.to_i %>");
+$('#more_link').attr('href', "/channels/get_page/<%= @channel.id %>?from_date=<%= last.updated_at.to_i %><% if params[:branch_id] %>&branch_id=<%= params[:branch_id].to_s %><% end %> ");
+<% else %>
+    $('#more_link').hide();
 <% end %>
 
 //last_checked = '<%= Time.now.to_i %>';

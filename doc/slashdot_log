@@ -1,0 +1,28 @@
+slashdot: There is breaking news that a 7.4 Magnitude Quake has hit off the coast of Japan, and a Tsuanmi warning has been made. Please post updates in the comments.
+inu_maru: Fastest slashdot story ever! I am still dizzy from the shake (living in yokohama), plenty of blurry images right now in http://www3.nhk.or.jp/nhkworld/ [nhk.or.jp]
+chemicaldave: Vote this up. Link has a live english translation stream.
+theNetImp: This one lasted a good 2 minutes, steady shake once it got going. Trying to get back to sleep here in Chiba Prefecture.
+mc3000: No injuries reported, according to NHK. This was in the vicinity of the 9.0 quake, 40 km below the sea bed off Sendai.
+
+Pharmboy: You're right, this is fast. At first I just though it was a dupe from a few weeks ago.
+
+Ephemeriis: Off-topic, but what's up with Slashdot links and FF4? Tried to go look at the images and the link didn't work. Had to copy & paste.
+demonbug: I've been having the same problem. Found it works to double-right-click (to open the context menu; single right click doesn't seem to work) and select "open in new tab", but pretty ridiculous. Even worse than before, when control-clicking to open a link in a new window just expand parent threads, often causing you to have to hunt all over the place to find the comment you were reading.
+stillnotelf: It also fails in FF3 and Ubuntu.
+
+AmiMoJo: According to the Japanese Meteorological Agency the tsunami is about 2m high. Coastal defences should be okay in most places but obviously anyone near the coast should retreat inland if possible.
+tripleevenfall: Thank you, I just happened to be checking slashdot to see what I should do.
+PPH: Then shouldn't you be waiting for the re-post in a few weeks?
+
+goombah99: the richter scale is logarithmic so a 9 is something like 30 times larger in energy than a 7.4. On the other hand the march quake was initially rated as a 7.1 scale quake then updated later to 9.
+Nick Ives: On the Richter Scale each whole number represents an order of magnitude difference in energy, so a 9 is 100 times more powerful than a 7.
+Kentari: One step in magnitude means a factor 10 increase in ground displacement. In energy this is about a factor 30 per magnitude. A 7.0 packs about 900 times less energy than a 9.0. The new earthquake has already been revised to 7.1.
+140Mandak262Jamuna: The scales are logarithmic. 7.4 earthquake is about 150 times less powerful than a 9.2
+140Mandak262Jamuna: The correct ratio seems to be 31 ^ ( 9.2 - 7.4 ) = 483. So this earthquake would be considered a moderate one, about 500 times less powerful than the 9.2 that stuck a few weeks ago.
+gilleain: There seems to be some sort of increase in the size of the slashdot commenter estimates of earthquake power ratios. First commenter said 30 times, then 100, then 150, now 500. Is there a logarithmic function to describe this increase in accuracy?
+kabloom: If they're using a logarithmic scale, there must be a reason why the logarithmic scale makes more sense. Maybe it's because the damage or perceived power scales logarithmically with the energy of the quake?
+
+AmiMoJo: Additional: only in Miyagi, elsewhere the tsunami is approx 0.5m. Fukushima Dai-ichi nuclear plant should not be affected by the wave, although obviously there is still the quake to worry about...
+
+fredan: how's the time schedule for the trains in Japan?
+antifoidulus: Most are already offline, it happened at 11:30 there, the shinkansen have probably almost all stopped, most regional services in the area probably weren't running at any real capacity anyway, so I doubt they would be running there. It was far enough away from Tokyo that I doubt any of the metros were really affected.
