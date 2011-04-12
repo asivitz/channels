@@ -715,7 +715,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 }
 
 
-.message_row .message_content p{
+.message_row .message_content .message_entry{
 	margin: 5px 0;
 	padding-left: 5px;
 	color: #333333;
@@ -724,15 +724,15 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
     position: relative;
     width: 98%;
 }
-#message_list .message_row .message_content p.unread {
+#message_list .message_row .message_content .message_entry .unread {
 	background: #eff7f7;
 }
 
-#message_list .message_row .message_content p .buttons {
+#message_list .message_row .message_content .message_entry .buttons {
 	visibility: hidden;
 }
 
-#message_list .message_row .message_content p:hover .buttons{
+#message_list .message_row .message_content .message_entry:hover .buttons{
     visibility:visible;
 }
 

@@ -12,6 +12,7 @@ class Channel < ActiveRecord::Base
     end
 
     def self.group messages
+        return [] if messages.nil?
         message_groups = []
         while messages.length > 0
             message = messages.pop

@@ -1,0 +1,6 @@
+<% branch_message = @channel.first_message_for_branch branchpoint.id %>
+<% if branch_message %>
+    <div class="branchpoint">
+        <%= link_to content_tag(:span, '')+"#{branch_message.summarize(80)}", "/channels/#{@channel.id}?branch_id=#{branchpoint.id}", :class => 'branch_link', :title => 'Click to view this branch.' %>
+    </div>
+<% end %>

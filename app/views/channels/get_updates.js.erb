@@ -1,6 +1,9 @@
-var donotify = false;
+var notifyname = null;
 
-<% @new_message_groups.reverse.each do |group| %>
+<% bid = params[:branch_id].to_i %>
+<% new_message_groups = Channel.group(@branches[bid]) %>
+
+<% new_message_groups.reverse.each do |group| %>
 
     if (topPoster() == '<%= group.poster %>')
     {
@@ -13,7 +16,7 @@ var donotify = false;
                 var ul = getLatestContainer().find('.message_content');
                 msg.appendTo(ul);
                 msg.hide().fadeIn();
-                donotify = true;
+                notifyname = '<%= m.poster %>';
             }
         <% end %>
     }
@@ -23,25 +26,42 @@ var donotify = false;
 
         msggroup.appendTo($('#message_list'));
         msggroup.hide().fadeIn();
-        donotify = true;
+        notifyname = '<%= group.poster %>';
     }
 
     messageScrollBottom();
 
 <% end %>
 
+<% @branches.each do |branch_id, msg_arr| %>
+    <% if bid != branch_id %>
+        var prev_msg = $('#message_<%= branch_id.to_s %>');
+        if (prev_msg.length > 0)
+        {
+            var branchpoint = $('#message_<%= branch_id.to_s %> .branchpoint');
+            if (branchpoint.length == 0)
+            {
+                branchpoint = $("<%= escape_javascript(render :partial => "channels/branchpoint", :object => Message.find(branch_id)) %>");
+                branchpoint.appendTo(prev_msg).hide().fadeIn();
+                notifyname = '<%= msg_arr.first.poster %>';
+            }
+        }
+
+    <% end %>
+<% end %>
+
 last_checked = '<%= Time.now.to_i %>';
 
-<% if not @new_message_groups.empty? %>
+<% if not new_message_groups.empty? %>
     if (weHaveFocus)
     {
             fadeUnread();
     }
     else
     {
-        if (donotify == true)
+        if (notifyname != null)
         {
-                    startNotify('<%= @new_message_groups.first.poster %>');
+                startNotify(notifyname);
         }
     }
 <% end %>
