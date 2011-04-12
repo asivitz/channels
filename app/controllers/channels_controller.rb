@@ -124,7 +124,6 @@ class ChannelsController < ApplicationController
       else
           @message_groups = @channel.get_page_in_groups(params[:branch_id])
       end
-
   end
 
   def get_updates 

@@ -1,6 +1,9 @@
 <% content_for :head do %>
     <%= javascript_include_tag "channel" %>
 <% end %>
+
+<% bid = params[:branch_id] %>
+
 <div id="sub_header">
 	<h2 class="channel_title"><%=h @channel.name %></h2>
 	<div class="sub_header_right">
@@ -23,7 +26,6 @@
                 <%= @channel.name %>
                 <span></span></a>
             </li>
-            <% bid = params[:branch_id] %>
             <% if bid %>
                 <% parents = @channel.parents_for_branch(bid) %>  
                 <% parents.each do |parent_bid| %>
@@ -84,6 +86,17 @@
 	</div>
 
 	<div id="messages">
+
+        <% if bid %>
+            <ul id="root_message">
+                <% root_message = Message.find(bid) %>
+                <%= render :partial => "message_group", :object => root_message %>
+            </ul>
+
+        <% end %>
+
+
+
 	<% prev_message = nil %>
 	<% if not @message_groups.empty? %>
 		<% last_message = @message_groups.first.messages.first %>
@@ -106,8 +119,8 @@
         <%= form_tag('add_user', :id => 'add_user_form') do %>
             <label for="user_alias">Add user:
             <%= text_field :user, :alias, :value => "" %>
-            </label>
-            <%= hidden_field_tag :id, @channel.id %>
+        </label>
+        <%= hidden_field_tag :id, @channel.id %>
 
             <a href="javascript:$('#add_user_form').submit();" >Add User</a>
         <% end %>
@@ -142,7 +155,7 @@ function playDing()
 function fadeUnread()
 {
     var marked_unread = $('.message_content p').filter('.unread');
-    marked_unread.animate({ background: '#fff'}, 10000);
+    marked_unread.animate({ backgroundColor: '#fff'}, 10000);
 }
 
 window.onfocus = function()

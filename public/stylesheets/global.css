@@ -645,7 +645,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 	overflow-y: scroll;
 }
 
-#message_list .message_row {
+.message_row {
 	clear: both;
 	list-style: none;
 	width: 100%;
@@ -653,18 +653,18 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 	padding: 0;
 	border-bottom: 1px dotted #ccc;
 }
-#message_list .message_row:last-child {
+.message_row:last-child {
 	border-bottom: none;
 }
-#message_list .message_row:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
-#message_list .message_row .meta {
+.message_row:after {content: ".";display: block; height: 0;clear: both;visibility: hidden;}
+.message_row .meta {
 	float: left;
 	width: 24px;
 	margin: 3px 10px 3px 15px;
 	text-align: right;
 }
 
-#message_list .message_row .meta a.user_pic {
+.message_row .meta a.user_pic {
 	width: 24px;
 	height: 24px;
 	display: block;
@@ -674,7 +674,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 	box-shadow: 0px 0px 3px rgba(0,0,0, .2); 
 }
 
-#message_list .message_row .username {
+.message_row .username {
 	font-weight: bold;
 	color: #026c70;
 	font-size: 12px;
@@ -715,7 +715,7 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
 }
 
 
-#message_list .message_row .message_content p{
+.message_row .message_content p{
 	margin: 5px 0;
 	padding-left: 5px;
 	color: #333333;
@@ -736,6 +736,25 @@ background-image: -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 1%, #f0f0f0 100%)
     visibility:visible;
 }
 
+#message_list .message_row .message_content 
+{
+	word-wrap: break-word;
+	padding-left: 44px;
+}
+
+#root_message
+{
+    margin: 4px 4px 4px 4px;
+    border:2px solid red;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background-color:#ffcfca;
+}
+
+#root_message .message_content .branchpoint
+{
+    display:none;
+}
 
 #message_list p.no_messages {
 	margin: 0 20px;

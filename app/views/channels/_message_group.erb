@@ -4,9 +4,14 @@
 </div>
 <p class="username"><%= message_group.poster %></p>
 <div class="message_content">
-    <% message_group.messages.each do |m| %>
-        <%= render :partial => "channels/message", :object => m %>
+    <% if message_group.respond_to? :messages %>
+        <% message_group.messages.each do |m| %>
+            <%= render :partial => "channels/message", :object => m %>
+        <% end %>
+    <% else %>
+        <%= render :partial => "channels/message", :object => message_group %>
     <% end %>
+
 </div>
 </li>
 
