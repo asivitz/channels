@@ -1,0 +1,29 @@
+.sc-pane .group-message-view
+{
+    margin: 10px 10px 10px 10px;
+    border: 2px solid black;
+}
+
+.group-message-view .group-message-view-name
+{
+    float:left;
+    margin:10px 10px 10px 10px;
+    color:green;
+}
+
+.group-message-view .group-message-view-timestamp
+{
+    
+    margin:10px 10px 10px 10px;
+    float: left;
+}
+
+.group-message-view .group-message-view-messages
+{
+    margin:10px 10px 10px 10px;
+    float: left;
+}
+
+.group-message-view .group-message-view-message
+{
+}
